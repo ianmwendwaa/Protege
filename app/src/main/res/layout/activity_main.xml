@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <!--        <TextView-->
+<!--            android:id="@+id/notesHeading"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="65dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginEnd="129dp"-->
+<!--            android:fontFamily="@font/adamina"-->
+<!--            android:text="@string/mwendzi_s_protege"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="24sp" />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/notesRecyclerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="650dp"-->
+<!--            android:layout_below="@+id/notesHeading"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:padding="16dp" />-->
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-49dp" />
+
+
+<!--    <SearchView-->
+<!--        android:id="@+id/searchView"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:background="@drawable/search_bar_bkg"-->
+<!--        android:closeIcon="@drawable/ic_clear"-->
+<!--        android:focusable="false"-->
+<!--        android:gravity="center"-->
+<!--        android:iconifiedByDefault="false"-->
+<!--        android:queryHint="Search"-->
+<!--        android:searchHintIcon="@null"-->
+<!--        android:searchIcon="@drawable/ic_search"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/addBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="91dp"-->
+<!--        android:backgroundTint="@color/blue"-->
+<!--        android:contentDescription="@string/add_new_note"-->
+<!--        android:src="@drawable/ic_add"-->
+<!--        android:tint="@color/black" />-->
+<!--    <GridLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="135dp"-->
+<!--        android:layout_weight="3"-->
+<!--        android:layout_marginTop="620dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:columnCount="2"-->
+<!--        android:padding="10dp"-->
+<!--        android:rowCount="1">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/notes_card"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:layout_margin="10dp"-->
+<!--            app:cardCornerRadius="15dp"-->
+<!--            app:cardElevation="4dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:src="@drawable/fornow" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginStart="60dp"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:layout_marginBottom="0dp"-->
+<!--                android:text="BMI"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp" />-->
+
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/bmi_card"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:layout_margin="10dp"-->
+<!--            app:cardCornerRadius="15dp"-->
+<!--            app:cardElevation="4dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:src="@drawable/fornow"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginStart="60dp"-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:layout_marginBottom="0dp"-->
+<!--                android:text="BMI"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp"/>-->
+
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--    </GridLayout>-->
+<!--    <Button-->
+<!--        android:id="@+id/notes"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="630dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:layout_marginLeft="70dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/todo"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="630dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:layout_marginLeft="230dp"/>-->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="-3dp"
+        android:background="#4440BC"
+        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+        app:itemIconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215689101781",
+    "project_id": "notessqlite-68f7d",
+    "storage_bucket": "notessqlite-68f7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215689101781:android:55f9b6216d1352acd4fd5c",
+        "android_client_info": {
+          "package_name": "com.example.notessqlite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYBkDvdHWHAPFl9pqTwct-tpIGptO-W_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
