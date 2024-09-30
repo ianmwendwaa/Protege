@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.math.pow
 
 class UpdateNoteActivity : AppCompatActivity() {
 
@@ -56,11 +57,12 @@ class UpdateNoteActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
                 val currentLength = s?.length?:0
-                val limit = 10
-                binding.charCountUpdate.text = "$currentLength/$limit"
+                val limit = 100000000
+                binding.charCountUpdate.text = "$currentLength"
                 if(currentLength>=limit){
                     val inputManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     inputManager.hideSoftInputFromWindow(binding.updateContentEditText.applicationWindowToken, 0)
+                    binding.updateContentEditText.clearFocus()
                 }
             }
         })
@@ -71,9 +73,10 @@ class UpdateNoteActivity : AppCompatActivity() {
             val currentDateTime = LocalDateTime.now()
             val newDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             val updatedNote = Note(noteId, newTitle, newContent, newDate)
+            val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM HH:mm:ss"))
             db.updateNote(updatedNote)
             finish()
-            Toast.makeText(this, "$newTitle updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$newTitle updated at $datePresentation", Toast.LENGTH_SHORT).show()
         }
     }
 }

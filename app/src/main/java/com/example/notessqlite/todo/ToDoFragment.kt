@@ -43,5 +43,4 @@ class ToDoFragment : Fragment() {
         super.onResume()
         toDoAdapter.refreshData(db.getAllToDos())
     }
-
 }

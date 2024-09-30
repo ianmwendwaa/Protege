@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-@Suppress("unused", "unused")
 class ToDoDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
         private const val DATABASE_NAME = "todo.db"
@@ -32,7 +31,7 @@ class ToDoDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
             put(COLUMN_TITLE, todo.taskName)
             put(COLUMN_CONTENT, todo.taskDescription)
             put(COLUMN_DATE, todo.time)
-            }
+        }
         db.insert(TABLE_NAME, null,values)
         db.close()
     }
@@ -54,31 +53,6 @@ class ToDoDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         cursor.close()
         db.close()
         return todoList
-    }
-
-    fun getToDoById(noteId: Int) : ToDo {
-        val db = readableDatabase
-        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $noteId"
-        val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
-        val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
-        val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
-        val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
-        cursor.close()
-        db.close()
-        return ToDo(id, title, content)
-    }
-    fun updateToDo(todo: ToDo){
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_TITLE, todo.taskName)
-            put(COLUMN_CONTENT, todo.taskDescription)
-            put(COLUMN_DATE, todo.time)
-            }
-        val whereClause = "$COLUMN_ID = ?"
-        val whereArgs = arrayOf(todo.id.toString())
-        db.update(TABLE_NAME, values, whereClause, whereArgs)
-        db.close()
     }
     fun deleteToDo(todoId: Int){
         val db = writableDatabase

@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/cheeky"
     tools:context=".notes.AddNoteActivity">
     <TextView
         android:id="@+id/addNoteHeading"
@@ -51,7 +52,7 @@
         android:layout_below="@+id/addNoteHeading"
         android:layout_marginTop="1dp"
         android:fontFamily="@font/adamina"
-        android:background="@drawable/blue_border"
+        android:background="@drawable/field_borders"
         android:hint="@string/title"
         android:maxLines="1"
         android:inputType="textCapSentences"
@@ -79,7 +80,7 @@
         android:textAlignment="center"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
-        android:background="@drawable/blue_border"/>
+        android:background="@drawable/field_borders"/>
 
     <EditText
         android:id="@+id/contentEditText"
@@ -87,7 +88,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/titleEditText"
         android:layout_marginTop="30dp"
-        android:background="@drawable/blue_border"
+        android:background="@drawable/field_borders"
         android:fontFamily="@font/adamina"
         android:gravity="top"
         android:maxLength="250"

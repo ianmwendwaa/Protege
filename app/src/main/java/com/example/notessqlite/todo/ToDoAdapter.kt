@@ -19,7 +19,7 @@ class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView
         val titleText: TextView = view.findViewById(R.id.todotitleTextView)
         val contentText: TextView = view.findViewById(R.id.todocontentTextView)
         //val updateButton = view.findViewById<Button>(R.id.updateButton)
-        val elapsedtime: TextView = view.findViewById(R.id.elapsedtime)
+        val elapsedTime: TextView = view.findViewById(R.id.elapsedtime)
         val deleteButton: ImageView = view.findViewById(R.id.deletetodoButton)
     }
 
@@ -34,7 +34,7 @@ class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView
         val todo = todo[position]
         holder.titleText.text = todo.taskName
         holder.contentText.text = todo.taskDescription
-        holder.elapsedtime.text = todo.time
+        holder.elapsedTime.text = todo.time
 
         holder.deleteButton.setOnClickListener {
             val title = todo.taskName
@@ -56,5 +56,4 @@ class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView
         todo = newToDos
         notifyDataSetChanged()
     }
-
 }
