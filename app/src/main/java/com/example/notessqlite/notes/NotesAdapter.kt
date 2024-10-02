@@ -25,6 +25,7 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
         val idTVDate: TextView = itemView.findViewById(R.id.idTVDate)
         val card: LinearLayout = itemView.findViewById(R.id.what)
+        val charCounter:TextView = itemView.findViewById(R.id.charCount)
         val updateButton: ImageView = itemView.findViewById(R.id.updateButton)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
@@ -41,6 +42,7 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
         holder.idTVDate.text = note.time
+        holder.charCounter.text = note.charCounter
 
         holder.card.setOnClickListener {
             val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {

@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -21,7 +20,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.example.notessqlite.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText

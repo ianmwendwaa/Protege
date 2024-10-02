@@ -37,9 +37,6 @@ class AddNoteActivity : AppCompatActivity() {
         charCount.text = 0.toString()
         bullets = findViewById(R.id.bullets)
         saveButton = findViewById(R.id.saveButton)
-        val currentDateTime=LocalDateTime.now()
-        val newDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-        tvDate.text = newDate
         titleEditText.requestFocus()
         contentEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -66,9 +63,11 @@ class AddNoteActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val content = contentEditText.text.toString()
-            val time = tvDate.text.toString()
-            val note = Note(0, title, content,time)
+            val charCount = charCount.text.toString()
+            val currentDateTime = LocalDateTime.now()
+            val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM HH:mm:ss"))
+            val note = Note(0, title, content,time,charCount)
             if(title.isEmpty()||content.isEmpty()){
                 Toast.makeText(this, "Type something for me to do my thing!", Toast.LENGTH_SHORT).show()
             }else{

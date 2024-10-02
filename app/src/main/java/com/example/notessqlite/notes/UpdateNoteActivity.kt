@@ -3,19 +3,16 @@
 package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.pow
 
 class UpdateNoteActivity : AppCompatActivity() {
 
@@ -23,7 +20,6 @@ class UpdateNoteActivity : AppCompatActivity() {
     private lateinit var db: NoteDatabase
     private var noteId = -1
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,6 +37,7 @@ class UpdateNoteActivity : AppCompatActivity() {
         val note = db.getNoteById(noteId)
         binding.updateTitleEditText.setText(note.title)
         binding.updateContentEditText.setText(note.content)
+        binding.charCountUpdate.setText(note.charCounter)
         binding.updateDate.setText(note.time)
 
         binding.updateTitleEditText.requestFocus()
@@ -63,7 +60,7 @@ class UpdateNoteActivity : AppCompatActivity() {
                     val inputManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     inputManager.hideSoftInputFromWindow(binding.updateContentEditText.applicationWindowToken, 0)
                     binding.updateContentEditText.clearFocus()
-                }
+                }else return
             }
         })
 
