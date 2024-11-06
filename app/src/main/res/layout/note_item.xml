@@ -10,6 +10,7 @@
     <LinearLayout
         android:id="@+id/what"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
@@ -21,7 +22,7 @@
 
             <TextView
                 android:id="@+id/titleTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Title"
                 android:textColor="@color/blue"
@@ -33,7 +34,7 @@
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/ic_edit"/>
+                android:src="@drawable/rv_archive_icon"/>
             <ImageView
                 android:id="@+id/deleteButton"
                 android:layout_width="24dp"
@@ -47,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Content"
+            android:textColor="@color/black"
             android:maxLines="1"
             android:layout_marginTop="4dp"/>
 
@@ -55,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/contentTextView"
+            android:textColor="@color/black"
             android:paddingTop="5dp"
             android:textSize="13sp" />
     </LinearLayout>

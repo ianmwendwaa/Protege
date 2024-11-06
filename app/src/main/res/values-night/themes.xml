@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.NotesSQLite" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.NotesSQLite" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#323030</item>
+        <item name="android:statusBarColor">@color/black</item>
+
     </style>
+
+    <style name="Theme.NotesSQLite" parent="Base.Theme.NotesSQLite" />
 </resources>

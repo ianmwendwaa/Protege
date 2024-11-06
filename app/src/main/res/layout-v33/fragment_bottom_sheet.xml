@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@drawable/sheet_background"
     tools:context=".todo.BottomSheetFragment">
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_margin="15dp"
         android:fontFamily="@font/adamina"
         android:text="New Task"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -36,9 +38,10 @@
             android:id="@+id/taskName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:autoHandwritingEnabled="true"
             android:fontFamily="@font/adamina"
-            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textColorHint="#F0676565"
+            android:inputType="textCapSentences"
             android:hint="Name">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -56,7 +59,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/adamina"
-            android:hint="Description">
+            android:hint="Description"
+            android:inputType="textCapSentences"
+            android:textColor="@color/black"
+            android:textColorHint="#F0676565">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +91,7 @@
             android:layout_marginTop="9dp"
             android:fontFamily="@font/adamina"
             android:text="Set Alarm"
-            android:textColor="#998E8893"
+            android:textColor="#99070707"
             android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>

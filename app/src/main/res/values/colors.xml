@@ -5,6 +5,8 @@
     <color name="antique">#FFF9F9</color>
     <color name="blue">#5882F1</color>
     <color name="gray">#DFDFDF</color>
+    <color name="purple">#8E58F1</color>
+    <color name="active_indicator">#D0BCFF</color>
     <color name="border_blue">#040067</color>
     <color name="cool_orange">#A85136</color>
 </resources>

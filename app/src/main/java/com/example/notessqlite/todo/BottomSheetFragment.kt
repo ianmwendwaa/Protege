@@ -2,32 +2,26 @@ package com.example.notessqlite.todo
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
-import android.app.AlertDialog
 import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.TimePicker
 import android.widget.Toast
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.ToDoDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-open class BottomSheetFragment : BottomSheetDialogFragment() {
+open class BottomSheetFragment : BottomSheetDialogFragment(){
     @SuppressLint("SetTextI18n")
     private var hours = 0
     private var minutes = 0
@@ -44,11 +38,6 @@ open class BottomSheetFragment : BottomSheetDialogFragment() {
         db = context?.let { it1 -> ToDoDatabase(it1) }!!
 
         taskName.requestFocus()
-
-        val inputManager = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.showSoftInput(taskName, InputMethodManager.SHOW_IMPLICIT)
-
-        createNotificationChannel()
 
         datePicked.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -80,81 +69,31 @@ open class BottomSheetFragment : BottomSheetDialogFragment() {
             val todo = ToDo(0, title, description,time)
            // scheduleReminder()
             db.insertToDo(todo)
+            setAlarm()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
             Toast.makeText(context, "$title saved at $time", Toast.LENGTH_SHORT).show()
             Toast.makeText(context,"Reminder for $time", Toast.LENGTH_SHORT).show()
         }
     }
 
-    //@SuppressLint("ScheduleExactAlarm")
-    private fun scheduleReminder() {
-        val intent = Intent(this.context, NotificationManager::class.java)
-        val title = view?.findViewById<TextInputEditText>(R.id.taskName)?.text.toString()
-        val description = view?.findViewById<TextInputEditText>(R.id.taskDescription)?.text.toString()
-        intent.putExtra(titleExtra, title)
-        intent.putExtra(contentExtra, description)
+    private fun setAlarm() {
+        val alarmManager = requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, Notifications::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
+            PendingIntent.FLAG_IMMUTABLE)
 
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            notificationID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
-        if(alarmManager.canScheduleExactAlarms()) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                time,
-                pendingIntent
-            )
-            showAlert(time, title, description)
-        }else{
-            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
-            startActivity(intent)
-        }
-    }
-
-    private fun showAlert(time: Long, title: String, description: String) {
-        val date = Date(time)
-        val dateFormat = android.text.format.DateFormat.getLongDateFormat(context)
-        val timeFormat = android.text.format.DateFormat.getTimeFormat(context)
-        AlertDialog.Builder(context)
-            .setTitle("Protege Reminder")
-            .setMessage("title: " + title +
-                        "\ndescription: "+ description+
-                        "\nAt: "+ dateFormat.format(date)+" " + timeFormat.format(date))
-            .setPositiveButton("Okay"){_,_->}
-            .show()
-        Toast.makeText(context, "Reminder set for $timeFormat", Toast.LENGTH_SHORT).show()
-
-    }
-
-    private lateinit var datePicker: DatePicker
-    private lateinit var timePicker: TimePicker
-    private fun getTime(): Long {
-        //val datePicked = view?.findViewById<DatePicker>(R.id.datePicker)
-        //val timePicker = view?.findViewById<TimePicker>(R.id.timePicker)
-        val year = datePicker.year
-        val month = datePicker.month
-        val day = datePicker.dayOfMonth
-        val minute = timePicker.minute
-        val hour = timePicker.hour
         val calendar = Calendar.getInstance()
-        calendar.set(year, month, day, minute, hour)
-        return calendar.timeInMillis
-    }
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, myHours)
+        calendar.set(Calendar.MINUTE, myMinutes)
 
-    private fun createNotificationChannel() {
-        val name = "Reminder Channel"
-        val description = "Channel for reminder notifications"
-        val importance = android.app.NotificationManager.IMPORTANCE_DEFAULT
-        val channel = android.app.NotificationChannel(channelID, name, importance)
-        channel.description = description
-        val notificationManager = requireContext().getSystemService(NOTIFICATION_SERVICE) as android.app.NotificationManager
-        notificationManager.createNotificationChannel(channel)
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

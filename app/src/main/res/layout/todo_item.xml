@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
         android:padding="16dp">
 
         <RelativeLayout
@@ -47,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Content"
+            android:textColor="@color/black"
             android:maxLines="1"
             android:layout_marginTop="4dp"/>
 
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/contentTextView"
             android:paddingTop="5dp"
+            android:textColor="@color/black"
             android:textSize="13sp" />
     </LinearLayout>
 

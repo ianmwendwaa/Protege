@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.ToDoDatabase
 
 class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
 

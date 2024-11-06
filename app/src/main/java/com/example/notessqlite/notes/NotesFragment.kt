@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.NoteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NotesFragment : Fragment() {
@@ -20,7 +21,6 @@ class NotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notes, container, false)
     }
 
@@ -44,11 +44,8 @@ class NotesFragment : Fragment() {
             val intent = Intent(context, AddNoteActivity::class.java)
             startActivity(intent)
         }
-        searchView.addTextChangedListener(object:TextWatcher
-        {
-
+        searchView.addTextChangedListener(object:TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -56,15 +53,13 @@ class NotesFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-
             }
-
         })
     }
 
-    private fun performFiltering(query: String) {
-//        val filteredList = fi
-    }
+//    private fun performFiltering(query: String) {
+////        val filteredList = fi
+//    }
     override fun onResume() {
         super.onResume()
         notesAdapter.refreshData(db.getAllNotes())

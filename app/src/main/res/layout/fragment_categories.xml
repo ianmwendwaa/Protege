@@ -3,18 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".todo.ToDoFragment">
-
-    <TextView
-        android:id="@+id/notesHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/adamina"
-        android:text="@string/protege_todo"
-        android:textColor="#7A0595"
-        android:textSize="24sp" />
+    tools:context=".categories.CategoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todoRView"
@@ -23,7 +12,7 @@
         android:layout_marginTop="40dp"
         android:padding="16dp" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/todoAddBtn"
+        android:id="@+id/categoryAddBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="610dp"
@@ -33,4 +22,5 @@
         android:contentDescription="@string/add_new_note"
         android:src="@drawable/ic_add"
         android:tint="@color/black" />
+
 </FrameLayout>

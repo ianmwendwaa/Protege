@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.ToDoDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ToDoFragment : Fragment() {

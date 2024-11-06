@@ -1,15 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.NotesSQLite" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/blue</item>
-         <item name="colorPrimaryVariant">@color/blue</item>
-         <item name="android:statusBarColor">@color/blue</item>
+    <style name="Base.Theme.NotesSQLite" parent="Theme.Material3.Dark.NoActionBar">
+         <item name="colorPrimary">@color/black</item>
+         <item name="colorPrimaryVariant">@color/black</item>
+         <item name="android:colorSecondary">@color/black</item>
     </style>
 
-    <style name="Theme.NotesSQLite" parent="Base.Theme.NotesSQLite" />
+    <style name="Theme.NotesSQLite" parent="Base.Theme.NotesSQLite"/>
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="color">#806504</item>
+        <item name="color">#D0BCFF</item>
     </style>
 </resources>

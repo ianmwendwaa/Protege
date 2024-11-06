@@ -3,7 +3,6 @@ package com.example.notessqlite.notes
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.NoteDatabase
 
 class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
@@ -25,8 +24,8 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
         val idTVDate: TextView = itemView.findViewById(R.id.idTVDate)
         val card: LinearLayout = itemView.findViewById(R.id.what)
-        val charCounter:TextView = itemView.findViewById(R.id.charCount)
-        val updateButton: ImageView = itemView.findViewById(R.id.updateButton)
+        //val charCounter:TextView = itemView.findViewById(R.id.charCount)
+        val archiveButton: ImageView = itemView.findViewById(R.id.updateButton)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 
@@ -42,7 +41,6 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
         holder.idTVDate.text = note.time
-        holder.charCounter.text = note.charCounter
 
         holder.card.setOnClickListener {
             val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
@@ -51,11 +49,10 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
             holder.itemView.context.startActivity(intent)
         }
 
-        holder.updateButton.setOnClickListener{
-            val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
-                putExtra("note_id", note.id)
-            }
-            holder.itemView.context.startActivity(intent)
+        holder.archiveButton.setOnClickListener{
+            var isArchived = false
+            val item = notes[position]
+            notifyItemChanged(position)
         }
 
         holder.deleteButton.setOnClickListener {
@@ -63,6 +60,8 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
             note.id.let { it1 -> db.deleteNote(it1) }
             refreshData(db.getAllNotes())
             Toast.makeText(holder.itemView.context, "$title deleted", Toast.LENGTH_SHORT).show()
+            //Snackbar.make(holder.itemView.context, "$title deleted", Snackbar.LENGTH_LONG).show()
+
         }
     }
 

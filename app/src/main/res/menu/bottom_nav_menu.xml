@@ -10,5 +10,12 @@
         android:id="@+id/navigation_todo"
         android:icon="@drawable/ic_todo"
         android:title="To-do" />
-
+    <item
+        android:id="@+id/navigation_archive"
+        android:icon="@drawable/archive_icon"
+        android:title="Archives" />
+    <item
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/category_icon"
+        android:title="Categories" />
 </menu>

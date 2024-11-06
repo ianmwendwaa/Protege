@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -38,11 +39,12 @@ class UpdateNoteActivity : AppCompatActivity() {
         binding.updateTitleEditText.setText(note.title)
         binding.updateContentEditText.setText(note.content)
         binding.charCountUpdate.setText(note.charCounter)
-        binding.updateDate.setText(note.time)
+        val currentDateTime = LocalDateTime.now()
+        val newDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm"))
+        binding.updateDate.text = newDate
+        //binding.updateDate.setText(note.time)
 
-        binding.updateTitleEditText.requestFocus()
-        val inputManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.showSoftInput(binding.updateTitleEditText, InputMethodManager.SHOW_IMPLICIT)
+        binding.updateContentEditText.requestFocus()
 
         binding.updateContentEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

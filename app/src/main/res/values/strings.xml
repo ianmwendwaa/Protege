@@ -2,7 +2,7 @@
     <string name="app_name">Protege</string>
     <string name="add_new_note">Add new note</string>
     <string name="mwendzi_s_protege">Mwendzi\'s Protégé</string>
-    <string name="add_note">Add Note Entry</string>
+    <string name="add_note">Add New Note</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="title_activity_todo_navigation">TodoNavigationActivity</string>
@@ -13,5 +13,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="protege_todo">Protege ToDo</string>
-    <string name="search_for_notes">Search for notes...</string>
+    <string name="search_for_notes">Search for notes…</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

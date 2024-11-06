@@ -8,32 +8,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/cheeky"
+    android:background="#F4F4F4"
     tools:context=".notes.AddNoteActivity">
+
     <TextView
         android:id="@+id/addNoteHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/add_note"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/andika"
+        android:text="@string/add_note"
         android:textColor="@color/blue"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/passwordSetter"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="99dp"
+        android:layout_toStartOf="@+id/saveButton"
+        android:layout_toEndOf="@+id/addNoteHeading"
+        android:src="@drawable/key_svgrepo_com" />
 
     <TextView
         android:id="@+id/tvDate"
-        android:layout_width="200dp"
+        android:layout_width="261dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="3dp"
         android:layout_toStartOf="@+id/saveButton"
-        android:fontFamily="@font/andika"
-        android:text=""
-        android:visibility="gone"
-        android:textColor="@color/blue"
-        android:textSize="24sp" />
+        android:fontFamily="@font/adamina"
+        android:textColor="#606060"
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/saveButton"
@@ -48,15 +63,17 @@
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/addNoteHeading"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="45dp"
         android:fontFamily="@font/adamina"
-        android:background="@drawable/field_borders"
         android:hint="@string/title"
-        android:maxLines="1"
+        android:textColorHint="#606060"
+        android:textColor="@color/black"
+        android:backgroundTint="@android:color/transparent"
         android:inputType="textCapSentences"
-        android:padding="12dp"
+        android:maxLines="1"
+        android:textStyle="bold"
         android:textSize="20sp" />
 
     <ImageView
@@ -78,22 +95,38 @@
         android:layout_alignEnd="@+id/contentEditText"
         android:layout_marginStart="10dp"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:textIsSelectable="true"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="2dp"
-        android:background="@drawable/field_borders"/>
+        android:layout_marginEnd="2dp"/>
 
     <EditText
         android:id="@+id/contentEditText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="396dp"
+        android:layout_height="1000dp"
         android:layout_below="@+id/titleEditText"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/field_borders"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/adamina"
+        android:backgroundTint="@android:color/transparent"
         android:gravity="top"
-        android:maxLength="250"
         android:hint="@string/description"
-        android:padding="12dp"
-        android:textSize="18sp"/>
+        android:textColorHint="#606060"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:capitalize="sentences"/>
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/toolBox"-->
+<!--        android:layout_width="420dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_below="@+id/contentEditText"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="-52dp"-->
+<!--        android:background="#3E3D3D"-->
+<!--        android:orientation="horizontal">-->
+
+<!--    </LinearLayout>-->
 
 </RelativeLayout>
