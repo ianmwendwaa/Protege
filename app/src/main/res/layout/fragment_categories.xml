@@ -17,10 +17,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="610dp"
         android:layout_marginStart="280dp"
-        android:backgroundTint="#7A0595"
+        android:backgroundTint="@color/categories_fab"
         android:fadingEdge="horizontal"
         android:contentDescription="@string/add_new_note"
         android:src="@drawable/ic_add"
         android:tint="@color/black" />
+    <include
+        android:id="@id/noCategory"
+        layout="@layout/no_data_returned"
+        android:visibility="gone"/>
 
 </FrameLayout>

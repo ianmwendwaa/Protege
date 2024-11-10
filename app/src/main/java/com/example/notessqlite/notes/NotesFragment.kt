@@ -10,6 +10,7 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
@@ -34,11 +35,18 @@ class NotesFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.notesRView)
         val addBtn: FloatingActionButton = view.findViewById(R.id.addBtn)
         val searchView: SearchView = view.findViewById(R.id.searchView)
-        val noDataView = view.findViewById<LinearLayout>(R.id.noDataView)
+        val noDataView: LinearLayout = view.findViewById(R.id.noDataView)
+        val noNotes: LinearLayout = view.findViewById(R.id.noNotes)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
         notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
         recyclerView.adapter = notesAdapter
+        val notesQueryList = db.getAllNotes()
+        if (notesQueryList.isEmpty()){
+            noNotes.visibility = View.VISIBLE
+        }else{
+            noNotes.visibility = View.GONE
+        }
 
         addBtn.setOnClickListener {
             val intent = Intent(context, AddNoteActivity::class.java)
@@ -49,7 +57,7 @@ class NotesFragment : Fragment() {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val greeting = when (currentHour) {
             in 0..11 -> getString(R.string.greeting_morning)
-            in 12..17 -> getString(R.string.greeting_afternoon)
+            in 12..16 -> getString(R.string.greeting_afternoon)
             else -> getString(R.string.greeting_evening)
         }
         greetings.text = greeting

@@ -10,13 +10,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.databases.ArchivesDatabase
 import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.todo.BottomSheetFragment
 
 class NotesAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val db: NoteDatabase = NoteDatabase(context)
+    private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -47,9 +51,17 @@ class NotesAdapter(private var notes: MutableList<Note>, context: Context) : Rec
             }
             holder.itemView.context.startActivity(intent)
         }
+        holder.card.setOnLongClickListener {
+            val bottomSheetFragment = BottomDialogAction()
+            true
+        }
 
         holder.archiveButton.setOnClickListener{
-//            Nothing to see here at the moment sweerie...
+            val title = note.title
+            note.id.let { it1 -> db.deleteNote(it1) }
+            archiveDB.insertArchivedNote(note)
+            refreshData(db.getAllNotes())
+            Toast.makeText(holder.itemView.context,"archived",Toast.LENGTH_SHORT).show()
         }
 
         holder.deleteButton.setOnClickListener {
@@ -66,11 +78,10 @@ class NotesAdapter(private var notes: MutableList<Note>, context: Context) : Rec
         notifyDataSetChanged()
     }
 //    To be used in updating searchView
-@SuppressLint("NotifyDataSetChanged")
-fun updateData(newList:List<Note>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(newList:List<Note>){
         notes.clear()
         notes.addAll(newList)
         notifyDataSetChanged()
     }
-
 }

@@ -47,9 +47,6 @@ class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView
             refreshData(db.getAllToDos())
             Toast.makeText(holder.itemView.context, "$title deleted", Toast.LENGTH_SHORT).show()
         }
-//        holder.updateButton.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, UpdateToDoActivity::class.java).apply {)
-//        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

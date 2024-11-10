@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:minHeight="400dp"
+    android:background="@drawable/sheet_background"
+    tools:context=".todo.BottomSheetFragment">
+
+    <TextView
+        android:id="@+id/taskHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_margin="15dp"
+        android:fontFamily="@font/adamina"
+        android:text="Select an action"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/saveCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done"
+        android:layout_marginTop="-43dp"
+        android:layout_marginStart="315dp"/>
+
+    <EditText
+        android:id="@+id/categoryName"
+        android:layout_width="325dp"
+        android:layout_height="61dp"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/field_borders"
+        android:capitalize="sentences"
+        android:defaultFocusHighlightEnabled="true"
+        android:fontFamily="@font/adamina"
+        android:hint="Name"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
+</LinearLayout>

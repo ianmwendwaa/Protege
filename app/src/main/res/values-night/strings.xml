@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="greeting_morning">greeting_morning\n</string>
+    <string name="search_note">Search Note</string>
+    <string name="mwendzi_s_protege">Mwendzi\'s Protégé</string>
+    <string name="greeting_afternoon">Good Afternoon🕑!!</string>
+    <string name="greeting_evening">Good Evening🌙🌃!!</string>
+    <string name="greeting_morning">Good Morning☀️!!</string>
 </resources>

@@ -37,7 +37,7 @@
             android:backgroundTint="@android:color/transparent"
             android:drawablePadding="10dp"
             app:closeIcon="@color/black"
-            android:backgroundTintMode="add"
+            android:queryHint="@string/search_note"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -65,5 +65,9 @@
     <include
         android:id="@id/noDataView"
         layout="@layout/no_data_returned"
+        android:visibility="gone"/>
+    <include
+        android:id="@id/noNotes"
+        layout="@layout/empty_notes_activity"
         android:visibility="gone"/>
 </FrameLayout>

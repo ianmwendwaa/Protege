@@ -29,6 +29,7 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
     private var myMinutes: Int = 0
     private val datePicked:TextView? = view?.findViewById(R.id.tvSelected)
     private lateinit var db: ToDoDatabase
+    private lateinit var toDoAdapter: ToDoAdapter
     @SuppressLint("SetTextI18n", "SimpleDateFormat", "CutPasteId")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +37,7 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
         val saveBtn: ImageView = view.findViewById(R.id.savetoDoButton)
         val datePicked: TextView = view.findViewById(R.id.tvSelected)
         db = context?.let { it1 -> ToDoDatabase(it1) }!!
+        toDoAdapter = ToDoAdapter(db.getAllToDos(),requireContext())
 
         taskName.requestFocus()
 
@@ -66,6 +68,7 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
             val todo = ToDo(0, title, description,time)
            // scheduleReminder()
             db.insertToDo(todo)
+            toDoAdapter.refreshData(db.getAllToDos())
             setAlarm()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
             Toast.makeText(context, "$title saved at $time", Toast.LENGTH_SHORT).show()
