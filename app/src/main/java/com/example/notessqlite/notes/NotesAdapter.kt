@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.NoteDatabase
 
-class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val db: NoteDatabase = NoteDatabase(context)
 
@@ -24,7 +24,6 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
         val idTVDate: TextView = itemView.findViewById(R.id.idTVDate)
         val card: LinearLayout = itemView.findViewById(R.id.what)
-        //val charCounter:TextView = itemView.findViewById(R.id.charCount)
         val archiveButton: ImageView = itemView.findViewById(R.id.updateButton)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
@@ -50,9 +49,7 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
         }
 
         holder.archiveButton.setOnClickListener{
-            var isArchived = false
-            val item = notes[position]
-            notifyItemChanged(position)
+//            Nothing to see here at the moment sweerie...
         }
 
         holder.deleteButton.setOnClickListener {
@@ -60,14 +57,20 @@ class NotesAdapter(private var notes: List<Note>, context: Context) : RecyclerVi
             note.id.let { it1 -> db.deleteNote(it1) }
             refreshData(db.getAllNotes())
             Toast.makeText(holder.itemView.context, "$title deleted", Toast.LENGTH_SHORT).show()
-            //Snackbar.make(holder.itemView.context, "$title deleted", Snackbar.LENGTH_LONG).show()
-
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newNotes: List<Note>) {
+    fun refreshData(newNotes: MutableList<Note>) {
         notes =  newNotes
         notifyDataSetChanged()
     }
+//    To be used in updating searchView
+@SuppressLint("NotifyDataSetChanged")
+fun updateData(newList:List<Note>){
+        notes.clear()
+        notes.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 }

@@ -6,37 +6,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".notes.NotesFragment">
 
+    <TextView
+        android:id="@+id/greetings"
+        android:layout_width="320dp"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:textAlignment="gravity"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:fontFamily="@font/adamina"
+        android:textStyle="bold" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="330dp"
         android:layout_height="45dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/search_bar_background">
+        android:layout_marginTop="100dp"
+        android:background="@drawable/search_bar_background"
+        android:backgroundTint="@color/search_black">
 
-        <EditText
+        <SearchView
             android:id="@+id/searchView"
-            android:layout_width="320dp"
+            android:layout_width="330dp"
             android:layout_height="45dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="45dp"
             android:backgroundTint="@android:color/transparent"
-            android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:hint="Search Note"
-            android:textColor="@color/black"
-            android:textColorHint="#A3A0A0"
+            app:closeIcon="@color/black"
+            android:backgroundTintMode="add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRView"
         android:layout_width="match_parent"
-        android:layout_height="674dp"
-        android:layout_marginTop="85dp"
+        android:layout_height="610dp"
+        android:layout_marginTop="150dp"
         android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,19 +62,8 @@
         android:contentDescription="@string/add_new_note"
         android:src="@drawable/ic_add"
         android:tint="@color/black" />
-
+    <include
+        android:id="@id/noDataView"
+        layout="@layout/no_data_returned"
+        android:visibility="gone"/>
 </FrameLayout>
-<!--<TextView-->
-<!--android:id="@+id/notesHeading"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_marginTop="4dp"-->
-<!--android:fontFamily="@font/adamina"-->
-<!--android:text="Protege Notes"-->
-<!--android:textColor="@color/blue"-->
-<!--android:textSize="24sp"-->
-<!--app:layout_constraintBottom_toTopOf="@+id/searchView"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent"-->
-<!--app:layout_constraintTop_toTopOf="parent"-->
-<!--app:layout_constraintVertical_bias="1.0" />-->

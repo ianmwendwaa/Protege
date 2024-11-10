@@ -12,7 +12,7 @@ const val channelID = "channel1"
 const val titleExtra = "titleExtra"
 const val contentExtra = "contentExtra"
 
-class NotificationManager:BroadcastReceiver() {
+class NotificationManagerr:BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val notification= NotificationCompat.Builder(context, channelID)
             .setSmallIcon(R.drawable.ic_done)

@@ -2,19 +2,20 @@ package com.example.notessqlite.notes
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.SearchView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.NoteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Calendar
 
 class NotesFragment : Fragment() {
     override fun onCreateView(
@@ -29,12 +30,11 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val greetings: TextView = view.findViewById(R.id.greetings)
         val recyclerView: RecyclerView = view.findViewById(R.id.notesRView)
         val addBtn: FloatingActionButton = view.findViewById(R.id.addBtn)
-        val searchView: EditText = view.findViewById(R.id.searchView)
-        val no = mutableListOf<Note>()
-        val noteArray = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, android.R.id.title, no)
-
+        val searchView: SearchView = view.findViewById(R.id.searchView)
+        val noDataView = view.findViewById<LinearLayout>(R.id.noDataView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
         notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
@@ -44,22 +44,45 @@ class NotesFragment : Fragment() {
             val intent = Intent(context, AddNoteActivity::class.java)
             startActivity(intent)
         }
-        searchView.addTextChangedListener(object:TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        searchView.queryHint = "Search Note..."
+
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val greeting = when (currentHour) {
+            in 0..11 -> getString(R.string.greeting_morning)
+            in 12..17 -> getString(R.string.greeting_afternoon)
+            else -> getString(R.string.greeting_evening)
+        }
+        greetings.text = greeting
+
+        searchView.setOnClickListener {
+            Toast.makeText(context,"Tap on the search icon to the left to search!",Toast.LENGTH_SHORT).show()
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                noteArray.filter.filter(s)
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterData(newText)
+                return true
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            private fun filterData(searchTerm: String?) {
+                val filteredList = if (searchTerm.isNullOrEmpty()){
+                    db.getAllNotes()
+                }else{
+                    db.searchNote(searchTerm)
+                }
+                notesAdapter.updateData(filteredList)
+                if (filteredList.isEmpty()){
+                    noDataView.visibility = View.VISIBLE
+                    addBtn.visibility = View.GONE
+                }else{
+                    noDataView.visibility = View.GONE
+                }
             }
         })
     }
-
-//    private fun performFiltering(query: String) {
-////        val filteredList = fi
-//    }
     override fun onResume() {
         super.onResume()
         notesAdapter.refreshData(db.getAllNotes())

@@ -17,7 +17,7 @@ class ArchivesFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_archives, container, false)
     }
-//   Yeah get used to it😝😝
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView: RecyclerView= view.findViewById(R.id.archivedRVView)

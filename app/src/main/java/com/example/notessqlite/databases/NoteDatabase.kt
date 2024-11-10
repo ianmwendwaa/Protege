@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.notessqlite.notes.Note
+import com.example.notessqlite.todo.titleExtra
 
 class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
@@ -40,7 +41,7 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
         db.close()
     }
 
-    fun getAllNotes(): List<Note> {
+    fun getAllNotes(): MutableList<Note> {
         val notesList = mutableListOf<Note>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
@@ -97,30 +98,21 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
         db.close()
     }
 
-    fun searchNote(){
-        val unfilteredList = mutableListOf<Note>()
-        val db = readableDatabase
-        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_TITLE LIKE ? OR $COLUMN_CONTENT LIKE ?"
-        val cursor = db.rawQuery(query, null)
+    fun searchNote(searchTerm:String):MutableList<Note>{
+        val noteEntities = mutableListOf<Note>()
+        val searchQuery = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_TITLE LIKE ?"
+        val selectionArgs = arrayOf("%$searchTerm%")
+        val cursor = readableDatabase.rawQuery(searchQuery,selectionArgs)
         while (cursor.moveToNext()){
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
-            val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
-            val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
-            val time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
-            val data = Note(id, title, content, time)
-            unfilteredList.add(data)
-        }
-    cursor.close()
-    }
-    fun cursorToList(cursor: Cursor): List<Note> {
-        val notesList = mutableListOf<Note>()
-        while (cursor.moveToNext()){
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
-            val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
-            val time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
-            val searchData = Note(id,title,time)
+            val note = Note(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                content = cursor.getString(cursor.getColumnIndexOrThrow("content")),
+                time = cursor.getString(cursor.getColumnIndexOrThrow("date"))
+            )
+            noteEntities.add(note)
         }
         cursor.close()
-        return notesList
+        return noteEntities
     }
 }

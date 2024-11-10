@@ -42,7 +42,6 @@ class UpdateNoteActivity : AppCompatActivity() {
         val currentDateTime = LocalDateTime.now()
         val newDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm"))
         binding.updateDate.text = newDate
-        //binding.updateDate.setText(note.time)
 
         binding.updateContentEditText.requestFocus()
 

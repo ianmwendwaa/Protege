@@ -2,17 +2,20 @@ package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.user_passwords.PasswordActivity
@@ -25,7 +28,7 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var contentEditText: EditText
     private lateinit var tvDate: TextView
-    private lateinit var saveButton: ImageView
+    private lateinit var saveButton: Button
     private lateinit var charCount: TextView
     private lateinit var bullets: ImageView
    // private lateinit var toolBox: LinearLayout
@@ -49,6 +52,7 @@ class AddNoteActivity : AppCompatActivity() {
         val currentDateTime = LocalDateTime.now()
         val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm"))
         tvDate.text = time
+//        Counter displaying number characters entered
         contentEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -71,25 +75,42 @@ class AddNoteActivity : AppCompatActivity() {
                 }
             }
         })
+        val textWatcher = object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val titleText = titleEditText.text.isNotEmpty()
+                val contentText = contentEditText.text.isNotEmpty()
+                saveButton.isEnabled = titleText&&contentText
+                if(saveButton.isEnabled){
+                    saveButton.setBackgroundColor(ContextCompat.getColor(this@AddNoteActivity, R.color.buttonEnabledColor))
+                }else{
+                    saveButton.setBackgroundColor(ContextCompat.getColor(this@AddNoteActivity,R.color.buttonDisabledColor))
+                }
+            }
+        }
+        titleEditText.addTextChangedListener(textWatcher)
+        contentEditText.addTextChangedListener(textWatcher)
+
+
         passwordMagic.setOnClickListener {
             startActivity(Intent(this,PasswordActivity::class.java))
         }
-//        if (title.isEmpty()&&content.isEmpty()){
-//            saveButton.visibility = View.GONE
-//        }else{
-//            saveButton.visibility =
-//        }
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val content = contentEditText.text.toString()
             val charCount = charCount.text.toString()
-            val currentDateTime = LocalDateTime.now()
-            val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-            tvDate.text = time
-            val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-            val note = Note(0, title, content,time,charCount)
+            val savedDateTime = LocalDateTime.now()
+            val savedTime = savedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+            tvDate.text = savedTime
+            val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+            val note = Note(0, title, content,savedTime,charCount)
             if(title.isEmpty()||content.isEmpty()){
-                Toast.makeText(this, "Type something for me to do my thing!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Something quite ain't right...", Toast.LENGTH_SHORT).show()
             }else{
                 db.insertNote(note)
                 finish()

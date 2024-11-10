@@ -22,12 +22,8 @@
         </activity>
 
         <receiver
-            android:name=".todo.NotificationManager"
-            android:enabled="true" />
-
-        <activity
-            android:name=".todo.ToDoFragment"
-            android:exported="false" />
+            android:name=".todo.NotificationAlarmReceiver"
+            android:enabled="false" />
         <activity
             android:name=".notes.UpdateNoteActivity"
             android:exported="false" />
