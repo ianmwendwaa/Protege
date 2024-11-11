@@ -5,7 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.notessqlite.databinding.ActivityMainBinding
-import com.example.notessqlite.notes.ArchivesFragment
+import com.example.notessqlite.archives.ArchivesFragment
 import com.example.notessqlite.categories.CategoriesFragment
 import com.example.notessqlite.notes.NotesFragment
 import com.example.notessqlite.todo.ToDoFragment

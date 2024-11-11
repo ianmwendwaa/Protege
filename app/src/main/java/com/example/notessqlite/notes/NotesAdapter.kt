@@ -3,7 +3,6 @@ package com.example.notessqlite.notes
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.databases.CategoriesDatabase
 import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.databases.NoteDatabase
 
@@ -57,11 +55,11 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             holder.itemView.context.startActivity(intent)
         }
 //        holder.card.setOnLongClickListener {
-//            val bottomSheetFragment = BottomDialogAction()
+//            val bottomSheetFragment = DialogActionPrompt()
 //            true
 //        }
         holder.moreButton.setOnClickListener {
-            val bottomSheetFragment = BottomDialogAction()
+            val bottomSheetFragment = DialogActionPrompt()
             bottomSheetFragment.show(fragmentManager,bottomSheetFragment.tag)
         }
 

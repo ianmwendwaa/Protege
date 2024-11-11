@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.todo.BottomSheetFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-open class BottomDialogAction:BottomSheetDialogFragment() {
+open class DialogActionPrompt:BottomSheetDialogFragment() {
     private lateinit var archivesDatabase: ArchivesDatabase
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

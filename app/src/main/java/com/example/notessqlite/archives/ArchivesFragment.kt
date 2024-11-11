@@ -1,4 +1,4 @@
-package com.example.notessqlite.notes
+package com.example.notessqlite.archives
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.databases.NoteDatabase
 
 class ArchivesFragment : Fragment() {
     override fun onCreateView(

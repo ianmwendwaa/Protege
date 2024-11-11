@@ -1,4 +1,4 @@
-package com.example.notessqlite.notes
+package com.example.notessqlite.archives
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.databases.CategoriesDatabase
 import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.notes.Note
 
 class ArchivesAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<ArchivesAdapter.ArchiveViewHolder>() {
     class ArchiveViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){

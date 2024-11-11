@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/sheet_background"
     android:minHeight="300dp"
-    tools:context=".notes.BottomDialogAction">
+    tools:context=".notes.DialogActionPrompt">
 
     <TextView
         android:id="@+id/taskHeading"
@@ -41,7 +41,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Archive"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
+                android:paddingTop="3dp"
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:textStyle="bold" />
@@ -50,7 +51,7 @@
                 android:id="@+id/archiveNoteImg"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/rv_archive_icon" />\
+                android:src="@drawable/another_archive" />\
         </RelativeLayout>
     </LinearLayout>
 
@@ -79,7 +80,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Star"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
+                android:paddingTop="3dp"
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:textStyle="bold"/>
@@ -111,7 +113,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Add To Folder"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
+                android:paddingTop="1dp"
                 android:textSize="16sp"
                 android:layout_marginStart="30dp"
                 android:textStyle="bold"/>
