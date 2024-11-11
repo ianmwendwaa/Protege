@@ -8,7 +8,7 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/what"
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="wrap_content"
@@ -21,29 +21,22 @@
             android:layout_marginTop="8dp">
 
             <TextView
-                android:id="@+id/titleTextView"
+                android:id="@+id/folderName"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="Folder Name"
                 android:textColor="@color/blue"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <ImageView
-                android:id="@+id/archiveButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
-                android:src="@drawable/rv_archive_icon"/>\
-            <ImageView
-                android:id="@+id/displayMore"
+                android:id="@+id/rigggeeeeddddd"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="55dp"
                 android:src="@drawable/more_button"/>
             <ImageView
-                android:id="@+id/deleteButton"
+                android:id="@+id/deleteFolder"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
@@ -51,19 +44,9 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/contentTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Content"
-            android:textColor="@color/black"
-            android:maxLines="1"
-            android:layout_marginTop="4dp"/>
-
-        <TextView
-            android:id="@+id/idTVDate"
+            android:id="@+id/dateModified"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/contentTextView"
             android:textColor="@color/black"
             android:paddingTop="5dp"
             android:textSize="13sp" />

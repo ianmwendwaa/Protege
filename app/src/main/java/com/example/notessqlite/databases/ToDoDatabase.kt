@@ -37,7 +37,7 @@ class ToDoDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         db.close()
     }
 
-    fun getAllToDos(): List<ToDo> {
+    fun getAllToDos(): MutableList<ToDo> {
         val todoList = mutableListOf<ToDo>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"

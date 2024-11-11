@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
@@ -23,7 +24,7 @@ import java.util.Calendar
 open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.OnTimeSetListener{
     @SuppressLint("SetTextI18n")
     var hours = 0
-    var minutes = 0
+    private var minutes = 0
 
     private var myHours: Int = 0
     private var myMinutes: Int = 0

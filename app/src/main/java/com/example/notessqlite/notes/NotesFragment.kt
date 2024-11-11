@@ -39,7 +39,7 @@ class NotesFragment : Fragment() {
         val noNotes: LinearLayout = view.findViewById(R.id.noNotes)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
-        notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
+        notesAdapter = NotesAdapter(db.getAllNotes(), childFragmentManager,requireContext())
         recyclerView.adapter = notesAdapter
         val notesQueryList = db.getAllNotes()
         if (notesQueryList.isEmpty()){
@@ -52,8 +52,9 @@ class NotesFragment : Fragment() {
             val intent = Intent(context, AddNoteActivity::class.java)
             startActivity(intent)
         }
-        searchView.queryHint = "Search Note..."
+        searchView.queryHint = getString(R.string.queryHint)
 
+//        Greeting logic
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val greeting = when (currentHour) {
             in 0..11 -> getString(R.string.greeting_morning)

@@ -29,25 +29,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <ImageView
-                android:id="@+id/archiveButton"
+                android:id="@+id/unarchiveButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/rv_archive_icon"/>\
-            <ImageView
-                android:id="@+id/displayMore"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="55dp"
-                android:src="@drawable/more_button"/>
-            <ImageView
-                android:id="@+id/deleteButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_delete"/>
+                android:src="@drawable/rv_archive_icon"/>
         </RelativeLayout>
 
         <TextView

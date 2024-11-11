@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:minHeight="400dp"
     android:background="@drawable/sheet_background"
-    tools:context=".todo.BottomSheetFragment">
+    android:minHeight="300dp"
+    tools:context=".notes.BottomDialogAction">
 
     <TextView
         android:id="@+id/taskHeading"
@@ -21,26 +21,102 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <ImageView
-        android:id="@+id/saveCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_done"
-        android:layout_marginTop="-43dp"
-        android:layout_marginStart="315dp"/>
 
-    <EditText
-        android:id="@+id/categoryName"
-        android:layout_width="325dp"
-        android:layout_height="61dp"
-        android:padding="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
+    <LinearLayout
+        android:id="@+id/archiveThis"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:background="@drawable/field_borders"
-        android:capitalize="sentences"
-        android:defaultFocusHighlightEnabled="true"
-        android:fontFamily="@font/adamina"
-        android:hint="Name"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/archiveText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Archive"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:layout_marginStart="30dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/archiveNoteImg"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/rv_archive_icon" />\
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/starNote"
+        android:layout_width="300dp"
+        android:background="@drawable/field_borders"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/starImg"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/star_action" />
+            <TextView
+                android:id="@+id/star"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Star"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:layout_marginStart="30dp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addToFolder"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        android:background="@drawable/field_borders"
+        android:layout_marginTop="10dp"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:id="@+id/addFolderImg"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/add_to_folder_action"/>
+            <TextView
+                android:id="@+id/addFolderText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Add To Folder"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:layout_marginStart="30dp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
 </LinearLayout>

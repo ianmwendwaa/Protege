@@ -109,13 +109,10 @@ class AddNoteActivity : AppCompatActivity() {
             tvDate.text = savedTime
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
             val note = Note(0, title, content,savedTime,charCount)
-            if(title.isEmpty()||content.isEmpty()){
-                //Toast.makeText(this, "Something quite ain't right...", Toast.LENGTH_SHORT).show()
-            }else{
-                db.insertNote(note)
-                finish()
-                Toast.makeText(this, "$title saved successfully at $datePresentation", Toast.LENGTH_SHORT).show()
-            }
+            db.insertNote(note)
+            finish()
+            Toast.makeText(this, "$title saved successfully at $datePresentation", Toast.LENGTH_SHORT).show()
+
         }
     }
 }

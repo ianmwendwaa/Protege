@@ -33,8 +33,8 @@ class ToDoFragment : Fragment() {
         db = context?.let { ToDoDatabase(it) }!!
         toDoAdapter = ToDoAdapter(db.getAllToDos(), requireContext())
         recyclerView.adapter = toDoAdapter
-        val nullToDoQuery = db.getAllToDos()
-        if(nullToDoQuery.isEmpty()){
+        val nullToDoQueryListResult = db.getAllToDos()
+        if(nullToDoQueryListResult.isEmpty()){
             noToDo.visibility = View.VISIBLE
         }else{
             noToDo.visibility = View.GONE

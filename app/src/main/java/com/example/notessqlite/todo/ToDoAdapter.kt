@@ -50,7 +50,7 @@ class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newToDos: List<ToDo>) {
+    fun refreshData(newToDos: MutableList<ToDo>) {
         todo = newToDos
         notifyDataSetChanged()
     }

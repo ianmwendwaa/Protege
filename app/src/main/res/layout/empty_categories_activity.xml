@@ -10,12 +10,12 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:src="@drawable/oops_no_data_found"/>
+        android:src="@drawable/oops_no_categories_data"/>
     <TextView
         android:id="@+id/noCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Note Repository Found!"
+        android:text="Your Folders are stored here!"
         android:fontFamily="@font/adamina"
         android:textColor="@color/black"
         android:textSize="18sp" />

@@ -31,6 +31,10 @@
             android:name=".notes.AddNoteActivity"
             android:exported="false" />
         <activity
+            android:name=".categories.CategoryViewActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -6,7 +6,7 @@
     tools:context=".categories.CategoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/todoRView"
+        android:id="@+id/categoryRV"
         android:layout_width="match_parent"
         android:layout_height="700dp"
         android:layout_marginTop="40dp"
@@ -24,7 +24,7 @@
         android:tint="@color/black" />
     <include
         android:id="@id/noCategory"
-        layout="@layout/no_data_returned"
+        layout="@layout/empty_categories_activity"
         android:visibility="gone"/>
 
 </FrameLayout>
