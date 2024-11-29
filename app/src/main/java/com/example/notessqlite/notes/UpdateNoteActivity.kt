@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.notessqlite.R
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
@@ -64,6 +66,26 @@ class UpdateNoteActivity : AppCompatActivity() {
                 }else return
             }
         })
+        val textWatcher = object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val titleText = binding.updateTitleEditText.text.isNotEmpty()
+                val contentText = binding.updateContentEditText.text.isNotEmpty()
+                binding.updateSaveButton.isEnabled = titleText||contentText
+                if(binding.updateSaveButton.isEnabled){
+                    binding.updateSaveButton.setBackgroundColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonEnabledColor))
+                }else{
+                    binding.updateSaveButton.setBackgroundColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonDisabledColor))
+                }
+            }
+        }
+        binding.updateTitleEditText.addTextChangedListener(textWatcher)
+        binding.updateContentEditText.addTextChangedListener(textWatcher)
 
         binding.updateSaveButton.setOnClickListener {
             val newTitle = binding.updateTitleEditText.text.toString()

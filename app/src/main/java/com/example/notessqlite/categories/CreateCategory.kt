@@ -26,15 +26,13 @@ class CreateCategory:BottomSheetDialogFragment() {
         categoryAdapter = CategoryAdapter(db.retrieveFolders(),requireContext())
         categoryName.requestFocus()
         val time = LocalDateTime.now()
-        val dateModified = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-        dateModification.text = dateModified
+        dateModification.text = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
         saveButton.setOnClickListener {
             val folderTitle = categoryName.text.toString().trim()
             val time = LocalDateTime.now()
             val dateModified = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             dateModification.text = dateModified
-            val finalTime = dateModification.text.toString()
-            val category = Category(0,folderTitle,finalTime)
+            val category = Category(0,folderTitle,dateModified)
             db.createFolder(category)
             Toast.makeText(context,"$folderTitle folder created!",Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()

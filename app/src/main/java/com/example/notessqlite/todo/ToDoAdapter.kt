@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.ToDoDatabase
 
-class ToDoAdapter(private var todo: List<ToDo>, context: Context) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
+class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
 
     private val db: ToDoDatabase = ToDoDatabase(context)
 

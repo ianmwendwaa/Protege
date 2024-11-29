@@ -39,9 +39,9 @@ class ToDoFragment : Fragment() {
         }else{
             noToDo.visibility = View.GONE
         }
-
         addTask.setOnClickListener {
-            fragmentManager?.let { it1 -> BottomSheetFragment().show(it1, "newTask") }
+            val bottomSheetFragment = BottomSheetFragment()
+            bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
         }
     }
 

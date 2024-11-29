@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/todo_fragment"
     tools:context=".todo.ToDoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,4 +27,5 @@
         android:id="@id/noToDo"
         layout="@layout/empty_todo_activity"
         android:visibility="gone"/>
+
 </FrameLayout>

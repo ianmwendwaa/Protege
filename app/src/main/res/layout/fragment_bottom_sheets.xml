@@ -49,6 +49,6 @@
         android:layout_marginEnd="80dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/adamina"
-        android:textColor="#606060"
+        android:textColor="@color/black"
         android:textSize="13sp" />
 </LinearLayout>

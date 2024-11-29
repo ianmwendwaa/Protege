@@ -14,7 +14,7 @@ open class DialogActionPrompt:BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val archiveFunction: LinearLayout = view.findViewById(R.id.archiveThis)
-        val starThis:LinearLayout = view.findViewById(R.id.starNote)
+//        val starThis:LinearLayout = view.findViewById(R.id.starNote)
         val addToFolder:LinearLayout = view.findViewById(R.id.addToFolder)
         archivesDatabase = context?.let { ArchivesDatabase(it) }!!
 

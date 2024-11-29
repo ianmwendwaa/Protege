@@ -1,4 +1,4 @@
-package com.example.notessqlite.categories
+package com.example.notessqlite.categories.categoryviews
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,7 +14,7 @@ import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.notes.Note
 
-class CategoryViewAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<CategoryViewAdapter.CategoryPreviewViewHolder>() {
+class ViewNotesInFolderAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<ViewNotesInFolderAdapter.CategoryPreviewViewHolder>() {
     class CategoryPreviewViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
@@ -55,10 +55,10 @@ class CategoryViewAdapter(private var notes: MutableList<Note>, context: Context
         notes =  newNotes
         notifyDataSetChanged()
     }
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateData(newList:List<Note>){
-        notes.clear()
-        notes.addAll(newList)
-        notifyDataSetChanged()
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun updateData(newList:MutableList<Note>){
+//        notes.clear()
+//        notes.addAll(newList)
+//        notifyDataSetChanged()
+//    }
 }

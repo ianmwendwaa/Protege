@@ -87,9 +87,9 @@ class AddNoteActivity : AppCompatActivity() {
                 val contentText = contentEditText.text.isNotEmpty()
                 saveButton.isEnabled = titleText&&contentText
                 if(saveButton.isEnabled){
-                    saveButton.setBackgroundColor(ContextCompat.getColor(this@AddNoteActivity, R.color.buttonEnabledColor))
+                    saveButton.setTextColor(ContextCompat.getColor(this@AddNoteActivity, R.color.buttonEnabledColor))
                 }else{
-                    saveButton.setBackgroundColor(ContextCompat.getColor(this@AddNoteActivity,R.color.buttonDisabledColor))
+                    saveButton.setTextColor(ContextCompat.getColor(this@AddNoteActivity,R.color.buttonDisabledColor))
                 }
             }
         }

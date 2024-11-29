@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -67,13 +68,13 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
             val description = view.findViewById<TextInputEditText>(R.id.taskDescription)?.text.toString().trim()
             val time = datePicked.text.toString()
             val todo = ToDo(0, title, description,time)
-           // scheduleReminder()
-            db.insertToDo(todo)
+            // scheduleReminder()
             toDoAdapter.refreshData(db.getAllToDos())
+            db.insertToDo(todo)
             setAlarm()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
             Toast.makeText(context, "$title saved at $time", Toast.LENGTH_SHORT).show()
-            Toast.makeText(context,"Reminder for $time", Toast.LENGTH_SHORT).show()
+            dismiss()
         }
     }
     @SuppressLint("SetTextI18n")
