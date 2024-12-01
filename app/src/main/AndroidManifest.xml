@@ -16,11 +16,14 @@
         android:theme="@style/Theme.NotesSQLite"
         tools:targetApi="31">
         <activity
+            android:name=".user_passwords.PasswordVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".RiggedActivity"
             android:exported="false" />
         <activity
             android:name=".user_passwords.PasswordActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <receiver
             android:name=".todo.NotificationAlarmReceiver"

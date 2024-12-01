@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.user_passwords.PasswordActivity
+import com.example.notessqlite.user_passwords.PasswordVerificationActivity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -98,7 +99,7 @@ class AddNoteActivity : AppCompatActivity() {
 
 
         passwordMagic.setOnClickListener {
-            startActivity(Intent(this,PasswordActivity::class.java))
+            startActivity(Intent(this,PasswordVerificationActivity::class.java))
         }
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()

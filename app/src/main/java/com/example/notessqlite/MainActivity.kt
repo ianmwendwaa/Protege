@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(){
                     replaceFragment(ArchivesFragment())
                     true
                 }
-                R.id.navigation_categories->{
+                R.id.navigation_folders->{
                     replaceFragment(CategoriesFragment())
                     true
                 }else -> false

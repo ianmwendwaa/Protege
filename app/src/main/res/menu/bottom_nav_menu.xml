@@ -15,7 +15,7 @@
         android:icon="@drawable/archive_icon"
         android:title="Archives" />
     <item
-        android:id="@+id/navigation_categories"
+        android:id="@+id/navigation_folders"
         android:icon="@drawable/category_icon"
-        android:title="Categories" />
+        android:title="Folders" />
 </menu>

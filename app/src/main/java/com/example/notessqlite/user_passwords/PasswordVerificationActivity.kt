@@ -1,22 +1,23 @@
 package com.example.notessqlite.user_passwords
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notessqlite.databases.PasswordDatabase
-import com.example.notessqlite.databinding.ActivityPasswordBinding
+import com.example.notessqlite.databinding.ActivityPasswordVerificationBinding
+import com.example.notessqlite.notes.AddNoteActivity
 
-class PasswordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPasswordBinding
+class PasswordVerificationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPasswordVerificationBinding
     private lateinit var db: PasswordDatabase
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         db = PasswordDatabase(this)
-        binding = ActivityPasswordBinding.inflate(layoutInflater)
+        binding = ActivityPasswordVerificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.zero.setOnClickListener {
@@ -58,14 +59,12 @@ class PasswordActivity : AppCompatActivity() {
         }
         binding.done.setOnClickListener {
             val myPassword = binding.tvFormula.text.toString()
-            val password = Password(0,myPassword)
-            if (myPassword.length<4){
-                Toast.makeText(this,"Password should be at least 4 characters!", Toast.LENGTH_SHORT).show()
+            val defPass = db.fetchPasswordRequest()
+            if(myPassword.equals(defPass)){
+                startActivity(Intent(this,AddNoteActivity::class.java))
             }else{
-                db.createPassword(password)
-                Toast.makeText(this,"Password created successfully",Toast.LENGTH_SHORT).show()
-                finish()
             }
+
         }
 
     }

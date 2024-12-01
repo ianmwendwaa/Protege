@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.notessqlite.categories.Category
 import com.example.notessqlite.notes.Note
+import com.example.notessqlite.todo.titleExtra
 
 class InsertNoteIntoFolderDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION) {
     companion object{
@@ -27,6 +28,7 @@ class InsertNoteIntoFolderDatabase(context: Context):SQLiteOpenHelper(context, D
         val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
     }
+
     fun insertIntoFolder(note: Note){
         val db = writableDatabase
         val values = ContentValues().apply {

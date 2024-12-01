@@ -54,10 +54,6 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             }
             holder.itemView.context.startActivity(intent)
         }
-//        holder.card.setOnLongClickListener {
-//            val bottomSheetFragment = DialogActionPrompt()
-//            true
-//        }
         holder.moreButton.setOnClickListener {
             val bottomSheetFragment = DialogActionPrompt()
             bottomSheetFragment.show(fragmentManager,bottomSheetFragment.tag)

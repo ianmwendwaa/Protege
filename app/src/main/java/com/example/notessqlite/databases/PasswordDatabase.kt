@@ -45,5 +45,23 @@ class PasswordDatabase(context: Context): SQLiteOpenHelper(context,
         db.update(TABLE_NAME,value,whereClause,whereArgs)
         db.close()
     }
+    fun fetchPasswordRequest(): MutableList<Password> {
+        val passwordDef = mutableListOf<Password>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME"
+        val cursor = db.rawQuery(query, null)
+
+        while (cursor.moveToNext()){
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+            val pass = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD_DEFINED))
+
+
+            val password = Password(id, pass)
+            passwordDef.add(password)
+        }
+        cursor.close()
+        db.close()
+        return passwordDef
+    }
 
 }
