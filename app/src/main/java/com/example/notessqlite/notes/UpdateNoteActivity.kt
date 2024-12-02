@@ -3,12 +3,23 @@
 package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Rect
+import android.graphics.Typeface
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
@@ -56,9 +67,23 @@ class UpdateNoteActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
+                //  Word Counter
+                fun countWords(contentEditText: EditText): Int {
+                    val text = contentEditText.text.toString().trim()
+                    return if (text.isEmpty()) {
+                        0
+                    } else {
+                        text.split("\\s+".toRegex()).size
+                    }
+                }
+
+                val editTxt: EditText = findViewById(R.id.updateContentEditText)
+                val wordCount = countWords(editTxt)
+                binding.updateWordCount.text = "Words: $wordCount"
+
                 val currentLength = s?.length?:0
                 val limit = 100000000
-                binding.charCountUpdate.text = "$currentLength"
+                binding.charCountUpdate.text = "Characters: $currentLength"
                 if(currentLength>=limit){
                     val inputManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     inputManager.hideSoftInputFromWindow(binding.updateContentEditText.applicationWindowToken, 0)
@@ -78,14 +103,101 @@ class UpdateNoteActivity : AppCompatActivity() {
                 val contentText = binding.updateContentEditText.text.isNotEmpty()
                 binding.updateSaveButton.isEnabled = titleText||contentText
                 if(binding.updateSaveButton.isEnabled){
-                    binding.updateSaveButton.setBackgroundColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonEnabledColor))
+                    binding.updateSaveButton.setTextColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonEnabledColor))
                 }else{
-                    binding.updateSaveButton.setBackgroundColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonDisabledColor))
+                    binding.updateSaveButton.setTextColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonDisabledColor))
                 }
             }
         }
         binding.updateTitleEditText.addTextChangedListener(textWatcher)
         binding.updateContentEditText.addTextChangedListener(textWatcher)
+
+        fun applyBold(editText:EditText){
+            val start = editText.selectionStart
+            val end = editText.selectionEnd
+            if(start!=end){
+                val spannable = SpannableStringBuilder(editText.text)
+                spannable.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                binding.updateContentEditText.text = spannable
+            }
+        }
+        fun applyItalics(editText: EditText){
+            val start = editText.selectionStart
+            val end = editText.selectionEnd
+            if(start!=end){
+                val spannable = SpannableStringBuilder(editText.text)
+                spannable.setSpan(
+                    StyleSpan(Typeface.ITALIC),
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                binding.updateContentEditText.text = spannable
+            }
+        }
+        fun underlineText(editText:EditText){
+            val start = editText.selectionStart
+            val end = editText.selectionEnd
+            if(start!=end){
+                val spannable = SpannableStringBuilder(editText.text)
+                spannable.setSpan(
+                    UnderlineSpan(),
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                binding.updateContentEditText.text = spannable
+            }
+        }
+        val pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result->
+                if (result.resultCode == Activity.RESULT_OK){
+                    val data: Intent? = result.data
+                    val imageUri = data?.data
+                    if(imageUri!=null){
+                        val imageSpan = AddNoteActivity.ResizableImageSpan(this,imageUri,500,700)
+                        val editable = binding.updateContentEditText.editableText
+                        editable.insert(binding.updateContentEditText.selectionStart," ")
+                        editable.setSpan(imageSpan,editable.length - 1,editable.length,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
+                }
+        }
+
+        binding.main2.viewTreeObserver.addOnGlobalLayoutListener {
+            val rect = Rect()
+            binding.main2.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = binding.main2.rootView.height
+            val keyboardHeight = screenHeight - rect.bottom
+            if(keyboardHeight > 0){
+                binding.toolbar.translationY = -keyboardHeight.toFloat()
+            }else{
+                binding.toolbar.translationY = 0f
+            }
+        }
+        binding.boldButton.setOnClickListener {
+            applyBold(binding.updateContentEditText)
+        }
+        binding.italicButton.setOnClickListener {
+            applyItalics(binding.updateContentEditText)
+        }
+        binding.underline.setOnClickListener {
+            underlineText(binding.updateContentEditText)
+        }
+        binding.bullets.setOnClickListener {
+            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+        }
+        binding.attachment.setOnClickListener {
+            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageLauncher.launch(pickImageIntent)
+        }
+        binding.voiceRecorder.setOnClickListener {
+            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+        }
 
         binding.updateSaveButton.setOnClickListener {
             val newTitle = binding.updateTitleEditText.text.toString()

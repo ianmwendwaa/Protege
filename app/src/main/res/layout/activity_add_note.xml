@@ -34,7 +34,7 @@
         android:layout_marginEnd="99dp"
         android:layout_toStartOf="@+id/saveButton"
         android:layout_toEndOf="@+id/addNoteHeading"
-        android:src="@drawable/key_svgrepo_com" />
+        android:src="@drawable/ic_password" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -54,17 +54,17 @@
         android:id="@+id/saveButton"
         android:layout_width="80dp"
         android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:text="Save"
-        android:textColor="@color/buttonDisabledColor"
-        app:backgroundTint="@android:color/transparent"
         android:layout_alignTop="@id/addNoteHeading"
-        android:layout_marginEnd="6dp"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:text="Save"
+        android:textColor="#546E7A"
+        app:backgroundTint="@android:color/transparent" />
 
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/addNoteHeading"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/adamina"
@@ -77,35 +77,36 @@
         android:textStyle="bold"
         android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/bullets"
-        android:visibility="gone"
-        android:layout_width="44dp"
-        android:layout_height="34dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="109dp"
-        android:layout_marginEnd="8dp"
-        android:layout_toStartOf="@+id/charCount"
-        android:src="@drawable/bullets" />
-
     <TextView
         android:id="@+id/charCount"
-        android:layout_width="55dp"
+        android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_below="@+id/titleEditText"
         android:layout_alignEnd="@+id/contentEditText"
         android:layout_marginStart="10dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:visibility="gone"
-        android:textIsSelectable="true"
+        android:textIsSelectable="false"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"/>
+
+    <TextView
+        android:id="@+id/wordCount"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/titleEditText"
+        android:layout_alignStart="@+id/charCount"
+        android:layout_marginStart="-77dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textIsSelectable="false" />
 
     <EditText
         android:id="@+id/contentEditText"
         android:layout_width="396dp"
-        android:layout_height="1000dp"
+        android:layout_height="1000000dp"
         android:layout_below="@+id/titleEditText"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
@@ -118,16 +119,94 @@
         android:textSize="15sp"
         android:capitalize="sentences"/>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/toolBox"-->
-<!--        android:layout_width="420dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_below="@+id/contentEditText"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="-52dp"-->
-<!--        android:background="#3E3D3D"-->
-<!--        android:orientation="horizontal">-->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="395dp"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-<!--    </LinearLayout>-->
+        <Button
+            android:id="@+id/boldButton"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/adamina"
+            android:text="B"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="52dp"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/italicButton"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/adamina"
+            android:text="I"
+            android:textColor="@color/black"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/underline"
+            android:layout_width="52dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="hkk"
+                android:src="@drawable/underline" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bullets"
+            android:layout_width="52dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_bullets" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/attachment"
+            android:layout_width="52dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_attachment" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/voiceRecorder"
+            android:layout_width="52dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="14dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_mic" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

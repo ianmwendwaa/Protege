@@ -100,7 +100,7 @@ class NotesFragment : Fragment() {
                     db.searchNote(searchTerm)
                 }
                 notesAdapter.updateData(filteredList)//-> Updating our list to the filtered list using the function in the adapter class
-            //            Updating the view if no search results are returned
+            //                Updating the view if no search results are returned
                 if (filteredList.isEmpty()){
                     noDataView.visibility = View.VISIBLE
                 }else{
