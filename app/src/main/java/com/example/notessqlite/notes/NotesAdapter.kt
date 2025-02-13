@@ -3,6 +3,8 @@ package com.example.notessqlite.notes
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +12,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ArchivesDatabase
 import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.databases.NoteDatabase
@@ -65,15 +69,27 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             archiveDB.insertArchivedNote(note)
             insertDB.insertIntoFolder(note)
             refreshData(db.getAllNotes())
-            Toast.makeText(holder.itemView.context,"$title archived",Toast.LENGTH_SHORT).show()
+            Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+            Utils.showToast(holder.itemView.context, "$title archived", R.drawable.ic_info)
         }
 
         holder.deleteButton.setOnClickListener {
             val title = note.title
             note.id.let { it1 -> db.deleteNote(it1) }
             refreshData(db.getAllNotes())
-            Toast.makeText(holder.itemView.context, "$title deleted", Toast.LENGTH_SHORT).show()
+            Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+            Utils.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
         }
+        val randomColor = getRandomColor()
+        val borderDrawable = GradientDrawable()
+        borderDrawable.setStroke(3,randomColor)
+        borderDrawable.cornerRadius = 10f
+//        holder.cardView.background = borderDrawable
+    }
+
+    private fun getRandomColor(): Int {
+        val random = java.util.Random()
+        return Color.rgb(random.nextInt(256),random.nextInt(256),random.nextInt(256))
     }
 
     @SuppressLint("NotifyDataSetChanged")

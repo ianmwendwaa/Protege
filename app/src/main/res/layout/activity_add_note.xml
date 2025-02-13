@@ -10,203 +10,195 @@
     android:padding="16dp"
     android:background="#F4F4F4"
     tools:context=".notes.AddNoteActivity">
-
-    <TextView
-        android:id="@+id/addNoteHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/andika"
-        android:text="@string/add_note"
-        android:textColor="@color/blue"
-        android:textSize="24sp" />
-
-    <ImageView
-        android:id="@+id/passwordSetter"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="99dp"
-        android:layout_toStartOf="@+id/saveButton"
-        android:layout_toEndOf="@+id/addNoteHeading"
-        android:src="@drawable/ic_password" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginStart="3dp"
-        android:layout_toStartOf="@+id/saveButton"
-        android:fontFamily="@font/adamina"
-        android:textColor="#606060"
-        android:textSize="11sp" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@id/addNoteHeading"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="6dp"
-        android:text="Save"
-        android:textColor="#546E7A"
-        app:backgroundTint="@android:color/transparent" />
-
-    <EditText
-        android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/addNoteHeading"
-        android:layout_marginTop="45dp"
-        android:fontFamily="@font/adamina"
-        android:hint="@string/title"
-        android:textColorHint="#606060"
-        android:textColor="@color/black"
-        android:backgroundTint="@android:color/transparent"
-        android:inputType="textCapSentences"
-        android:maxLines="1"
-        android:textStyle="bold"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/charCount"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/titleEditText"
-        android:layout_alignEnd="@+id/contentEditText"
-        android:layout_marginStart="10dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textIsSelectable="false"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="2dp"/>
-
-    <TextView
-        android:id="@+id/wordCount"
-        android:layout_width="70dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/titleEditText"
-        android:layout_alignStart="@+id/charCount"
-        android:layout_marginStart="-77dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="2dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textIsSelectable="false" />
-
-    <EditText
-        android:id="@+id/contentEditText"
-        android:layout_width="396dp"
-        android:layout_height="1000000dp"
-        android:layout_below="@+id/titleEditText"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/adamina"
-        android:backgroundTint="@android:color/transparent"
-        android:gravity="top"
-        android:hint="@string/description"
-        android:textColorHint="#606060"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:capitalize="sentences"/>
-
-    <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_width="395dp"
-        android:layout_height="49dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/boldButton"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/adamina"
-            android:text="B"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="52dp"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/italicButton"
-            android:layout_width="56dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/adamina"
-            android:text="I"
-            android:textColor="@color/black"
-            android:textStyle="italic" />
-    </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/underline"
-            android:layout_width="52dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="261dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="135dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/indie_flower"
+                android:textColor="#606060"
+                android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="18dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="hkk"
-                android:src="@drawable/underline" />
-        </LinearLayout>
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="5dp"
+                android:text="Save"
+                android:textColor="@color/buttonDisabledColor"
+                android:textSize="18sp"
+                android:fontFamily="@font/indie_flower"
+                app:backgroundTint="@android:color/transparent" />
 
-        <LinearLayout
-            android:id="@+id/bullets"
-            android:layout_width="52dp"
-            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="3dp"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/indie_flower"
+                android:hint="@string/title"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="#606060"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_bullets" />
-        </LinearLayout>
+            <EditText
+                android:id="@+id/contentEditText"
+                android:layout_width="395dp"
+                android:layout_height="650dp"
+                android:layout_below="@+id/titleEditText"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="22dp"
+                android:backgroundTint="@android:color/transparent"
+                android:capitalize="sentences"
+                android:fontFamily="@font/indie_flower"
+                android:gravity="top"
+                android:hint="@string/description"
+                android:textColor="@color/black"
+                android:textColorHint="#606060"
+                android:textSize="17.5sp" />
 
-        <LinearLayout
-            android:id="@+id/attachment"
-            android:layout_width="52dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_attachment" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/voiceRecorder"
-            android:layout_width="52dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="20dp"
+            <TextView
+                android:id="@+id/charCount"
+                android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="14dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_mic" />
-        </LinearLayout>
+                android:layout_below="@+id/titleEditText"
+                android:layout_alignEnd="@+id/contentEditText"
+                android:layout_marginStart="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textIsSelectable="false"
+                android:fontFamily="@font/indie_flower"
+                android:textSize="17sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="2dp"/>
 
-    </LinearLayout>
-</RelativeLayout>
+            <TextView
+                android:id="@+id/wordCount"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/titleEditText"
+                android:layout_alignStart="@+id/charCount"
+                android:layout_marginStart="-77dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="2dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/indie_flower"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textIsSelectable="false" />
+        </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/notesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </RelativeLayout>
+<!--<LinearLayout-->
+<!--android:id="@+id/toolbar"-->
+<!--android:layout_width="395dp"-->
+<!--android:layout_height="49dp"-->
+<!--android:layout_alignParentBottom="true"-->
+<!--android:background="@color/white"-->
+<!--android:orientation="horizontal"-->
+<!--android:visibility="gone">-->
+
+<!--<Button-->
+<!--    android:id="@+id/boldButton"-->
+<!--    android:layout_width="57dp"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:background="@android:color/transparent"-->
+<!--    android:fontFamily="@font/adamina"-->
+<!--    android:text="B"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:textStyle="bold" />-->
+
+<!--<LinearLayout-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <Button-->
+<!--        android:id="@+id/italicButton"-->
+<!--        android:layout_width="56dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:fontFamily="@font/adamina"-->
+<!--        android:text="I"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textStyle="italic" />-->
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+<!--    android:id="@+id/underline"-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="13dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="18dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:contentDescription="hkk"-->
+<!--        android:src="@drawable/underline" />-->
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+<!--    android:id="@+id/bullets"-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="15dp"-->
+<!--        android:layout_marginStart="18dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_bullets" />-->
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+<!--    android:id="@+id/attachment"-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="29dp"-->
+<!--        android:layout_marginStart="17dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_attachment" />-->
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+<!--    android:id="@+id/voiceRecorder"-->
+<!--    android:layout_width="52dp"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <ImageView-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:layout_marginStart="17dp"-->
+<!--        android:layout_marginTop="14dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_mic" />-->
+<!--</LinearLayout>-->
+
+<!--</LinearLayout>-->

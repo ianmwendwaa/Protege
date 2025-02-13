@@ -1,35 +1,71 @@
 package com.example.notessqlite.notes
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.provider.MediaStore.Video
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.MediaController
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.VideoView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import androidx.lifecycle.lifecycleScope
+import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.databases.NoteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class NotesFragment : Fragment() {
+class NotesFragment : Fragment(),AnimationTrigger {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_notes, container, false)
     }
+    private lateinit var videoView: VideoView
+    override fun triggerAnimation() {
+        videoView = requireView().findViewById(R.id.videoAnim)
+        videoView.visibility = View.VISIBLE
+
+        val animationSrc = Uri.parse("android.resource://"+
+                requireActivity().packageName+"/"+ R.raw.lisref)
+        videoView.setVideoURI(animationSrc)
+
+        val animationController = MediaController(requireContext())
+        videoView.setMediaController(animationController)
+        animationController.setAnchorView(videoView)
+        Log.d("VideoUri","VideoUri:$animationSrc")
+
+        videoView.start()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dismissAnimation()
+        },3000)
+    }
+
+    override fun dismissAnimation() {
+        videoView = requireView().findViewById(R.id.videoAnim)
+        videoView.visibility = View.GONE
+        videoView.stopPlayback()
+    }
 
     private lateinit var db: NoteDatabase
+    private lateinit var db2:InsertNoteIntoFolderDatabase
     private lateinit var notesAdapter: NotesAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,8 +78,17 @@ class NotesFragment : Fragment() {
         val noNotes: LinearLayout = view.findViewById(R.id.noNotes)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
+        db2 = context?.let { InsertNoteIntoFolderDatabase(it) }!!
         notesAdapter = NotesAdapter(db.getAllNotes(), childFragmentManager,requireContext())
         recyclerView.adapter = notesAdapter
+        arguments?.getInt("newNotePosition")?.let { newNotePosition->
+            recyclerView.scrollToPosition(newNotePosition)
+            val viewHolder = recyclerView.findViewHolderForAdapterPosition(newNotePosition)
+            viewHolder?.itemView?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+        }
+//        sort.setOnClickListener {
+//            db.getAllNotesByTitle()
+//        }
 
         //             Setting up a view that returns if there are no notes
         val notesQueryList = db.getAllNotes()
@@ -61,23 +106,49 @@ class NotesFragment : Fragment() {
         searchView.queryHint = getString(R.string.queryHint)
 
         //               Greeting logic
-        fun TextView.typeWriteGreeting(lifecycleScope:LifecycleCoroutineScope,text:String,intervalMs:Long) {
+        fun TextView.typeWriteMessage(lifecycleScope:LifecycleCoroutineScope, text:String, intervalMs:Long) {
             this.text = ""
             lifecycleScope.launch {
                 text.forEach { char ->
                     delay(intervalMs)
-                    this@typeWriteGreeting.append(char.toString())
+                    this@typeWriteMessage.append(char.toString())
                 }
             }
         }
         val lifecycleScope = lifecycleScope
-        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        val greeting =  when (currentHour) {
-            in 0..11 -> getString(R.string.greeting_morning)
-            in 12..16 -> getString(R.string.greeting_afternoon)
-            else -> getString(R.string.greeting_evening)
+        fun getGreeting():String{
+            val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+            return when (currentHour) {
+                in 0..11 -> getString(R.string.greeting_morning)
+                in 12..16 -> getString(R.string.greeting_afternoon)
+                else -> getString(R.string.greeting_evening)
+            }
         }
-        greetings.typeWriteGreeting(lifecycleScope, greeting, 100)
+        fun getCelebration():String{
+            val month = Calendar.getInstance().get(Calendar.MONTH)+1
+            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            return when {
+                month == 1 && day == 12 -> getString(R.string.odriya)
+                month == 1 && day == 31 -> getString(R.string.beryl)
+                month == 2 && day == 7 -> getString(R.string.christine)
+                month == 2 && day == 19 -> getString(R.string.stephanie)
+                month == 3 && day == 1 -> getString(R.string.ann)
+                month == 4 && day == 7 -> getString(R.string.mine)
+                month == 5 && day == 1 -> getString(R.string.clarissa)
+                month == 5 && day == 6 -> getString(R.string.aiyana)
+                month == 5 && day == 17 -> getString(R.string.kimberly)
+                month == 5 && day == 19 -> getString(R.string.megan)
+                month == 8 && day == 2 -> getString(R.string.seanice)
+                month == 8 && day == 22 -> getString(R.string.amandine)
+                month == 9 && day == 29 -> getString(R.string.lashley)
+                month == 10 && day == 29 -> getString(R.string.simone)
+                month == 11 && day == 23 -> getString(R.string.mum)
+                month == 12 && day == 5 -> getString(R.string.kailetu)
+                else -> getGreeting()
+            }
+        }
+        val celebration = getCelebration()
+        greetings.typeWriteMessage(lifecycleScope,celebration,100)
 
         //              Search for notes Logic
         searchView.setOnClickListener {

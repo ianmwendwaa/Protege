@@ -33,5 +33,9 @@
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">@color/blue</item>
     </style>
+    <style name="BottomNavigationViewTextStyle" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/indie_flower</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

@@ -29,7 +29,6 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
         db?.execSQL(dropTableQuery)
         onCreate(db)
     }
-
     fun insertNote(note: Note){
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -41,6 +40,19 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
         db.close()
     }
 
+
+    fun updateNote(note: Note){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE, note.title)
+            put(COLUMN_CONTENT, note.content)
+            put(COLUMN_DATE, note.time)
+        }
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(note.id.toString())
+        db.update(TABLE_NAME, values, whereClause, whereArgs)
+        db.close()
+    }
     fun getAllNotes(): MutableList<Note> {
         val notesList = mutableListOf<Note>()
         val db = readableDatabase
@@ -59,19 +71,6 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
         cursor.close()
         db.close()
         return notesList
-    }
-
-    fun updateNote(note: Note){
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_TITLE, note.title)
-            put(COLUMN_CONTENT, note.content)
-            put(COLUMN_DATE, note.time)
-        }
-        val whereClause = "$COLUMN_ID = ?"
-        val whereArgs = arrayOf(note.id.toString())
-        db.update(TABLE_NAME, values, whereClause, whereArgs)
-        db.close()
     }
 
     fun getNoteById(noteId: Int) : Note {

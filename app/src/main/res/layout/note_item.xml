@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
+    android:layout_marginBottom="5dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:id="@+id/what"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
         android:padding="16dp">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,8 +26,9 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:fontFamily="@font/indie_flower"
                 android:textColor="@color/blue"
-                android:textSize="15.4sp"
+                android:textSize="16sp"
                 android:maxLength="35"
                 android:textStyle="bold"/>
             <ImageView
@@ -35,14 +37,14 @@
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/rv_archive_icon"/>
+                android:src="@drawable/ic_archives"/>
             <ImageView
                 android:id="@+id/displayMore"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="22dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="55dp"
-                android:src="@drawable/more_button"/>
+                android:src="@drawable/ic_more_info"/>
             <ImageView
                 android:id="@+id/deleteButton"
                 android:layout_width="24dp"
@@ -56,6 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Content"
+            android:textSize="15sp"
+            android:fontFamily="@font/indie_flower"
             android:textColor="@color/black"
             android:maxLines="1"
             android:layout_marginTop="4dp"/>
@@ -66,8 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/contentTextView"
             android:textColor="@color/black"
+            android:fontFamily="@font/indie_flower"
             android:paddingTop="5dp"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 

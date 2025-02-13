@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ToDoDatabase
 
 class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
@@ -17,15 +18,15 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
     private val db: ToDoDatabase = ToDoDatabase(context)
 
     class ToDoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleText: TextView = view.findViewById(R.id.todotitleTextView)
-        val contentText: TextView = view.findViewById(R.id.todocontentTextView)
+        val titleText: TextView = view.findViewById(R.id.titleTextView)
+        val contentText: TextView = view.findViewById(R.id.contentTextView)
         //val updateButton = view.findViewById<Button>(R.id.updateButton)
-        val elapsedTime: TextView = view.findViewById(R.id.elapsedtime)
-        val deleteButton: ImageView = view.findViewById(R.id.deletetodoButton)
+        val elapsedTime: TextView = view.findViewById(R.id.idTVDate)
+        val deleteButton: ImageView = view.findViewById(R.id.deleteButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.todo_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
         return ToDoViewHolder(view)
     }
 
@@ -45,7 +46,7 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
                 }
             }
             refreshData(db.getAllToDos())
-            Toast.makeText(holder.itemView.context, "$title deleted", Toast.LENGTH_SHORT).show()
+            Utils.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
         }
     }
 

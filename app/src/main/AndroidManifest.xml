@@ -16,10 +16,13 @@
         android:theme="@style/Theme.NotesSQLite"
         tools:targetApi="31">
         <activity
+            android:name=".BirthdayActivity"
+            android:exported="false" />
+        <activity
             android:name=".user_passwords.PasswordVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".RiggedActivity"
+            android:name=".notes.NotesFragment"
             android:exported="false" />
         <activity
             android:name=".user_passwords.PasswordActivity"

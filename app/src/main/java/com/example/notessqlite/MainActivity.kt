@@ -3,6 +3,7 @@ package com.example.notessqlite
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.notessqlite.archives.ArchivesFragment
 import com.example.notessqlite.categories.CategoriesFragment
@@ -15,7 +16,9 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.statusBarColor = ContextCompat.getColor(this,R.color.blue)
         binding = ActivityMainBinding.inflate(layoutInflater)
+//        Utils.showToast(this,"Testing",R.drawable.help_a)
         setContentView(binding.root)
         replaceFragment(NotesFragment())
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->

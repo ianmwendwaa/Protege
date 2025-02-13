@@ -84,6 +84,14 @@ class InsertNoteIntoFolderDatabase(context: Context):SQLiteOpenHelper(context, D
         db.delete(TABLE_NAME, whereClause, whereArgs)
         db.close()
     }
+    fun updateNoteFolderId(noteId: Int, folderId: Int) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("folderId", folderId)
+        }
+        db.update("Notes", values, "id = ?", arrayOf(noteId.toString()))
+        db.close()
+    }
     fun deleteNote(noteId: Int){
         val db = writableDatabase
         val whereClause = "$COLUMN_ID = ?"

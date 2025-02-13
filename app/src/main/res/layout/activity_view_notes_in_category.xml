@@ -16,6 +16,7 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:text="Save"
+        android:fontFamily="@font/indie_flower"
         android:textColor="@color/white"
         app:backgroundTint="@color/buttonDisabledColor"
         android:layout_marginEnd="6dp"/>
@@ -29,7 +30,7 @@
         android:layout_marginTop="130dp"
         android:layout_marginEnd="80dp"
         android:layout_marginStart="3dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:textColor="#606060"
         android:textSize="11sp" />
 
@@ -45,7 +46,7 @@
         android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="#606060"
-        android:textSize="20sp"
+        android:textSize="21sp"
         android:textStyle="bold" />
     <EditText
         android:id="@+id/folderDescription"
@@ -56,12 +57,12 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@android:color/transparent"
         android:capitalize="sentences"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:gravity="top"
         android:hint="@string/description"
         android:textColor="@color/black"
         android:textColorHint="#606060"
-        android:textSize="15sp" />
+        android:textSize="17sp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesInCatRV"
         android:layout_width="match_parent"

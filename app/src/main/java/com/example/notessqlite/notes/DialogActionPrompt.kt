@@ -23,7 +23,6 @@ open class DialogActionPrompt:BottomSheetDialogFragment() {
         }
         addToFolder.setOnClickListener {
             fragmentManager?.let { it1 -> AddToFolderDialog().show(it1, "newTask") }
-//            To make this sheet go kaboom when the next dialog opens
             dismiss()
         }
     }

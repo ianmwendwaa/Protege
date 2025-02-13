@@ -23,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
@@ -41,7 +42,6 @@ class UpdateNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         db = NoteDatabase(this)
-
         noteId = intent.getIntExtra("note_id", -1)
         if (noteId == -1) {
             finish()
@@ -112,55 +112,13 @@ class UpdateNoteActivity : AppCompatActivity() {
         binding.updateTitleEditText.addTextChangedListener(textWatcher)
         binding.updateContentEditText.addTextChangedListener(textWatcher)
 
-        fun applyBold(editText:EditText){
-            val start = editText.selectionStart
-            val end = editText.selectionEnd
-            if(start!=end){
-                val spannable = SpannableStringBuilder(editText.text)
-                spannable.setSpan(
-                    StyleSpan(Typeface.BOLD),
-                    start,
-                    end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                binding.updateContentEditText.text = spannable
-            }
-        }
-        fun applyItalics(editText: EditText){
-            val start = editText.selectionStart
-            val end = editText.selectionEnd
-            if(start!=end){
-                val spannable = SpannableStringBuilder(editText.text)
-                spannable.setSpan(
-                    StyleSpan(Typeface.ITALIC),
-                    start,
-                    end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                binding.updateContentEditText.text = spannable
-            }
-        }
-        fun underlineText(editText:EditText){
-            val start = editText.selectionStart
-            val end = editText.selectionEnd
-            if(start!=end){
-                val spannable = SpannableStringBuilder(editText.text)
-                spannable.setSpan(
-                    UnderlineSpan(),
-                    start,
-                    end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                binding.updateContentEditText.text = spannable
-            }
-        }
         val pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result->
                 if (result.resultCode == Activity.RESULT_OK){
                     val data: Intent? = result.data
                     val imageUri = data?.data
                     if(imageUri!=null){
-                        val imageSpan = AddNoteActivity.ResizableImageSpan(this,imageUri,500,700)
+                        val imageSpan = Utils.ResizableImageSpan(this,imageUri,500,700)
                         val editable = binding.updateContentEditText.editableText
                         editable.insert(binding.updateContentEditText.selectionStart," ")
                         editable.setSpan(imageSpan,editable.length - 1,editable.length,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -168,36 +126,36 @@ class UpdateNoteActivity : AppCompatActivity() {
                 }
         }
 
-        binding.main2.viewTreeObserver.addOnGlobalLayoutListener {
-            val rect = Rect()
-            binding.main2.getWindowVisibleDisplayFrame(rect)
-            val screenHeight = binding.main2.rootView.height
-            val keyboardHeight = screenHeight - rect.bottom
-            if(keyboardHeight > 0){
-                binding.toolbar.translationY = -keyboardHeight.toFloat()
-            }else{
-                binding.toolbar.translationY = 0f
-            }
-        }
-        binding.boldButton.setOnClickListener {
-            applyBold(binding.updateContentEditText)
-        }
-        binding.italicButton.setOnClickListener {
-            applyItalics(binding.updateContentEditText)
-        }
-        binding.underline.setOnClickListener {
-            underlineText(binding.updateContentEditText)
-        }
-        binding.bullets.setOnClickListener {
-            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
-        }
-        binding.attachment.setOnClickListener {
-            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            pickImageLauncher.launch(pickImageIntent)
-        }
-        binding.voiceRecorder.setOnClickListener {
-            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
-        }
+//        binding.main2.viewTreeObserver.addOnGlobalLayoutListener {
+//            val rect = Rect()
+//            binding.main2.getWindowVisibleDisplayFrame(rect)
+//            val screenHeight = binding.main2.rootView.height
+//            val keyboardHeight = screenHeight - rect.bottom
+//            if(keyboardHeight > 0){
+//                binding.toolbar.translationY = -keyboardHeight.toFloat()
+//            }else{
+//                binding.toolbar.translationY = 0f
+//            }
+//        }
+//        binding.boldButton.setOnClickListener {
+//            applyBold(binding.updateContentEditText)
+//        }
+//        binding.italicButton.setOnClickListener {
+//            applyItalics(binding.updateContentEditText)
+//        }
+//        binding.underline.setOnClickListener {
+//            underlineText(binding.updateContentEditText)
+//        }
+//        binding.bullets.setOnClickListener {
+//            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+//        }
+//        binding.attachment.setOnClickListener {
+//            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            pickImageLauncher.launch(pickImageIntent)
+//        }
+//        binding.voiceRecorder.setOnClickListener {
+//            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+//        }
 
         binding.updateSaveButton.setOnClickListener {
             val newTitle = binding.updateTitleEditText.text.toString()
@@ -207,8 +165,9 @@ class UpdateNoteActivity : AppCompatActivity() {
             val updatedNote = Note(noteId, newTitle, newContent, newDate)
             val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM HH:mm:ss"))
             db.updateNote(updatedNote)
+            Utils.showToast(this,"Protege will remember that",R.drawable.ic_info)
+            Utils.showToast(this,"$newTitle updated successfully at $datePresentation",R.drawable.ic_info)
             finish()
-            Toast.makeText(this, "$newTitle updated at $datePresentation", Toast.LENGTH_SHORT).show()
         }
     }
 }

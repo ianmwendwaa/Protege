@@ -5,6 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="antique">#FFF9F9</color>
     <color name="blue">#5882F1</color>
+    <color name="status_bar_color">#F4F4F4</color>
     <color name="gray">#DFDFDF</color>
     <color name="purple">#8E58F1</color>
     <color name="categories_fab">#F31B92</color>

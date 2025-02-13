@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notesFragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,30 +10,29 @@
     <TextView
         android:id="@+id/greetings"
         android:layout_width="320dp"
-        android:layout_height="30dp"
-        android:paddingLeft="10dp"
+        android:layout_height="33dp"
+        android:paddingLeft="8dp"
         android:textAlignment="gravity"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="@color/blue"
         android:textSize="23sp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="330dp"
+        android:layout_width="310dp"
         android:layout_height="45dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/search_bar_background"
-        android:backgroundTint="@color/search_black">
+        android:backgroundTint="#7B9CF4">
 
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="310dp"
             android:layout_height="45dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="45dp"
             android:backgroundTint="@android:color/transparent"
             android:drawablePadding="10dp"
@@ -49,7 +49,7 @@
         android:id="@+id/notesRView"
         android:layout_width="match_parent"
         android:layout_height="610dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="140dp"
         android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,4 +70,14 @@
         android:id="@id/noNotes"
         layout="@layout/empty_notes_activity"
         android:visibility="gone"/>
+
+    <VideoView
+        android:id="@+id/videoAnim"
+        android:visibility="gone"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>
