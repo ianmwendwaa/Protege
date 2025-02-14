@@ -40,6 +40,7 @@ class ToDoFragment : Fragment() {
             noToDo.visibility = View.GONE
         }
         addTask.setOnClickListener {
+//            startActivity(Intent(requireContext(),DummyActivity::class.java))
             val bottomSheetFragment = BottomSheetFragment()
             bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
         }

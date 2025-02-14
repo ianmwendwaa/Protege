@@ -7,37 +7,38 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TimePicker
+import androidx.appcompat.app.AppCompatActivity
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ToDoDatabase
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
 
-open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.OnTimeSetListener{
+class DummyActivity:AppCompatActivity(),TimePickerDialog.OnTimeSetListener {
     @SuppressLint("SetTextI18n")
     var hours = 0
     private var minutes = 0
 
     private var myHours: Int = 0
     private var myMinutes: Int = 0
-    private val datePicked:TextView? = view?.findViewById(R.id.tvSelected)
     private lateinit var db: ToDoDatabase
     private lateinit var toDoAdapter: ToDoAdapter
-    @SuppressLint("SetTextI18n", "SimpleDateFormat", "CutPasteId")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val taskName: TextInputEditText = view.findViewById(R.id.taskName)
-        val saveBtn: ImageView = view.findViewById(R.id.savetoDoButton)
-        val datePicked: TextView = view.findViewById(R.id.tvSelected)
-        db = context?.let { it1 -> ToDoDatabase(it1) }!!
-        toDoAdapter = ToDoAdapter(db.getAllToDos(),requireContext())
+    private lateinit var taskName:TextInputEditText
+    private lateinit var taskDescription:TextInputEditText
+    private lateinit var saveBtn:ImageView
+    private lateinit var datePicked:TextView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.dummy_tester)
+        taskName = findViewById(R.id.name)
+        taskDescription = findViewById(R.id.desc)
+        saveBtn = findViewById(R.id.savetoDoButtonz)
+        datePicked = findViewById(R.id.tvSelectedz)
+        db = ToDoDatabase(this)
+        toDoAdapter = ToDoAdapter(db.getAllToDos(),this)
 
         taskName.requestFocus()
 
@@ -58,12 +59,12 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
 //                }else{
 //                    datePicked.text = "$current  $myHours:$myMinutes"
 //                }
-            val timePickerDialog = TimePickerDialog(context, this, hours, minutes, true)
+            val timePickerDialog = TimePickerDialog(this, this, hours, minutes, true)
             timePickerDialog.show()
         }
         saveBtn.setOnClickListener {
-            val title = view.findViewById<TextInputEditText>(R.id.taskName)?.text.toString().trim()
-            val description = view.findViewById<TextInputEditText>(R.id.taskDescription)?.text.toString().trim()
+            val title = taskName.text.toString().trim()
+            val description = taskDescription.text.toString().trim()
             val time = datePicked.text.toString()
             val todo = ToDo(0, title, description,time)
             // scheduleReminder()
@@ -71,23 +72,15 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
             db.insertToDo(todo)
             setAlarm()
 //            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
-            Utils.showToast(requireContext(),"Protege will remember that.",R.drawable.ic_info)
-            Utils.showToast(requireContext(), "I shall remind you to $title at $time",R.drawable.butterfly_effect)
-            dismiss()
+            Utils.showToast(this,"Protege will remember that.", R.drawable.ic_info)
+            Utils.showToast(this, "I shall remind you to $title at $time", R.drawable.butterfly_effect)
+            finish()
         }
     }
-    @SuppressLint("SetTextI18n")
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        myHours = hourOfDay
-        myMinutes = minute
-        val time = "$myHours:$myMinutes"
-        datePicked?.text = time
-    }
-
     private fun setAlarm() {
-        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, NotificationAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
+        val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this,NotificationAlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent,
             PendingIntent.FLAG_IMMUTABLE)
 
         // Set the alarm to trigger at the specified time
@@ -104,12 +97,10 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
         )
     }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bottom_sheet, container, false)
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        myHours = hourOfDay
+        myMinutes = minute
+        val time = "$myHours:$myMinutes"
+        datePicked.text = time
     }
 }

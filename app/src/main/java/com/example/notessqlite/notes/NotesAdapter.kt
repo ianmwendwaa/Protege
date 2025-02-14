@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notessqlite.CodeBase
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ArchivesDatabase
@@ -67,16 +68,16 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             archiveDB.insertArchivedNote(note)
             insertDB.insertIntoFolder(note)
             refreshData(db.getAllNotes())
-            Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            Utils.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
+            CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+            CodeBase.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
         }
 
         holder.deleteButton.setOnClickListener {
             val title = note.title
             note.id.let { it1 -> db.deleteNote(it1) }
             refreshData(db.getAllNotes())
-            Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            Utils.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
+            CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+            CodeBase.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
         }
         val randomColor = getRandomColor()
         val borderDrawable = GradientDrawable()

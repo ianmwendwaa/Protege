@@ -46,6 +46,13 @@ class CategoriesFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        val noCategories:LinearLayout = requireActivity().findViewById(R.id.noCategory)
+        val query = db.retrieveFolders()
+        if (query.isEmpty()){
+            noCategories.visibility = View.VISIBLE
+        }else{
+            noCategories.visibility = View.GONE
+        }
         categoryAdapter.refreshData(db.retrieveFolders())
     }
 }

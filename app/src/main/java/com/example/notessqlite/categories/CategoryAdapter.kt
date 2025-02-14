@@ -50,7 +50,7 @@ class CategoryAdapter(private var category: MutableList<Category>,context: Conte
                 putExtra("folder_Id",category.id)
             }
             holder.itemView.context.startActivity(intent)
-            Toast.makeText(holder.itemView.context,"Not Yet There boy😝",Toast.LENGTH_SHORT).show()
+            Utils.showToast(holder.itemView.context, "The butterfly effect.",R.drawable.butterfly_effect)
         }
         holder.card.setOnClickListener {
             val intent = Intent(holder.itemView.context, ViewNotesInFolder::class.java).apply {

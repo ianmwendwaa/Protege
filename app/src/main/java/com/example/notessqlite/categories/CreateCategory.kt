@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.CategoriesDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDateTime
@@ -36,7 +36,7 @@ class CreateCategory:BottomSheetDialogFragment() {
             dateModification.text = dateModified
             val category = Category(0,folderTitle,dateModified,folderDescription)
             db.createFolder(category)
-            Toast.makeText(context,"$folderTitle folder created!",Toast.LENGTH_SHORT).show()
+            Utils.showToast(requireContext(),"New folder created!",R.drawable.butterfly_effect)
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
         }
     }
