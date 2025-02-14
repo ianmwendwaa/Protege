@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TimePicker
-import android.widget.Toast
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ToDoDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -71,7 +71,8 @@ open class BottomSheetFragment : BottomSheetDialogFragment(),TimePickerDialog.On
             db.insertToDo(todo)
             setAlarm()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
-            Toast.makeText(context, "$title saved at $time", Toast.LENGTH_SHORT).show()
+            Utils.showToast(requireContext(),"Protege will remember that.",R.drawable.ic_info)
+            Utils.showToast(requireContext(), "I shall remind you to $title at $time",R.drawable.butterfly_effect)
             dismiss()
         }
     }

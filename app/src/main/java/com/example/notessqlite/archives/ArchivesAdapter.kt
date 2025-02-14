@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
+import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ArchivesDatabase
 import com.example.notessqlite.databases.NoteDatabase
 import com.example.notessqlite.notes.Note
@@ -44,7 +45,8 @@ class ArchivesAdapter(private var notes: MutableList<Note>, context: Context) : 
             note.id.let { it1->db.deleteNote(it1) }
             notesDB.insertNote(note)
             refreshData(db.getArchivedNotes())
-            Toast.makeText(holder.itemView.context,"$title unarchived",Toast.LENGTH_SHORT).show()
+            Utils.showToast(holder.itemView.context,"Protege took note of your realization of this note.",R.drawable.ic_info)
+            Utils.showToast(holder.itemView.context,"$title has been unarchived.",R.drawable.ic_info)
         }
     }
 

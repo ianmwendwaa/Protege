@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(){
         enableEdgeToEdge()
         window.statusBarColor = ContextCompat.getColor(this,R.color.blue)
         binding = ActivityMainBinding.inflate(layoutInflater)
-//        Utils.showToast(this,"Testing",R.drawable.help_a)
+//        Utils.showToast(this,"Testing",R.drawable.butterfly_effect)
         setContentView(binding.root)
         replaceFragment(NotesFragment())
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
@@ -20,9 +19,9 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
     class ToDoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.titleTextView)
         val contentText: TextView = view.findViewById(R.id.contentTextView)
-        //val updateButton = view.findViewById<Button>(R.id.updateButton)
         val elapsedTime: TextView = view.findViewById(R.id.idTVDate)
         val deleteButton: ImageView = view.findViewById(R.id.deleteButton)
+        val archiveButton: ImageView = view.findViewById(R.id.archiveButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
@@ -37,6 +36,7 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
         holder.titleText.text = todo.taskName
         holder.contentText.text = todo.taskDescription
         holder.elapsedTime.text = todo.time
+        holder.archiveButton.visibility = View.GONE
 
         holder.deleteButton.setOnClickListener {
             val title = todo.taskName
@@ -46,6 +46,7 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
                 }
             }
             refreshData(db.getAllToDos())
+            Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
             Utils.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
         }
     }

@@ -20,6 +20,7 @@ class CreateCategory:BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val categoryName:EditText = view.findViewById(R.id.categoryName)
+        val categoryDescription:EditText = view.findViewById(R.id.categoryDescription)
         val dateModification:TextView = view.findViewById(R.id.dateModification)
         val saveButton:ImageView = view.findViewById(R.id.saveCategory)
         db = context?.let { CategoriesDatabase(it) }!!
@@ -29,10 +30,11 @@ class CreateCategory:BottomSheetDialogFragment() {
         dateModification.text = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
         saveButton.setOnClickListener {
             val folderTitle = categoryName.text.toString().trim()
+            val folderDescription = categoryDescription.text.toString()
             val time = LocalDateTime.now()
             val dateModified = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             dateModification.text = dateModified
-            val category = Category(0,folderTitle,dateModified)
+            val category = Category(0,folderTitle,dateModified,folderDescription)
             db.createFolder(category)
             Toast.makeText(context,"$folderTitle folder created!",Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()

@@ -2,7 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/adamina</item>
-        <item>@font/andika</item>
         <item>@font/indie_flower</item>
     </array>
 </resources>

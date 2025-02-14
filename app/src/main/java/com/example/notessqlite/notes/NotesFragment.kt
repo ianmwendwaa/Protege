@@ -1,11 +1,11 @@
 package com.example.notessqlite.notes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.MediaStore.Video
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -106,6 +106,7 @@ class NotesFragment : Fragment(),AnimationTrigger {
         searchView.queryHint = getString(R.string.queryHint)
 
         //               Greeting logic
+        @SuppressLint("SetTextI18n")
         fun TextView.typeWriteMessage(lifecycleScope:LifecycleCoroutineScope, text:String, intervalMs:Long) {
             this.text = ""
             lifecycleScope.launch {

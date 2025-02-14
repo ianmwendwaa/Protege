@@ -16,7 +16,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:layout_margin="15dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:text="New Task"
         android:textAlignment="center"
         android:textSize="25sp"
@@ -40,7 +40,7 @@
             android:id="@+id/taskName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/indie_flower"
             android:inputType="textCapWords"
             android:defaultFocusHighlightEnabled="true"
             android:textColorHint="@color/black"
@@ -60,7 +60,7 @@
             android:id="@+id/taskDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/indie_flower"
             android:inputType="textCapWords"
             android:hint="Description">
 

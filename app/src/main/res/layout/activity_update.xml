@@ -34,7 +34,7 @@
                 android:layout_marginStart="3dp"
                 android:fontFamily="@font/indie_flower"
                 android:textColor="#606060"
-                android:textSize="11sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/updateSaveButton"

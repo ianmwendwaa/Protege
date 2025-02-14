@@ -32,28 +32,26 @@
             <ImageView
                 android:id="@+id/rigggeeeeddddd"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="19dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="55dp"
-                android:src="@drawable/more_button"/>
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/ic_more_info"/>
             <ImageView
                 android:id="@+id/deleteFolder"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_delete"/>
+                android:src="@drawable/ic_trash"/>
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/date_Modifiedzz"
+            android:id="@+id/dateModifiedzz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:fontFamily="@font/indie_flower"
             android:paddingTop="5dp"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
     </LinearLayout>
-
-
-
-
 </androidx.cardview.widget.CardView>

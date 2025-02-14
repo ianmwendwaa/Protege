@@ -11,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
@@ -70,7 +68,7 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             insertDB.insertIntoFolder(note)
             refreshData(db.getAllNotes())
             Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            Utils.showToast(holder.itemView.context, "$title archived", R.drawable.ic_info)
+            Utils.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
         }
 
         holder.deleteButton.setOnClickListener {

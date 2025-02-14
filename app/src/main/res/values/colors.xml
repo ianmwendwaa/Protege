@@ -9,7 +9,6 @@
     <color name="gray">#DFDFDF</color>
     <color name="purple">#8E58F1</color>
     <color name="categories_fab">#F31B92</color>
-    <color name="active_indicator">#D0BCFF</color>
     <color name="buttonEnabledColor">#008577</color>
     <color name="buttonDisabledColor">#D3D3D3</color>
 </resources>

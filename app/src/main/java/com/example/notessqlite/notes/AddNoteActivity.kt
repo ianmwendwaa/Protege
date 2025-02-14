@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
 import com.example.notessqlite.R.drawable.ic_info
-import com.example.notessqlite.R.drawable.ic_taken
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.NoteDatabase
 import java.time.LocalDateTime
@@ -231,7 +230,7 @@ class AddNoteActivity : AppCompatActivity() {
             animationTrigger?.triggerAnimation()
             Utils.showToast(this, "Protege will remember that!",ic_info)
             Utils.showToast(this, "$title saved successfully at $datePresentation",
-                R.drawable.help_a
+                R.drawable.toast_note_taken
             )
             finish()
 //            findNavController().navigate(

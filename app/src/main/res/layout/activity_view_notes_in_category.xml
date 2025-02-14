@@ -12,49 +12,57 @@
 
     <Button
         android:id="@+id/saveFolder"
-        android:layout_width="80dp"
+        android:layout_width="95dp"
         android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Save"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="21dp"
         android:fontFamily="@font/indie_flower"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/buttonDisabledColor"
-        android:layout_marginEnd="6dp"/>
+        android:text="Save"
+        android:textColor="@color/buttonDisabledColor"
+        android:textSize="18sp"
+        app:backgroundTint="@color/buttonEnabledColor" />
 
     <TextView
-        android:id="@+id/dateModified"
+        android:id="@+id/dateOfFolder"
         android:layout_width="261dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="130dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginStart="3dp"
+        android:paddingStart="4dp"
         android:fontFamily="@font/indie_flower"
         android:textColor="#606060"
-        android:textSize="11sp" />
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/folderTitle"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="45dp"
+        android:layout_below="@+id/saveFolder"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="46dp"
         android:backgroundTint="@android:color/transparent"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:hint="@string/title"
         android:inputType="textCapSentences"
         android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="#606060"
-        android:textSize="21sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
+
     <EditText
         android:id="@+id/folderDescription"
         android:layout_width="377dp"
-        android:layout_height="97dp"
+        android:layout_height="85dp"
         android:layout_below="@+id/folderTitle"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:backgroundTint="@android:color/transparent"
         android:capitalize="sentences"
         android:fontFamily="@font/indie_flower"
@@ -63,6 +71,7 @@
         android:textColor="@color/black"
         android:textColorHint="#606060"
         android:textSize="17sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesInCatRV"
         android:layout_width="match_parent"

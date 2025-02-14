@@ -8,16 +8,17 @@ import com.example.notessqlite.categories.Category
 
 class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION) {
     companion object{
-        private const val DATABASE_NAME = "y.db"
+        private const val DATABASE_NAME = "folder.db"
         private const val DATABASE_VERSION = 1
-        private const val TABLE_NAME = "sthe"
+        private const val TABLE_NAME = "all_folders_table"
         private const val COLUMN_ID = "id"
-        private const val COLUMN_FOLDER_NAME = "x_name"
+        private const val COLUMN_FOLDER_NAME = "name"
+        private const val COLUMN_FOLDER_DESCRIPTION = "description"
         private const val COLUMN_DATE_OF_MODIFICATION = "date_of_modification"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createTableQuery = "CREATE TABLE $TABLE_NAME($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_FOLDER_NAME TEXT,$COLUMN_DATE_OF_MODIFICATION TEXT)"
+        val createTableQuery = "CREATE TABLE $TABLE_NAME($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_FOLDER_NAME TEXT,$COLUMN_FOLDER_DESCRIPTION TEXT,$COLUMN_DATE_OF_MODIFICATION TEXT)"
         db?.execSQL(createTableQuery)
     }
 
@@ -29,6 +30,7 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_FOLDER_NAME,category.folderName)
+            put(COLUMN_FOLDER_DESCRIPTION,category.folderDescription)
             put(COLUMN_DATE_OF_MODIFICATION,category.dateModified)
         }
         db.insert(TABLE_NAME,null,values)
@@ -43,8 +45,9 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
         while (cursor.moveToNext()){
             val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_NAME))
+            val description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_DESCRIPTION))
             val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_MODIFICATION))
-            val category = Category(id,name,date)
+            val category = Category(id,name,date,description)
             categoryList.add(category)
         }
         cursor.close()
@@ -67,10 +70,23 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
 
         val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
         val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_NAME))
+        val description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_DESCRIPTION))
         val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_MODIFICATION))
 
         cursor.close()
         db.close()
-        return Category(id, name, date)
+        return Category(id, name, date, description)
+    }
+    fun updateNote(category: Category){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_FOLDER_NAME, category.folderName)
+            put(COLUMN_FOLDER_DESCRIPTION, category.dateModified)
+            put(COLUMN_DATE_OF_MODIFICATION, category.folderDescription)
+        }
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(category.id.toString())
+        db.update(TABLE_NAME, values, whereClause, whereArgs)
+        db.close()
     }
 }

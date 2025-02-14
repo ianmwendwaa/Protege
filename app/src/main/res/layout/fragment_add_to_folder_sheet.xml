@@ -15,11 +15,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:layout_margin="15dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:text="Select Folder"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foldersToChooseFrom"

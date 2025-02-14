@@ -30,7 +30,7 @@ class CategoryCreatedInFragment(private var category: MutableList<Category>, con
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = category[position]
         holder.folderName.text = category.folderName
-        holder.dateModified.text = category.dateModified
+        holder.dateModified.text = category.folderDescription
 
         holder.card.setOnClickListener {
         }

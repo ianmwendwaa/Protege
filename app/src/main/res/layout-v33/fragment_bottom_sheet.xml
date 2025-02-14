@@ -16,11 +16,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:layout_margin="15dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/indie_flower"
         android:text="New Task"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="27sp"
         android:textStyle="bold" />
     <ImageView
         android:id="@+id/savetoDoButton"
@@ -39,9 +39,10 @@
             android:id="@+id/taskName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/indie_flower"
             android:textColor="@color/black"
             android:textColorHint="#F0676565"
+            android:textSize="19sp"
             android:inputType="textCapSentences"
             android:hint="Name">
 
@@ -59,8 +60,9 @@
             android:id="@+id/taskDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/indie_flower"
             android:hint="Description"
+            android:textSize="19sp"
             android:inputType="textCapSentences"
             android:textColor="@color/black"
             android:textColorHint="#F0676565">
@@ -90,9 +92,9 @@
             android:layout_height="25dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="9dp"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/indie_flower"
             android:text="Set Alarm"
             android:textColor="#99070707"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>
