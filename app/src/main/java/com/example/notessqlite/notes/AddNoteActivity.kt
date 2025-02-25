@@ -36,15 +36,6 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var saveButton: Button
     private lateinit var charCount: TextView
     private lateinit var wordCounter: TextView
-//    private lateinit var toolBar: LinearLayout
-//    private lateinit var boldButton: Button
-//    private lateinit var italicButton: Button
-//    private lateinit var underline: LinearLayout
-//    private lateinit var bullets: LinearLayout
-//    private lateinit var voiceRecorder: LinearLayout
-//    private lateinit var attachment: LinearLayout
-
-    private lateinit var rootView: ScrollView
     private var animationTrigger:AnimationTrigger?=null
     private var isBullets = false
     private var isItalicsEnabled = false
@@ -54,21 +45,13 @@ class AddNoteActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_note)
         db = NoteDatabase(this)
-        titleEditText = findViewById(R.id.titleEditText)
-        contentEditText = findViewById(R.id.contentEditText)
+        titleEditText = findViewById(R.id.relationshipName)
+        contentEditText = findViewById(R.id.relationshipInfo)
         tvDate = findViewById(R.id.tvDate)
         charCount = findViewById(R.id.charCount)
         wordCounter = findViewById(R.id.wordCount)
-//        passwordMagic =findViewById(R.id.passwordSetter)
         saveButton = findViewById(R.id.saveButton)
-//        toolBar = findViewById(R.id.toolbar)
-//        boldButton = findViewById(R.id.boldButton)
-//        italicButton = findViewById(R.id.italicButton)
-//        underline = findViewById(R.id.underline)
-//        bullets = findViewById(R.id.bullets)
-//        attachment = findViewById(R.id.attachment)
-//        voiceRecorder = findViewById(R.id.voiceRecorder)
-//        rootView = findViewById(R.id.main)
+
         titleEditText.requestFocus()
 
 //        Setting time for the date view
@@ -76,18 +59,7 @@ class AddNoteActivity : AppCompatActivity() {
         val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
         tvDate.text = time
 
-////        Setting the toolbar to go with the flow of the keyboard
-//        rootView.viewTreeObserver.addOnGlobalLayoutListener {
-//            val rect = Rect()
-//            rootView.getWindowVisibleDisplayFrame(rect)
-//            val screenHeight = rootView.rootView.height
-//            val keyboardHeight = screenHeight - rect.bottom
-////            if(keyboardHeight > 0){
-////                toolBar.translationY = -keyboardHeight.toFloat()
-////            }else{
-////                toolBar.translationY = 0f
-////            }
-//        }
+
         val wordCounterInit = "Words: 0"
         val charCounterInit = "Characters: 0"
         wordCounter.text = wordCounterInit
@@ -113,7 +85,7 @@ class AddNoteActivity : AppCompatActivity() {
                     }
                 }
 
-                val editTxt: EditText = findViewById(R.id.contentEditText)
+                val editTxt: EditText = findViewById(R.id.relationshipInfo)
                 val wordCount = countWords(editTxt)
                 wordCounter.text = "Words: $wordCount"
 
@@ -179,44 +151,6 @@ class AddNoteActivity : AppCompatActivity() {
         titleEditText.addTextChangedListener(textWatcher)
         contentEditText.addTextChangedListener(textWatcher)
 
-
-        val pickImageLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                    val imageUri = data?.data
-                    if (imageUri != null) {
-                        val imageSpan = Utils.ResizableImageSpan(this, imageUri, 500, 700)
-                        val editable = contentEditText.editableText
-                        editable.insert(contentEditText.selectionStart, " ")
-                        editable.setSpan(
-                            imageSpan,
-                            editable.length - 1,
-                            editable.length,
-                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                        )
-                    }
-                }
-            }
-//        boldButton.setOnClickListener {
-//            applyBoldToText(contentEditText)
-//        }
-//        italicButton.setOnClickListener {
-//            applyItalicToText(contentEditText)
-//        }
-//        underline.setOnClickListener {
-//            applyUnderlineToText(contentEditText)
-//        }
-//        bullets.setOnClickListener {
-//            Toast.makeText(this,"Still in development; Should display bullets..",Toast.LENGTH_LONG).show()
-//        }
-//        attachment.setOnClickListener {
-//            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//            pickImageLauncher.launch(pickImageIntent)
-//        }
-//        voiceRecorder.setOnClickListener {
-//            Toast.makeText(this,"Still in development; Should record voice notes..",Toast.LENGTH_LONG).show()
-//        }
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val content = contentEditText.text.toString()
@@ -233,9 +167,6 @@ class AddNoteActivity : AppCompatActivity() {
                 R.drawable.toast_note_taken
             )
             finish()
-//            findNavController().navigate(
-//                R.id.idTVDate, bundleOf("newNotePosition" to newNotePosition)
-//            )
         }
     }
 }

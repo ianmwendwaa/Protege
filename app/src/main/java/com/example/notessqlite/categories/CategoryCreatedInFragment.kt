@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.CategoriesDatabase
+import com.example.notessqlite.databases.EntryDatabase
 import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.notes.Note
 import com.example.notessqlite.notes.NotesAdapter as NotesAdapter1
@@ -18,7 +19,10 @@ import com.example.notessqlite.notes.NotesAdapter as NotesAdapter1
 class CategoryCreatedInFragment(private var category: MutableList<Category>, context: Context):RecyclerView.Adapter<CategoryCreatedInFragment.CategoryViewHolder>() {
     private var db:CategoriesDatabase = CategoriesDatabase(context)
     private var insertNoteIntoFolderDatabase:InsertNoteIntoFolderDatabase = InsertNoteIntoFolderDatabase(context)
+    private var entryDB:EntryDatabase = EntryDatabase(context)
     private var notes:Note = Note(id = 0, "", "", "","")
+
+
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val folderName: TextView = itemView.findViewById(R.id.folderName)
         val dateModified: TextView = itemView.findViewById(R.id.dateModified)
@@ -36,11 +40,16 @@ class CategoryCreatedInFragment(private var category: MutableList<Category>, con
         holder.folderName.text = category.folderName
         holder.dateModified.text = category.folderDescription
 
+
+
         holder.card.setOnClickListener {
-            try{
-                insertNoteIntoFolderDatabase.insertIntoFolder(notes)
-            }catch (e:Exception){
-                Utils.showToast(holder.itemView.context, "$e",R.drawable.ic_info)
+//            try{
+//                insertNoteIntoFolderDatabase.insertIntoFolder(notes)
+//            }catch (e:Exception){
+//                Utils.showToast(holder.itemView.context, "$e",R.drawable.ic_info)
+//            }
+            if (category.folderName.contains("Entries")){
+                entryDB.getAllEntries()
             }
         }
     }

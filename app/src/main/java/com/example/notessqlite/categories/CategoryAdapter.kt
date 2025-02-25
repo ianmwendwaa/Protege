@@ -13,12 +13,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
+import com.example.notessqlite.categories.categoryviews.NotesInFolder
 import com.example.notessqlite.categories.categoryviews.ViewNotesInFolder
 import com.example.notessqlite.databases.CategoriesDatabase
+import com.example.notessqlite.databases.EntryDatabase
 
 class CategoryAdapter(private var category: MutableList<Category>,context: Context):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     private var db:CategoriesDatabase = CategoriesDatabase(context)
-//    private var insertNoteIntoFolderDatabase:InsertNoteIntoFolderDatabase = InsertNoteIntoFolderDatabase(context)
+    private var entryDB:EntryDatabase = EntryDatabase(context)
+
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val folderName: TextView = itemView.findViewById(R.id.folderName)
         val dateModified: TextView = itemView.findViewById(R.id.dateModifiedzz)
@@ -36,7 +39,7 @@ class CategoryAdapter(private var category: MutableList<Category>,context: Conte
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = category[position]
         holder.folderName.text = category.folderName
-        holder.dateModified.text = category.folderDescription
+        holder.dateModified.text = category.dateModified
 
         holder.deleteButton.setOnClickListener {
             val folderName = category.folderName
@@ -53,10 +56,15 @@ class CategoryAdapter(private var category: MutableList<Category>,context: Conte
             Utils.showToast(holder.itemView.context, "The butterfly effect.",R.drawable.butterfly_effect)
         }
         holder.card.setOnClickListener {
-            val intent = Intent(holder.itemView.context, ViewNotesInFolder::class.java).apply {
-                putExtra("folder_Id", category.id)
+            if (category.folderName.contains("Entries")){
+                holder.itemView.context.startActivity(Intent(holder.itemView.context,ViewNotesInFolder::class.java).apply {
+                    putExtra("folder_Id",category.id)
+                })
+            }else{
+                holder.itemView.context.startActivity(Intent(holder.itemView.context,NotesInFolder::class.java).apply {
+                    putExtra("folder_Id",category.id)
+                })
             }
-            holder.itemView.context.startActivity(intent)
         }
     }
 

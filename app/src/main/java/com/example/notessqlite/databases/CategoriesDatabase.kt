@@ -81,8 +81,8 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_FOLDER_NAME, category.folderName)
-            put(COLUMN_FOLDER_DESCRIPTION, category.dateModified)
-            put(COLUMN_DATE_OF_MODIFICATION, category.folderDescription)
+            put(COLUMN_FOLDER_DESCRIPTION, category.folderDescription)
+            put(COLUMN_DATE_OF_MODIFICATION, category.dateModified)
         }
         val whereClause = "$COLUMN_ID = ?"
         val whereArgs = arrayOf(category.id.toString())

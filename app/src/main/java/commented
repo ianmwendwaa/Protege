@@ -1,0 +1,115 @@
+//<------------------------------------Add note activity---------------------------------------->\\
+
+//private lateinit var rootView: ScrollView
+
+
+//    private lateinit var toolBar: LinearLayout
+//    private lateinit var boldButton: Button
+//    private lateinit var italicButton: Button
+//    private lateinit var underline: LinearLayout
+//    private lateinit var bullets: LinearLayout
+//    private lateinit var voiceRecorder: LinearLayout
+//    private lateinit var attachment: LinearLayout
+
+//        passwordMagic =findViewById(R.id.passwordSetter)
+
+//        toolBar = findViewById(R.id.toolbar)
+//        boldButton = findViewById(R.id.boldButton)
+//        italicButton = findViewById(R.id.italicButton)
+//        underline = findViewById(R.id.underline)
+//        bullets = findViewById(R.id.bullets)
+//        attachment = findViewById(R.id.attachment)
+//        voiceRecorder = findViewById(R.id.voiceRecorder)
+//        rootView = findViewById(R.id.main)
+
+
+////        Setting the toolbar to go with the flow of the keyboard
+//        rootView.viewTreeObserver.addOnGlobalLayoutListener {
+//            val rect = Rect()
+//            rootView.getWindowVisibleDisplayFrame(rect)
+//            val screenHeight = rootView.rootView.height
+//            val keyboardHeight = screenHeight - rect.bottom
+////            if(keyboardHeight > 0){
+////                toolBar.translationY = -keyboardHeight.toFloat()
+////            }else{
+////                toolBar.translationY = 0f
+////            }
+//        }
+
+
+//        boldButton.setOnClickListener {
+//            applyBoldToText(contentEditText)
+//        }
+//        italicButton.setOnClickListener {
+//            applyItalicToText(contentEditText)
+//        }
+//        underline.setOnClickListener {
+//            applyUnderlineToText(contentEditText)
+//        }
+//        bullets.setOnClickListener {
+//            Toast.makeText(this,"Still in development; Should display bullets..",Toast.LENGTH_LONG).show()
+//        }
+//        attachment.setOnClickListener {
+//            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            pickImageLauncher.launch(pickImageIntent)
+//        }
+//        voiceRecorder.setOnClickListener {
+//            Toast.makeText(this,"Still in development; Should record voice notes..",Toast.LENGTH_LONG).show()
+//        }
+
+val pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val imageUri = data?.data
+                    if (imageUri != null) {
+                        val imageSpan = Utils.ResizableImageSpan(this, imageUri, 500, 700)
+                        val editable = contentEditText.editableText
+                        editable.insert(contentEditText.selectionStart, " ")
+                        editable.setSpan(
+                            imageSpan,
+                            editable.length - 1,
+                            editable.length,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                    }
+                }
+            }
+
+
+//            findNavController().navigate(
+//                R.id.idTVDate, bundleOf("newNotePosition" to newNotePosition)
+//            )
+
+//<----------------------------------UpdateNoteActivity-------------------------------------------->
+
+//        binding.main2.viewTreeObserver.addOnGlobalLayoutListener {
+//            val rect = Rect()
+//            binding.main2.getWindowVisibleDisplayFrame(rect)
+//            val screenHeight = binding.main2.rootView.height
+//            val keyboardHeight = screenHeight - rect.bottom
+//            if(keyboardHeight > 0){
+//                binding.toolbar.translationY = -keyboardHeight.toFloat()
+//            }else{
+//                binding.toolbar.translationY = 0f
+//            }
+//        }
+//        binding.boldButton.setOnClickListener {
+//            applyBold(binding.updateContentEditText)
+//        }
+//        binding.italicButton.setOnClickListener {
+//            applyItalics(binding.updateContentEditText)
+//        }
+//        binding.underline.setOnClickListener {
+//            underlineText(binding.updateContentEditText)
+//        }
+//        binding.bullets.setOnClickListener {
+//            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+//        }
+//        binding.attachment.setOnClickListener {
+//            val pickImageIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            pickImageLauncher.launch(pickImageIntent)
+//        }
+//        binding.voiceRecorder.setOnClickListener {
+//            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
+//        }

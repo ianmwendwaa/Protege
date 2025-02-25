@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.NotesSQLite" parent="Theme.Material3.Dark.NoActionBar">
-         <item name="colorPrimary">@color/black</item>
-         <item name="colorPrimaryVariant">@color/black</item>
-         <item name="android:colorSecondary">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="android:colorSecondary">@color/black</item>
     </style>
 
-    <style name="Theme.NotesSQLite" parent="Base.Theme.NotesSQLite"/>
+    <style name="Theme.NotesSQLite" parent="Base.Theme.NotesSQLite" />
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="color">#D0BCFF</item>

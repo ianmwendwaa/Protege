@@ -18,4 +18,8 @@
         android:id="@+id/navigation_folders"
         android:icon="@drawable/category_icon"
         android:title="Folders" />
+    <item
+        android:id="@+id/navigation_relationships"
+        android:icon="@drawable/ic_relationship"
+        android:title="Relationships"/>
 </menu>

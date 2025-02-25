@@ -41,7 +41,7 @@
                 app:backgroundTint="@android:color/transparent" />
 
             <EditText
-                android:id="@+id/titleEditText"
+                android:id="@+id/relationshipName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
@@ -58,10 +58,10 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/contentEditText"
+                android:id="@+id/relationshipInfo"
                 android:layout_width="395dp"
                 android:layout_height="650dp"
-                android:layout_below="@+id/titleEditText"
+                android:layout_below="@+id/relationshipName"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="22dp"
@@ -78,8 +78,8 @@
                 android:id="@+id/charCount"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_below="@+id/titleEditText"
-                android:layout_alignEnd="@+id/contentEditText"
+                android:layout_below="@+id/relationshipName"
+                android:layout_alignEnd="@+id/relationshipInfo"
                 android:layout_marginStart="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -93,7 +93,7 @@
                 android:id="@+id/wordCount"
                 android:layout_width="70dp"
                 android:layout_height="20dp"
-                android:layout_below="@+id/titleEditText"
+                android:layout_below="@+id/relationshipName"
                 android:layout_alignStart="@+id/charCount"
                 android:layout_marginStart="-77dp"
                 android:layout_marginTop="4dp"
@@ -103,6 +103,20 @@
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textIsSelectable="false" />
+
+            <EditText
+                android:id="@+id/category"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/relationshipName"
+                android:layout_alignStart="@+id/charCount"
+                android:layout_marginStart="-244dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:fontFamily="@font/indie_flower"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
         </RelativeLayout>
     <FrameLayout
         android:id="@+id/notesFragment"

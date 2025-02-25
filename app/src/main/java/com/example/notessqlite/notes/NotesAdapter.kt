@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.CodeBase
 import com.example.notessqlite.R
-import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ArchivesDatabase
+import com.example.notessqlite.databases.EntryDatabase
 import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.databases.NoteDatabase
 
@@ -24,8 +24,9 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
 
     private val db: NoteDatabase = NoteDatabase(context)
     private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
-//    private val categoryDB:CategoriesDatabase = CategoriesDatabase(context)
     private val insertDB:InsertNoteIntoFolderDatabase = InsertNoteIntoFolderDatabase(context)
+
+    private val entryDB:EntryDatabase = EntryDatabase(context)
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -50,6 +51,10 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
         holder.idTVDate.text = note.time
+
+        if(note.title=="Entry"){
+            entryDB.insertNote(note)
+        }
 
         holder.card.setOnClickListener {
             val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {

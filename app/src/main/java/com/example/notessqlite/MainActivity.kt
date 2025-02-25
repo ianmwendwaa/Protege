@@ -9,6 +9,7 @@ import com.example.notessqlite.archives.ArchivesFragment
 import com.example.notessqlite.categories.CategoriesFragment
 import com.example.notessqlite.databinding.ActivityMainBinding
 import com.example.notessqlite.notes.NotesFragment
+import com.example.notessqlite.relationships.RelationshipsFragment
 import com.example.notessqlite.todo.ToDoFragment
 
 class MainActivity : AppCompatActivity(){
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity(){
         enableEdgeToEdge()
         window.statusBarColor = ContextCompat.getColor(this,R.color.blue)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        CodeBase.showToast(this,"Testing",R.drawable.butterfly_effect)
         setContentView(binding.root)
         replaceFragment(NotesFragment())
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity(){
                 }
                 R.id.navigation_folders->{
                     replaceFragment(CategoriesFragment())
+                    true
+                }
+                R.id.navigation_relationships->{
+                    replaceFragment(RelationshipsFragment())
                     true
                 }else -> false
             }

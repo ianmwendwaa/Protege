@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F4F4F4"
+    tools:context=".relationships.AddRelationshipActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvDateToday"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="@font/indie_flower"
+            android:paddingLeft="3dp"
+            android:textColor="#606060"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/saveRelationship"
+            android:layout_width="95dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="5dp"
+            android:text="Save"
+            android:textColor="@color/buttonDisabledColor"
+            android:textSize="18sp"
+            android:fontFamily="@font/indie_flower"
+            app:backgroundTint="@android:color/transparent" />
+
+        <EditText
+            android:id="@+id/relationshipName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="6dp"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="@font/indie_flower"
+            android:hint="Relationship with..."
+            android:inputType="textCapSentences"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="#606060"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/relationshipInfo"
+            android:layout_width="match_parent"
+            android:layout_height="458dp"
+            android:layout_below="@+id/relationshipName"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="66dp"
+            android:backgroundTint="@android:color/transparent"
+            android:capitalize="sentences"
+            android:fontFamily="@font/indie_flower"
+            android:gravity="top"
+            android:hint="Elaborate further"
+            android:textColor="@color/black"
+            android:textColorHint="#606060"
+            android:textSize="17.5sp" />
+
+        <EditText
+            android:id="@+id/relationshipStatus"
+            android:layout_width="281dp"
+            android:layout_height="46dp"
+            android:layout_below="@+id/relationshipName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="94dp"
+            android:background="@drawable/field_borders"
+            android:ems="10"
+            android:inputType="number"
+            android:paddingLeft="13dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="124dp"
+            android:fontFamily="@font/indie_flower"
+            android:text="Relationship status(1-10):"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

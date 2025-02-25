@@ -10,12 +10,14 @@ import android.widget.TextView
 import com.example.notessqlite.R
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.CategoriesDatabase
+import com.example.notessqlite.databases.EntryDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class CreateCategory:BottomSheetDialogFragment() {
     private lateinit var db:CategoriesDatabase
+    private lateinit var entryDB:EntryDatabase
     private lateinit var categoryAdapter: CategoryAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,10 +26,12 @@ class CreateCategory:BottomSheetDialogFragment() {
         val dateModification:TextView = view.findViewById(R.id.dateModification)
         val saveButton:ImageView = view.findViewById(R.id.saveCategory)
         db = context?.let { CategoriesDatabase(it) }!!
+        entryDB = EntryDatabase(requireContext())
         categoryAdapter = CategoryAdapter(db.retrieveFolders(),requireContext())
         categoryName.requestFocus()
         val time = LocalDateTime.now()
         dateModification.text = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+
         saveButton.setOnClickListener {
             val folderTitle = categoryName.text.toString().trim()
             val folderDescription = categoryDescription.text.toString()
