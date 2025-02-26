@@ -31,12 +31,23 @@
                 android:textSize="16sp"
                 android:maxLength="35"
                 android:textStyle="bold"/>
+
             <ImageView
                 android:id="@+id/deleteButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_trash"/>
+                android:layout_marginStart="-40dp"
+                android:layout_toEndOf="@+id/statusIcon"
+                android:src="@drawable/ic_trash" />
+
+            <ImageView
+                android:id="@+id/statusIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="-100dp"
+                android:layout_toEndOf="@id/nameTextView" />
         </RelativeLayout>
 
         <TextView

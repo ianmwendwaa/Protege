@@ -7,4 +7,6 @@
     <string name="greeting_morning">Good Morning Ian!</string>
     <string name="queryHint">Search for Note…</string>
     <string name="relationship_with">Relationship with...</string>
+    <string name="navigation_drawer_close">navigation_drawer_close\n</string>
+    <string name="navigation_drawer_open">navigation_drawer_open\n</string>
 </resources>

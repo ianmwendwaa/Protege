@@ -16,7 +16,11 @@
         android:theme="@style/Theme.NotesSQLite"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateRelationshipActivity"
+            android:name=".archives.MainActivity2"
+            android:exported="false"
+            android:theme="@style/Theme.NotesSQLite.NoActionBar" />
+        <activity
+            android:name=".relationships.RelationshipStatusHintActivity"
             android:exported="false"
             android:theme="@style/Theme.NotesSQLite" />
         <activity
@@ -49,10 +53,11 @@
         <activity
             android:name=".categories.categoryviews.ViewNotesInFolder"
             android:exported="false" />
-        <activity android:name=".categories.categoryviews.NotesInFolder"
-            android:exported="false"/>
         <activity
-            android:name=".todo.DummyActivity"
+            android:name=".categories.categoryviews.NotesInFolder"
+            android:exported="false" />
+        <activity
+            android:name=".relationships.UpdateRelationshipActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

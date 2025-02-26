@@ -19,7 +19,6 @@ class ArchivesAdapter(private var notes: MutableList<Note>, context: Context) : 
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
         val idTVDate: TextView = itemView.findViewById(R.id.idTVDate)
-//        val card: LinearLayout = itemView.findViewById(R.id.what)
         val unarchiveButton: ImageView = itemView.findViewById(R.id.archiveButton)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }

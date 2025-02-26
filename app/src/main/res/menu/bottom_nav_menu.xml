@@ -5,7 +5,6 @@
         android:id="@+id/navigation_notes"
         android:icon="@drawable/ic_notes"
         android:title="Notes" />
-
     <item
         android:id="@+id/navigation_todo"
         android:icon="@drawable/ic_todo"

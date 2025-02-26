@@ -113,3 +113,19 @@ val pickImageLauncher =
 //        binding.voiceRecorder.setOnClickListener {
 //            Toast.makeText(this,"Still in development",Toast.LENGTH_LONG).show()
 //        }
+
+//<---------------------------------Bottom sheet Fragment------------------------------------------>
+
+//            val formatter = SimpleDateFormat("MM/dd")
+//            val date = Date()
+//            val current = formatter.format(date)
+//            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour:Int, minute:Int ->
+//                calendar.set(Calendar.HOUR_OF_DAY, hour)
+//                calendar.set(Calendar.MINUTE, minute)
+//                myHours = hour
+//                myMinutes = minute
+//                if (myMinutes<10){
+//                    datePicked.text = "$current $myHours:0$myMinutes"
+//                }else{
+//                    datePicked.text = "$current  $myHours:$myMinutes"
+//                }

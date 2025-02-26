@@ -2,11 +2,9 @@ package com.example.notessqlite.databases
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.notessqlite.notes.Note
-import com.example.notessqlite.todo.titleExtra
 
 class EntryDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
@@ -20,7 +18,7 @@ class EntryDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     override fun onCreate(db: SQLiteDatabase?){
-        val createTableQuery = "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_TITLE TEXT, $COLUMN_CONTENT TEXT, $COLUMN_DATE TEXT)"
+        val createTableQuery = "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_TITLE TEXT, $COLUMN_CONTENT TEXT, $COLUMN_DATE TEXT, UNIQUE($COLUMN_TITLE))"
         db?.execSQL(createTableQuery)
     }
 
@@ -29,15 +27,15 @@ class EntryDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
         db?.execSQL(dropTableQuery)
         onCreate(db)
     }
-    fun insertNote(note: Note){
+
+    fun insertNote(note: Note) {
         val db = writableDatabase
-        val values = ContentValues().apply {
+        val values1 = ContentValues().apply {
             put(COLUMN_TITLE, note.title)
             put(COLUMN_CONTENT, note.content)
             put(COLUMN_DATE, note.time)
         }
-        db.insert(TABLE_NAME, null,values)
-        db.close()
+        db.insert(TABLE_NAME, null, values1)
     }
 
     fun updateNote(note: Note){
@@ -52,8 +50,10 @@ class EntryDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
         db.update(TABLE_NAME, values, whereClause, whereArgs)
         db.close()
     }
+
     fun getAllEntries(): MutableList<Note> {
         val notesList = mutableListOf<Note>()
+        val uniqueNotes = HashSet<Pair<String,String>>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query, null)
@@ -65,7 +65,11 @@ class EntryDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, 
             val time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
 
             val note = Note(id, title, content, time)
-            notesList.add(note)
+            val titleContentPair = Pair(title,content)
+            if (!uniqueNotes.contains(titleContentPair)){
+                notesList.add(note)
+                uniqueNotes.add(titleContentPair)
+            }
         }
         cursor.close()
         db.close()

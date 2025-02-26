@@ -10,15 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.databases.RelationshipDatabase
+import com.example.notessqlite.databinding.FragmentRelationshipsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RelationshipsFragment : Fragment() {
+    private var _binding:FragmentRelationshipsBinding?=null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_relationships, container, false)
+        _binding = FragmentRelationshipsBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     private lateinit var relationshipAdapter: RelationshipAdapter
@@ -26,19 +29,15 @@ class RelationshipsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView:RecyclerView = view.findViewById(R.id.relationshipRV)
-        val addNewRelationshipFAB:FloatingActionButton = view.findViewById(R.id.addRelationship)
-
+        binding.relationshipRV.layoutManager = LinearLayoutManager(context)
         db = context?.let { RelationshipDatabase(it) }!!
         relationshipAdapter = RelationshipAdapter(db.getAllRelationships(),requireContext())
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.relationshipRV.layoutManager = LinearLayoutManager(context)
 
-        recyclerView.adapter = relationshipAdapter
+        binding.relationshipRV.adapter = relationshipAdapter
 
-
-        addNewRelationshipFAB.setOnClickListener {
+        binding.addRelationship.setOnClickListener {
             startActivity(Intent(requireContext(), AddRelationshipActivity::class.java))
         }
-
     }
 }

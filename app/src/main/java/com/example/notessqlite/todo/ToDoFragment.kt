@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
@@ -23,6 +25,8 @@ class ToDoFragment : Fragment() {
     }
     private lateinit var db: ToDoDatabase
     private lateinit var toDoAdapter: ToDoAdapter
+    private lateinit var viewModel: ToDoViewModel
+    private lateinit var toDoRepository: ToDoRepository
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -31,7 +35,10 @@ class ToDoFragment : Fragment() {
         val noToDo: LinearLayout = view.findViewById(R.id.noToDo)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { ToDoDatabase(it) }!!
-        toDoAdapter = ToDoAdapter(db.getAllToDos(), requireContext())
+        toDoRepository = ToDoRepository(db)
+        val viewModelFactory = ToDoViewModelFactory(toDoRepository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ToDoViewModel::class.java]
+        toDoAdapter = ToDoAdapter(db.getAllToDos(), requireContext(),viewModel)
         recyclerView.adapter = toDoAdapter
         val nullToDoQueryListResult = db.getAllToDos()
         if(nullToDoQueryListResult.isEmpty()){
@@ -39,15 +46,26 @@ class ToDoFragment : Fragment() {
         }else{
             noToDo.visibility = View.GONE
         }
+
+        viewModel.todoList.observe(viewLifecycleOwner, Observer {
+            toDos->
+                toDoAdapter.refreshData(toDos)
+        })
+
+        viewModel.showNoToDo.observe(viewLifecycleOwner,Observer{
+            show->
+            noToDo.visibility = if(show)
+                View.VISIBLE else View.GONE
+        })
         addTask.setOnClickListener {
 //            startActivity(Intent(requireContext(),DummyActivity::class.java))
-            val bottomSheetFragment = BottomSheetFragment()
+            val bottomSheetFragment = BottomSheetFragment(viewModel)
             bottomSheetFragment.show(requireActivity().supportFragmentManager,bottomSheetFragment.tag)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        toDoAdapter.refreshData(db.getAllToDos())
+        viewModel.loadToDos()
     }
 }

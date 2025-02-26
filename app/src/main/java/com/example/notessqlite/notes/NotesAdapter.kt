@@ -82,7 +82,7 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             note.id.let { it1 -> db.deleteNote(it1) }
             refreshData(db.getAllNotes())
             CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            CodeBase.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
+            CodeBase.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
         }
         val randomColor = getRandomColor()
         val borderDrawable = GradientDrawable()

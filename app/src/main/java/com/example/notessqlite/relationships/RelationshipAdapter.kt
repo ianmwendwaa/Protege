@@ -23,7 +23,8 @@ class RelationshipAdapter(private var relationships: MutableList<Relationship>, 
     class RelationshipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val titleTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        val contentTextView: TextView = itemView.findViewById(R.id.relationshipStatus)
+        val contentTextView: TextView = itemView.findViewById(R.id.relationshipStatusUpdate)
+        val statusIcon: ImageView = itemView.findViewById(R.id.statusIcon)
         val card: LinearLayout = itemView.findViewById(R.id.what)
         val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
@@ -40,9 +41,17 @@ class RelationshipAdapter(private var relationships: MutableList<Relationship>, 
         holder.titleTextView.text = relationship.name
         holder.contentTextView.text = relationship.relationshipStatus
 
+        when(relationship.relationshipStatus){
+            "Distant" -> holder.statusIcon.setImageResource(R.drawable.status_distant_icon)
+            "Neutral" -> holder.statusIcon.setImageResource(R.drawable.status_neutral)
+            "Ally" -> holder.statusIcon.setImageResource(R.drawable.status_ally)
+            "Companion" -> holder.statusIcon.setImageResource(R.drawable.status_companion)
+            else-> holder.statusIcon.setImageResource(R.drawable.ic_info)
+        }
+
         holder.card.setOnClickListener {
             val intent = Intent(holder.itemView.context, UpdateRelationshipActivity::class.java).apply {
-                putExtra("note_id", relationship.id)
+                putExtra("relationship_id", relationship.id)
             }
             holder.itemView.context.startActivity(intent)
         }
@@ -56,7 +65,7 @@ class RelationshipAdapter(private var relationships: MutableList<Relationship>, 
                 "This action will have consequences.",
                 R.drawable.butterfly_effect
             )
-            CodeBase.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
+            CodeBase.showToast(holder.itemView.context, "Relationship with $title deleted!", R.drawable.ic_info)
         }
         val randomColor = getRandomColor()
         val borderDrawable = GradientDrawable()

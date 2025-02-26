@@ -37,22 +37,39 @@ class ToDoDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nu
         db.close()
     }
 
+    fun updateToDo(toDo: ToDo){
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE,toDo.taskName)
+            put(COLUMN_CONTENT,toDo.taskDescription)
+            put(COLUMN_DATE,toDo.time)
+        }
+        val whereClause = "$COLUMN_ID=?"
+        val whereArgs = arrayOf(toDo.id.toString())
+        db.update(TABLE_NAME,values,whereClause, whereArgs)
+        db.close()
+    }
     fun getAllToDos(): MutableList<ToDo> {
         val todoList = mutableListOf<ToDo>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query, null)
-        while (cursor.moveToNext()){
-            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
-            val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
-            val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
-            val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
+        try{
+            while (cursor.moveToNext()){
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+                val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
+                val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
+                val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
 
-            val todo = ToDo(id, title, content, date)
-            todoList.add(todo)
+                val todo = ToDo(id, title, content, date)
+                todoList.add(todo)
+            }
+        }finally {
+            if(cursor!=null){
+                cursor.close()
+            }
+            db?.close()
         }
-        cursor.close()
-        db.close()
         return todoList
     }
     fun deleteToDo(todoId: Int){

@@ -11,4 +11,13 @@
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="color">#D0BCFF</item>
     </style>
+
+    <style name="Theme.NotesSQLite.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NotesSQLite.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NotesSQLite.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

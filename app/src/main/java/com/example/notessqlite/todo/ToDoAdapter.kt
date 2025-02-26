@@ -12,7 +12,7 @@ import com.example.notessqlite.R
 import com.example.notessqlite.Utils
 import com.example.notessqlite.databases.ToDoDatabase
 
-class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
+class ToDoAdapter(private var todo: List<ToDo>, context: Context, viewModel: ToDoViewModel) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
 
     private val db: ToDoDatabase = ToDoDatabase(context)
 
@@ -47,12 +47,12 @@ class ToDoAdapter(private var todo: MutableList<ToDo>, context: Context) : Recyc
             }
             refreshData(db.getAllToDos())
             Utils.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            Utils.showToast(holder.itemView.context, "$title deleted", R.drawable.ic_info)
+            Utils.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newToDos: MutableList<ToDo>) {
+    fun refreshData(newToDos: List<ToDo>) {
         todo = newToDos
         notifyDataSetChanged()
     }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="relationship_with">Relationship with...</string>
+    <string name="navigation_drawer_close">navigation_drawer_close\n</string>
+    <string name="navigation_drawer_open">navigation_drawer_open\n</string>
 </resources>
