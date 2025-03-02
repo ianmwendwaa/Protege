@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.ArchivesDatabase
+import com.example.notessqlite.database.ArchivesDatabase
 
 class ArchivesFragment : Fragment() {
     override fun onCreateView(

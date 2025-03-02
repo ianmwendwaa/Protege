@@ -1,106 +1,72 @@
 package com.example.notessqlite.todo
 
-import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.example.notessqlite.MainActivity
 import com.example.notessqlite.R
 
-class NotificationAlarmReceiver : BroadcastReceiver() {
+class NotificationReceiver : BroadcastReceiver() {
 
+    companion object {
+        const val CHANNEL_ID = "notification_channel"
+        const val NOTIFICATION_ID = 1
+    }
+
+    @SuppressLint("MissingPermission")
     override fun onReceive(context: Context, intent: Intent) {
-        // Create the notification channel (required for Android 8.0 and higher)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // unique id for the channel
-            val channelId = "medicine_reminders"
+        Log.d("NotificationReceiver", "onReceive() called")
+        createNotificationChannel(context)
 
-            // name of the channel
-            val channelName = "Medicine Reminders"
+        val message = intent.getStringExtra("message") ?: "Default message" // Correct key and null handling
+        Log.d("NotificationReceiver", "Message received: $message")
 
-            // importance level of the channel
-            val importance = NotificationManager.IMPORTANCE_HIGH
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_done)
+            .setContentTitle("Something's cooking")
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
 
-            // creating channel
-            val channel =
-                NotificationChannel(channelId, channelName, importance)
-
-            // enabling lights for the channel
-            channel.enableLights(true)
-
-            // setting light color for the channel
-            channel.lightColor = Color.RED
-
-            // enabling vibration for the channel
-            channel.enableVibration(true)
-            val notificationManager = context.getSystemService(NotificationManager::class.java)
-            notificationManager?.createNotificationChannel(
-                channel
-            ) // registering the channel with the system
-        }
-
-        // Create the notification
-
-        // unique id for the notification
-        val notificationId = 1
-
-        // title of the notification
-        val title = "Medicine Reminder"
-
-        // text of the notification
-        val text = "It's time to take your medicine."
-        val intent =
-            Intent(
-                context,
-                MainActivity::class.java
-            ) // intent to launch when the notification is clicked
-        val pendingIntent =
-            PendingIntent.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_IMMUTABLE
-            ) // creating a pending intent to wrap the intent
-
-        // creating the builder object
-        val builder =
-            NotificationCompat.Builder(context, "medicine_reminders")
-                .setSmallIcon(
-                    R.drawable.ic_done
-                ) // setting the small icon for the notification
-                .setContentTitle(title) // setting the title for the notification
-                .setContentText(text) // setting the text for the notification
-                .setContentIntent(pendingIntent) // attaching the pending intent to the notification
-                .setAutoCancel(
-                    true
-                ) // setting the notification to be automatically cancelled when clicked
-                .setPriority(
-                    NotificationCompat.PRIORITY_HIGH
-                ) // setting the priority level of the notification
-
-        // Display the notification
-
-        // getting the notification manager
-        val notificationManager =
-            NotificationManagerCompat.from(context)
-
-        // displaying the notification
+        val notificationManager = NotificationManagerCompat.from(context)
         if (ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.POST_NOTIFICATIONS
+                android.Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
             return
         }
-        notificationManager.notify(notificationId, builder.build())
+        notificationManager.notify(NOTIFICATION_ID, builder.build())
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    private fun createNotificationChannel(context: Context) {
+        Log.d("NotificationReceiver", "createNotificationChannel() called")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Channel"
+            val descriptionText = "Channel description"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }

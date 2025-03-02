@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.categories.CategoryCreatedInFragment
-import com.example.notessqlite.databases.CategoriesDatabase
-import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
+import com.example.notessqlite.folders.CategoryCreatedInFragment
+import com.example.notessqlite.database.CategoriesDatabase
+import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 open class AddToFolderDialog:BottomSheetDialogFragment() {

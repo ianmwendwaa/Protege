@@ -12,9 +12,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notessqlite.CodeBase
+import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.RelationshipDatabase
+import com.example.notessqlite.database.RelationshipDatabase
 
 class RelationshipAdapter(private var relationships: MutableList<Relationship>, context: Context) : RecyclerView.Adapter<RelationshipAdapter.RelationshipViewHolder>() {
 

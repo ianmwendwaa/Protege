@@ -1,6 +1,6 @@
 package com.example.notessqlite.todo
 
-import com.example.notessqlite.databases.ToDoDatabase
+import com.example.notessqlite.database.ToDoDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

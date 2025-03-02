@@ -38,9 +38,9 @@ class Notifications: BroadcastReceiver() {
         val title = "Protege Reminder"
         val text = "You have a designated task"
 
-        val intent = Intent(context, ToDoFragment::class.java)
+        val intents = Intent(context, ToDoFragment::class.java)
         val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
+            context, 0, intents,
             PendingIntent.FLAG_IMMUTABLE
         )
 

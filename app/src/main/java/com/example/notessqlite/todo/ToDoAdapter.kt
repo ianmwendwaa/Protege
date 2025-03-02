@@ -9,9 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.Utils
-import com.example.notessqlite.databases.ToDoDatabase
+import com.example.notessqlite.toasts.Utils
+import com.example.notessqlite.database.ToDoDatabase
 
+@Suppress("UNUSED_PARAMETER")
 class ToDoAdapter(private var todo: List<ToDo>, context: Context, viewModel: ToDoViewModel) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
 
     private val db: ToDoDatabase = ToDoDatabase(context)

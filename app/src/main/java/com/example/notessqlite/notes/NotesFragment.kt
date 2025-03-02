@@ -22,8 +22,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
-import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
+import com.example.notessqlite.database.NoteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

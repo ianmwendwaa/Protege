@@ -13,18 +13,20 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notessqlite.CodeBase
+import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.databases.EntryDatabase
-import com.example.notessqlite.databases.InsertNoteIntoFolderDatabase
-import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.database.ArchivesDatabase
+import com.example.notessqlite.database.EntryDatabase
+import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
+import com.example.notessqlite.database.NoteDatabase
+import com.example.notessqlite.database.TrashDatabase
 
 class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentManager: FragmentManager,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val db: NoteDatabase = NoteDatabase(context)
     private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
     private val insertDB:InsertNoteIntoFolderDatabase = InsertNoteIntoFolderDatabase(context)
+    private val trashDB:TrashDatabase = TrashDatabase(context)
 
     private val entryDB:EntryDatabase = EntryDatabase(context)
 
@@ -57,10 +59,16 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
         }
 
         holder.card.setOnClickListener {
-            val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
-                putExtra("note_id", note.id)
+            try{
+                val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
+                    putExtra("note_id", note.id)
+                }
+                holder.itemView.context.startActivity(intent)
+            }catch (_:Exception){
+                CodeBase.showToast(holder.itemView.context,"Wrong activity callback",R.drawable.ic_info)
+            }finally {
+                CodeBase.showToast(holder.itemView.context,"Wrong activity callback",R.drawable.ic_info)
             }
-            holder.itemView.context.startActivity(intent)
         }
         holder.moreButton.setOnClickListener {
             val bottomSheetFragment = DialogActionPrompt()
@@ -80,7 +88,7 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
         holder.deleteButton.setOnClickListener {
             val title = note.title
             note.id.let { it1 -> db.deleteNote(it1) }
-            refreshData(db.getAllNotes())
+            trashDB.addNoteIntoTrash(note)
             CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
             CodeBase.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
         }

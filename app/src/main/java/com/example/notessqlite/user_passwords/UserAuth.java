@@ -8,9 +8,9 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.notessqlite.CodeBase;
+import com.example.notessqlite.toasts.CodeBase;
 import com.example.notessqlite.R;
-import com.example.notessqlite.databases.PasswordDatabase;
+import com.example.notessqlite.database.PasswordDatabase;
 import com.example.notessqlite.databinding.ActivityPasswordBinding;
 
 public class UserAuth extends AppCompatActivity {

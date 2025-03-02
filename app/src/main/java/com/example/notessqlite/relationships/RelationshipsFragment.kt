@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.notessqlite.R
-import com.example.notessqlite.databases.RelationshipDatabase
+import com.example.notessqlite.database.RelationshipDatabase
 import com.example.notessqlite.databinding.FragmentRelationshipsBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RelationshipsFragment : Fragment() {
     private var _binding:FragmentRelationshipsBinding?=null
@@ -19,7 +16,7 @@ class RelationshipsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRelationshipsBinding.inflate(inflater,container,false)
         return binding.root
     }

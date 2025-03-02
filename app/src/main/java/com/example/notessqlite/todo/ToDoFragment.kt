@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.ToDoDatabase
+import com.example.notessqlite.database.ToDoDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ToDoFragment : Fragment() {

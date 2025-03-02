@@ -3,6 +3,7 @@ package com.example.notessqlite.todo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+@Suppress("UNCHECKED_CAST")
 class ToDoViewModelFactory(private val toDoRepository: ToDoRepository):ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(ToDoViewModel::class.java)){

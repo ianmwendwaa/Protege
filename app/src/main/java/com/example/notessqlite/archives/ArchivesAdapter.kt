@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.Utils
-import com.example.notessqlite.databases.ArchivesDatabase
-import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.toasts.Utils
+import com.example.notessqlite.database.ArchivesDatabase
+import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.notes.Note
 
 class ArchivesAdapter(private var notes: MutableList<Note>, context: Context) : RecyclerView.Adapter<ArchivesAdapter.ArchiveViewHolder>() {

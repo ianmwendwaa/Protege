@@ -14,11 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesSQLite"
-        tools:targetApi="31">
-        <activity
-            android:name=".archives.MainActivity2"
-            android:exported="false"
-            android:theme="@style/Theme.NotesSQLite.NoActionBar" />
+        android:targetSdkVersion="33"
+        tools:targetApi="33">
         <activity
             android:name=".relationships.RelationshipStatusHintActivity"
             android:exported="false"
@@ -31,17 +28,14 @@
             android:name=".user_passwords.UserConfirmation"
             android:exported="false" />
         <activity
-            android:name=".BirthdayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".notes.NotesFragment"
+            android:name=".toasts.BirthdayActivity"
             android:exported="false" />
         <activity
             android:name=".user_passwords.UserAuth"
             android:exported="true" />
 
         <receiver
-            android:name=".todo.NotificationAlarmReceiver"
+            android:name=".todo.NotificationReceiver"
             android:enabled="false" />
 
         <activity
@@ -51,10 +45,10 @@
             android:name=".notes.AddNoteActivity"
             android:exported="false" />
         <activity
-            android:name=".categories.categoryviews.ViewNotesInFolder"
+            android:name=".folders.categoryviews.ViewNotesInFolder"
             android:exported="false" />
         <activity
-            android:name=".categories.categoryviews.NotesInFolder"
+            android:name=".folders.categoryviews.NotesInFolder"
             android:exported="false" />
         <activity
             android:name=".relationships.UpdateRelationshipActivity"

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#F4F4F4"
-    tools:context=".categories.categoryviews.NotesInFolder">
+    tools:context=".folders.categoryviews.NotesInFolder">
 
     <Button
         android:id="@+id/saveFolder"

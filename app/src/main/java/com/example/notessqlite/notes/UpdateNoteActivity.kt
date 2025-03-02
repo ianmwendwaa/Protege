@@ -12,8 +12,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
-import com.example.notessqlite.Utils
-import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.toasts.Utils
+import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.databinding.ActivityUpdateBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

@@ -3,9 +3,9 @@ package com.example.notessqlite.relationships
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.notessqlite.CodeBase
+import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.R
-import com.example.notessqlite.databases.RelationshipDatabase
+import com.example.notessqlite.database.RelationshipDatabase
 import com.example.notessqlite.databinding.ActivityUpdateRelationshipBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

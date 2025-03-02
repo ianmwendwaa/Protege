@@ -37,7 +37,7 @@
         <item name="android:fontFamily">@font/indie_flower</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="NavigationDrawerTextStyle" parent="TextAppearance.AppCompat.Body2">
+    <style name="NavigationDrawerTextStyle" parent="TextAppearance.AppCompat.Caption">
         <item name="android:fontFamily">@font/indie_flower</item>
     </style>
 

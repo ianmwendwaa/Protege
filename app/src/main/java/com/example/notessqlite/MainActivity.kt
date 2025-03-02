@@ -1,29 +1,29 @@
 package com.example.notessqlite
 
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.TypefaceSpan
 import android.view.MenuItem
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.notessqlite.archives.ArchivesFragment
-import com.example.notessqlite.categories.CategoriesFragment
+import com.example.notessqlite.archives.ui.birthday.BirthdayFragment
+import com.example.notessqlite.archives.ui.trash.TrashFragment
+import com.example.notessqlite.folders.CategoriesFragment
 import com.example.notessqlite.databinding.ActivityMainBinding
 import com.example.notessqlite.notes.NotesFragment
 import com.example.notessqlite.relationships.RelationshipsFragment
 import com.example.notessqlite.todo.ToDoFragment
+import com.google.android.material.internal.NavigationMenuItemView
 import com.google.android.material.navigation.NavigationView
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
@@ -43,6 +43,16 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         drawerLayout = binding.drawerLayout
         navigationView = binding.navigationView
         navigationView.setNavigationItemSelectedListener(this)
+
+//        val menu = navigationView.menu
+//        val indieTypeface = ResourcesCompat.getFont(this,R.font.indie_flower)
+//
+//        for (i in 0 until menu.size()){
+//            val menuItem = menu.getItem(i)
+//            val navigationMenuItemView = menuItem.actionView as NavigationMenuItemView
+//            val textView = navigationMenuItemView.findViewById<TextView>(R.id.)
+//            textView.setTypeface(indieTypeface,Typeface.NORMAL)
+//        }
 
         toggle = ActionBarDrawerToggle(
             this,
@@ -85,7 +95,15 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-
+            R.id.nav_password->{
+                replaceFragment(com.example.notessqlite.archives.ui.password.PasswordFragment())
+            }
+            R.id.nav_trash->{
+                replaceFragment(TrashFragment())
+            }
+            R.id.nav_slideshow->{
+                replaceFragment(BirthdayFragment())
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

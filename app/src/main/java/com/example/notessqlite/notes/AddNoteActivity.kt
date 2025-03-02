@@ -1,8 +1,6 @@
 package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
@@ -14,16 +12,14 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
 import com.example.notessqlite.R.drawable.ic_info
-import com.example.notessqlite.Utils
-import com.example.notessqlite.databases.NoteDatabase
+import com.example.notessqlite.toasts.Utils
+import com.example.notessqlite.database.NoteDatabase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -163,9 +159,7 @@ class AddNoteActivity : AppCompatActivity() {
             db.insertNote(note)
             animationTrigger?.triggerAnimation()
             Utils.showToast(this, "Protege will remember that!",ic_info)
-            Utils.showToast(this, "$title saved successfully at $datePresentation",
-                R.drawable.toast_note_taken
-            )
+            Utils.showToast(this, "$title saved successfully at $datePresentation", R.drawable.toast_note_taken)
             finish()
         }
     }
