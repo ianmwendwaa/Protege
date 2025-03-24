@@ -9,4 +9,6 @@
     <string name="relationship_with">Relationship with...</string>
     <string name="navigation_drawer_close">navigation_drawer_close\n</string>
     <string name="navigation_drawer_open">navigation_drawer_open\n</string>
+    <string name="add_new_birthday">add_new_birthday\n</string>
+    <string name="set_date">Set Date</string>
 </resources>

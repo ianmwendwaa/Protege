@@ -1,14 +1,11 @@
 package com.example.notessqlite
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -20,7 +17,6 @@ import com.example.notessqlite.databinding.ActivityMainBinding
 import com.example.notessqlite.notes.NotesFragment
 import com.example.notessqlite.relationships.RelationshipsFragment
 import com.example.notessqlite.todo.ToDoFragment
-import com.google.android.material.internal.NavigationMenuItemView
 import com.google.android.material.navigation.NavigationView
 
 @Suppress("DEPRECATION")
@@ -82,8 +78,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                     replaceFragment(CategoriesFragment())
                     true
                 }
-                R.id.navigation_relationships->{
-                    replaceFragment(RelationshipsFragment())
+                R.id.navigation_birthday->{
+                    replaceFragment(BirthdayFragment())
                     true
                 }else -> false
             }
@@ -101,8 +97,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             R.id.nav_trash->{
                 replaceFragment(TrashFragment())
             }
-            R.id.nav_slideshow->{
-                replaceFragment(BirthdayFragment())
+            R.id.nav_relationships->{
+                replaceFragment(RelationshipsFragment())
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

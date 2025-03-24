@@ -44,5 +44,9 @@
 
     <string name="menu_password">Passwords</string>
     <string name="menu_trash">Trash</string>
-    <string name="menu_birthdays">Birthdays</string>
+    <string name="menu_relationships">Relationships</string>
+    <string name="add_new_birthday">add_new_birthday\n</string>
+    <string name="dazzle_with_a_bit_sparkle">Dazzle with a bit Sparkle</string>
+    <string name="set_date">Set Date</string>
+    <string name="title_activity_home_page">HomePage</string>
 </resources>

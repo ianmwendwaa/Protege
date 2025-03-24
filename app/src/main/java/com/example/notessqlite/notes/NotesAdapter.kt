@@ -21,7 +21,7 @@ import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.database.TrashDatabase
 
-class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentManager: FragmentManager,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private var notes: MutableList<Note>,context: Context,viewModel: NoteViewModel) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val db: NoteDatabase = NoteDatabase(context)
     private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
@@ -69,10 +69,6 @@ class NotesAdapter(private var notes: MutableList<Note>,private val  fragmentMan
             }finally {
                 CodeBase.showToast(holder.itemView.context,"Wrong activity callback",R.drawable.ic_info)
             }
-        }
-        holder.moreButton.setOnClickListener {
-            val bottomSheetFragment = DialogActionPrompt()
-            bottomSheetFragment.show(fragmentManager,bottomSheetFragment.tag)
         }
 
         holder.archiveButton.setOnClickListener{

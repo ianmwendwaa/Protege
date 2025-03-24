@@ -1,9 +1,11 @@
 package com.example.notessqlite.toasts
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.Typeface
+import android.icu.util.Calendar
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -18,6 +20,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.notessqlite.R
+import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class Utils {
@@ -103,6 +108,34 @@ class Utils {
                 fm.bottom = 0
             }
             return width
+        }
+    }
+}
+class datePickerDialog{
+    companion object{
+        fun showDatePickerDialog(context: Context,datePicked:TextInputEditText){
+            val calendar = Calendar.getInstance()
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val month = calendar.get(Calendar.MONTH)
+            val year = calendar.get(Calendar.YEAR)
+            val inflater = LayoutInflater.from(context)
+            val layout:View = inflater.inflate(R.layout.activity_add_birthday,null)
+
+            val datePickerDialog = DatePickerDialog(
+                context,
+                {_,selectedYear,selectedMonth,selectedDay->
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(
+                        selectedYear,
+                        selectedMonth,
+                        selectedDay
+                    )
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedCalendar.time)
+//                    datePicked.text = formattedDate
+                },year,month,day
+            )
+            datePickerDialog.show()
         }
     }
 }

@@ -18,7 +18,7 @@
         android:icon="@drawable/category_icon"
         android:title="Folders" />
     <item
-        android:id="@+id/navigation_relationships"
-        android:icon="@drawable/ic_relationship"
-        android:title="Relationships"/>
+        android:id="@+id/navigation_birthday"
+        android:icon="@drawable/birthday_icon"
+        android:title="Birthdays"/>
 </menu>

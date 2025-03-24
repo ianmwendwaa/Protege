@@ -11,16 +11,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.toasts.Utils
+import com.example.notessqlite.database.CategoriesDatabase
 import com.example.notessqlite.folders.categoryviews.NotesInFolder
 import com.example.notessqlite.folders.categoryviews.ViewNotesInFolder
-import com.example.notessqlite.database.CategoriesDatabase
-import com.example.notessqlite.database.EntryDatabase
+import com.example.notessqlite.toasts.Utils
 
 class CategoryAdapter(private var category: MutableList<Category>,context: Context):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     private var db:CategoriesDatabase = CategoriesDatabase(context)
-    private var entryDB:EntryDatabase = EntryDatabase(context)
-
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val folderName: TextView = itemView.findViewById(R.id.folderName)
         val dateModified: TextView = itemView.findViewById(R.id.dateModifiedzz)

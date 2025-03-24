@@ -18,6 +18,7 @@ import android.widget.VideoView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,6 +67,8 @@ class NotesFragment : Fragment(),AnimationTrigger {
     private lateinit var db: NoteDatabase
     private lateinit var db2:InsertNoteIntoFolderDatabase
     private lateinit var notesAdapter: NotesAdapter
+    private lateinit var viewModel: NoteViewModel
+    private lateinit var noteRepository: NoteRepository
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,7 +81,10 @@ class NotesFragment : Fragment(),AnimationTrigger {
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
         db2 = context?.let { InsertNoteIntoFolderDatabase(it) }!!
-        notesAdapter = NotesAdapter(db.getAllNotes(), childFragmentManager,requireContext())
+        noteRepository = NoteRepository(db)
+        val viewModelFactory = NoteViewModelFactory(noteRepository)
+        viewModel = ViewModelProvider(this,viewModelFactory)[NoteViewModel::class.java]
+        notesAdapter = NotesAdapter(db.getAllNotes(), requireContext(),viewModel)
         recyclerView.adapter = notesAdapter
         arguments?.getInt("newNotePosition")?.let { newNotePosition->
             recyclerView.scrollToPosition(newNotePosition)

@@ -6,14 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".archives.ui.birthday.BirthdayFragment">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/birthdayRV"
-        android:layout_width="match_parent"
-        android:layout_height="729dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/birthdayHeader"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:fontFamily="@font/indie_flower"
+        android:text="@string/dazzle_with_a_bit_sparkle"
+        android:textAlignment="center"
+        android:textSize="23sp"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/birthdayRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/birthdayAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="610dp"
+        android:backgroundTint="@color/categories_fab"
+        android:contentDescription="@string/add_new_birthday"
+        android:fadingEdge="horizontal"
+        android:src="@drawable/ic_add"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/birthdayRV"
+        android:layout_width="409dp"
+        android:layout_height="627dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.759" />
 </androidx.constraintlayout.widget.ConstraintLayout>
