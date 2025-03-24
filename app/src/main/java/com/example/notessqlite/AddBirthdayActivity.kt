@@ -33,6 +33,7 @@ class AddBirthdayActivity : BottomSheetDialogFragment() {
     private lateinit var date:TextInputEditText
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        db = context?.let { BirthDayDatabase(it) }!!
         val birthdayName:TextInputEditText = view.findViewById(R.id.birthdayName)
         val birthDay:TextInputEditText = view.findViewById(R.id.birthdayDate)
         val tvSelected:TextView = view.findViewById(R.id.birthdaySelected)
