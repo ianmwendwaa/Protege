@@ -1,4 +1,5 @@
 [versions]
+activation = "1.1.1"
 agp = "8.8.1"
 fragmentKtx = "1.8.2"
 kotlin = "1.9.0"
@@ -27,6 +28,7 @@ activityCompose = "1.10.1"
 composeBom = "2024.04.01"
 
 [libraries]
+activation = { module = "javax.activation:activation", version.ref = "activation" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }

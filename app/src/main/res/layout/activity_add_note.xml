@@ -68,7 +68,9 @@
                 android:backgroundTint="@android:color/transparent"
                 android:capitalize="sentences"
                 android:fontFamily="@font/indie_flower"
+                android:justificationMode="inter_word"
                 android:gravity="top"
+                android:overScrollMode="ifContentScrolls"
                 android:hint="@string/description"
                 android:textColor="@color/black"
                 android:textColorHint="#606060"
@@ -102,14 +104,17 @@
                 android:fontFamily="@font/indie_flower"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                android:textIsSelectable="false" />/
-        </RelativeLayout>
-    <FrameLayout
-        android:id="@+id/notesFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+                android:textIsSelectable="false" />
 
-    </RelativeLayout>
+            <FrameLayout
+                android:id="@+id/notesFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="14dp" />/
+        </RelativeLayout>
+
+</RelativeLayout>
 <!--<LinearLayout-->
 <!--android:id="@+id/toolbar"-->
 <!--android:layout_width="395dp"-->

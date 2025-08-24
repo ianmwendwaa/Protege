@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.database.TrashDatabase
 import com.example.notessqlite.databinding.FragmentTrashBinding
-import com.example.notessqlite.notes.NoteRepository
-import com.example.notessqlite.notes.NoteViewModel
 import com.example.notessqlite.notes.NotesAdapter
 
 class TrashFragment : Fragment() {
@@ -38,7 +36,7 @@ class TrashFragment : Fragment() {
         binding.header.text = header
         db = context?.let { TrashDatabase(it) }!!
         db1 = context?.let { NoteDatabase(it) }!!
-        adapter = NotesAdapter(db.getAllDisposedTrash(),requireContext(), viewModel = NoteViewModel(noteRepo = NoteRepository(db1)))
+        adapter = NotesAdapter(db.getAllDisposedTrash(),requireContext())
         binding.trashRV.layoutManager = LinearLayoutManager(context)
         binding.trashRV.adapter = adapter
         val expirationTarget = java.util.concurrent.TimeUnit.DAYS.toMillis(7)

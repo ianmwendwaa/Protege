@@ -8,15 +8,18 @@ import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.Rational
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.notessqlite.R
 import com.example.notessqlite.database.ToDoDatabase
 import com.example.notessqlite.notes.NotificationReceiver
@@ -47,9 +50,9 @@ class BottomSheetFragment(private val viewModel: ToDoViewModel) : BottomSheetDia
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            Log.i("Permission: ", "Granted")
+            Log.d("Permission: ", "Granted")
         } else {
-            Log.i("Permission: ", "Denied")
+            Log.w("Permission: ", "Denied")
         }
     }
 
@@ -67,16 +70,13 @@ class BottomSheetFragment(private val viewModel: ToDoViewModel) : BottomSheetDia
 
         datePicked.setOnClickListener {
             Log.d("BottomSheetFragment", "datePicked.setOnClickListener() called")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (alarmManager.canScheduleExactAlarms()) {
-                    showDateTimePicker()
-                } else {
-                    requestPermissionLauncher.launch(Manifest.permission.SCHEDULE_EXACT_ALARM)
-                }
-            } else {
+            if (alarmManager.canScheduleExactAlarms()) {
                 showDateTimePicker()
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+
         saveBtn.setOnClickListener {
             Log.d("BottomSheetFragment", "saveBtn.setOnClickListener() called")
             val title = taskName.text.toString().trim()

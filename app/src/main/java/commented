@@ -129,3 +129,63 @@ val pickImageLauncher =
 //                }else{
 //                    datePicked.text = "$current  $myHours:$myMinutes"
 //                }
+
+
+
+//    private lateinit var drawerLayout: DrawerLayout
+//    private lateinit var navigationView: NavigationView
+//    private lateinit var toggle: ActionBarDrawerToggle
+
+
+//        drawerLayout = binding.drawerLayout
+////        navigationView = binding.navigationView
+//        navigationView.setNavigationItemSelectedListener(this)
+
+//        val menu = navigationView.menu
+//        val indieTypeface = ResourcesCompat.getFont(this,R.font.indie_flower)
+//
+//        for (i in 0 until menu.size()){
+//            val menuItem = menu.getItem(i)
+//            val navigationMenuItemView = menuItem.actionView as NavigationMenuItemView
+//            val textView = navigationMenuItemView.findViewById<TextView>(R.id.)
+//            textView.setTypeface(indieTypeface,Typeface.NORMAL)
+//        }
+//
+//        toggle = ActionBarDrawerToggle(
+//            this,
+//            drawerLayout,
+//            binding.toolbar,
+//            R.string.navigation_drawer_open,
+//            R.string.navigation_drawer_close
+//        )
+//        drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
+
+
+
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.nav_password->{
+//                replaceFragment(com.example.notessqlite.archives.ui.password.PasswordFragment())
+//            }
+//            R.id.nav_trash->{
+//                replaceFragment(TrashFragment())
+//            }
+//            R.id.nav_relationships->{
+//                replaceFragment(RelationshipsFragment())
+//            }
+//        }
+//        drawerLayout.closeDrawer(GravityCompat.START)
+//        return true
+//    }
+
+//    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.",
+//        ReplaceWith("super.onBackPressed()", "androidx.appcompat.app.AppCompatActivity")
+//    )
+//    override fun onBackPressed() {
+//        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+//            drawerLayout.closeDrawer(GravityCompat.START)
+//        }else{
+//            super.onBackPressed()
+//        }
+//    }

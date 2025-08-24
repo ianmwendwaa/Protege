@@ -7,6 +7,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.notessqlite.Birthday
+import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_CONTENT
+import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_DATE
+import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_TITLE
 import com.example.notessqlite.folders.Category
 import com.example.notessqlite.notes.Note
 import com.example.notessqlite.relationships.Relationship
@@ -17,7 +20,7 @@ import java.util.concurrent.TimeUnit
 class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
         private const val DATABASE_NAME = "notes.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
         private const val TABLE_NAME = "all_my_notes"
         private const val COLUMN_ID = "id"
         private const val COLUMN_TITLE = "title"
@@ -31,6 +34,16 @@ class NoteDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < 3) {
+            db?.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN $COLUMN_TITLE TEXT DEFAULT 'General'")
+            db?.execSQL("ALTER TABLE all_my_notes RENAME TO all_of_my_notes");
+            // Create the new table.
+            db?.execSQL("CREATE TABLE all_my_notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, date DATE)")
+            // Copy data to the new table.
+            db?.execSQL("INSERT INTO all_my_notes(id, title, content, date) SELECT id, title, content, date FROM all_of_my_notes")
+            // Drop the temporary table.
+            db?.execSQL("DROP TABLE all_of_my_notes")
+        }
         val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
         onCreate(db)
@@ -801,12 +814,12 @@ class BirthDayDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
     }
     fun getBirthdays():MutableList<Birthday>{
-        val db = readableDatabase
         val birthdayList = mutableListOf<Birthday>()
+        val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query,null)
 
-        while (cursor.moveToFirst()){
+        while (cursor.moveToNext()){
             val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
             val dob = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDATE))
@@ -817,6 +830,10 @@ class BirthDayDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         db.close()
         return birthdayList
+    }
+    fun getBirthdayById(birthdayId: Int){
+        val db = readableDatabase
+        
     }
     fun updateBirthday(birthday: Birthday){
         val db = writableDatabase

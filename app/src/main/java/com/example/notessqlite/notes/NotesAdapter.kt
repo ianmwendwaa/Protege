@@ -21,7 +21,7 @@ import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.database.TrashDatabase
 
-class NotesAdapter(private var notes: MutableList<Note>,context: Context,viewModel: NoteViewModel) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private var notes: MutableList<Note>,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val db: NoteDatabase = NoteDatabase(context)
     private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
@@ -54,10 +54,6 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context,viewMod
         holder.contentTextView.text = note.content
         holder.idTVDate.text = note.time
 
-        if(note.title=="Entry"){
-            entryDB.insertNote(note)
-        }
-
         holder.card.setOnClickListener {
             try{
                 val intent = Intent(holder.itemView.context, UpdateNoteActivity::class.java).apply {
@@ -81,18 +77,20 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context,viewMod
             CodeBase.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
         }
 
+
         holder.deleteButton.setOnClickListener {
             val title = note.title
             note.id.let { it1 -> db.deleteNote(it1) }
             trashDB.addNoteIntoTrash(note)
+            refreshData(db.getAllNotes())
             CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
             CodeBase.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
         }
         val randomColor = getRandomColor()
         val borderDrawable = GradientDrawable()
-        borderDrawable.setStroke(3,randomColor)
+        borderDrawable.setStroke(1,randomColor)
         borderDrawable.cornerRadius = 10f
-//        holder.cardView.background = borderDrawable
+//        holder.card.background = borderDrawable
     }
 
     private fun getRandomColor(): Int {

@@ -22,9 +22,10 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.notessqlite.R
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Locale
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "unused")
 class Utils {
     companion object{
         fun showToast(context: Context, message:String,image:Int){
@@ -41,7 +42,7 @@ class Utils {
             toastTextView.text = message
 
             val toast = Toast(context)
-            toast.duration = Toast.LENGTH_LONG
+            toast.duration = Toast.LENGTH_SHORT
             toast.view = layout
             toast.show()
         }
@@ -72,6 +73,11 @@ class Utils {
                 )
                 editText.text = spannable
             }
+        }
+        fun displayBirthday(txtView:TextView, birthday:String){
+            val currentDay = LocalDate.now()
+            val month = Calendar.getInstance().get(Calendar.MONTH)+1
+            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         }
 
         fun applyItalicToText(editText: EditText){
@@ -111,6 +117,7 @@ class Utils {
         }
     }
 }
+@Suppress("UnusedVariable", "unused")
 class datePickerDialog{
     companion object{
         fun showDatePickerDialog(context: Context,datePicked:TextInputEditText){

@@ -40,7 +40,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/birthdayRV"
-        android:layout_width="409dp"
+        android:layout_width="350dp"
         android:layout_height="627dp"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"

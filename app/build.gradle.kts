@@ -16,6 +16,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
 
     buildTypes {
@@ -40,6 +45,12 @@ android {
         viewBinding = true
         compose = true
     }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
 }
 
 dependencies {
@@ -62,6 +73,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+//    implementation("com.sun.mail:jakarta.mail:2.0.1")
+    implementation("com.sun.mail:javax.mail:1.6.2")
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
+    implementation ("androidx.work:work-runtime-ktx:2.10.3")
+    implementation(libs.activation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

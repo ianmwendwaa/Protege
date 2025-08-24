@@ -10,7 +10,6 @@
     tools:context=".MainActivity"
     tools:openDrawer="start">
 
-    <!-- Your existing ConstraintLayout goes here -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -62,21 +61,21 @@
             app:menu="@menu/bottom_nav_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- The NavigationView for the drawer -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#F4F4F4F4"
-        app:itemTextColor="@color/black"
-        app:itemIconTint="@color/black"
-        style="@style/NavigationDrawerTextStyle"
-        app:itemActiveIndicatorStyle="@style/NavigationDrawerTextStyle"
-        app:itemTextAppearanceActive="@style/NavigationDrawerTextStyle"
-        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
-        app:itemTextAppearance="@font/indie_flower"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/activity_main_drawer" />
+<!--    &lt;!&ndash; The NavigationView for the drawer &ndash;&gt;-->
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigationView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:background="#F4F4F4F4"-->
+<!--        app:itemTextColor="@color/black"-->
+<!--        app:itemIconTint="@color/black"-->
+<!--        style="@style/NavigationDrawerTextStyle"-->
+<!--        app:itemActiveIndicatorStyle="@style/NavigationDrawerTextStyle"-->
+<!--        app:itemTextAppearanceActive="@style/NavigationDrawerTextStyle"-->
+<!--        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"-->
+<!--        app:itemTextAppearance="@font/indie_flower"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        app:menu="@menu/activity_main_drawer" />-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

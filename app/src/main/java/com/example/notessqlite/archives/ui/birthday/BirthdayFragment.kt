@@ -1,20 +1,15 @@
 package com.example.notessqlite.archives.ui.birthday
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notessqlite.AddBirthdayActivity
 import com.example.notessqlite.BirthdayAdapter
 import com.example.notessqlite.database.BirthDayDatabase
-import com.example.notessqlite.database.RelationshipDatabase
 import com.example.notessqlite.databinding.FragmentBirthdayBinding
-import com.example.notessqlite.folders.CategoryAdapter
-import com.example.notessqlite.todo.BottomSheetFragment
 
 class BirthdayFragment : Fragment() {
 

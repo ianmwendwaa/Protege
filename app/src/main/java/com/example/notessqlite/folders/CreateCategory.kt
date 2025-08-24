@@ -11,6 +11,7 @@ import com.example.notessqlite.R
 import com.example.notessqlite.toasts.Utils
 import com.example.notessqlite.database.CategoriesDatabase
 import com.example.notessqlite.database.EntryDatabase
+import com.example.notessqlite.toasts.CodeBase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -38,10 +39,14 @@ class CreateCategory:BottomSheetDialogFragment() {
             val timeAtm = LocalDateTime.now()
             val dateModified = timeAtm.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             dateModification.text = dateModified
-            val category = Category(0,folderTitle,dateModified,folderDescription)
-            db.createFolder(category)
-            Utils.showToast(requireContext(),"New folder created!",R.drawable.butterfly_effect)
-            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+            if(folderTitle.isEmpty() && folderDescription.isEmpty()){
+                CodeBase.showToast(context, "Fill in the name and description!", R.drawable.ic_info)
+            }else{
+                val category = Category(0,folderTitle,dateModified,folderDescription)
+                db.createFolder(category)
+                Utils.showToast(requireContext(),"New folder created!",R.drawable.butterfly_effect)
+                activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+            }
         }
     }
 

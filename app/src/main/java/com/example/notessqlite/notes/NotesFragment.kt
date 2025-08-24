@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +26,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
+import com.example.notessqlite.toasts.CodeBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import androidx.core.net.toUri
 
 class NotesFragment : Fragment(),AnimationTrigger {
     override fun onCreateView(
@@ -42,8 +45,8 @@ class NotesFragment : Fragment(),AnimationTrigger {
         videoView = requireView().findViewById(R.id.videoAnim)
         videoView.visibility = View.VISIBLE
 
-        val animationSrc = Uri.parse("android.resource://"+
-                requireActivity().packageName+"/"+ R.raw.lisref)
+        val animationSrc = ("android.resource://" +
+                requireActivity().packageName + "/" + R.raw.lisref).toUri()
         videoView.setVideoURI(animationSrc)
 
         val animationController = MediaController(requireContext())
@@ -67,8 +70,6 @@ class NotesFragment : Fragment(),AnimationTrigger {
     private lateinit var db: NoteDatabase
     private lateinit var db2:InsertNoteIntoFolderDatabase
     private lateinit var notesAdapter: NotesAdapter
-    private lateinit var viewModel: NoteViewModel
-    private lateinit var noteRepository: NoteRepository
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -81,10 +82,7 @@ class NotesFragment : Fragment(),AnimationTrigger {
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { NoteDatabase(it) }!!
         db2 = context?.let { InsertNoteIntoFolderDatabase(it) }!!
-        noteRepository = NoteRepository(db)
-        val viewModelFactory = NoteViewModelFactory(noteRepository)
-        viewModel = ViewModelProvider(this,viewModelFactory)[NoteViewModel::class.java]
-        notesAdapter = NotesAdapter(db.getAllNotes(), requireContext(),viewModel)
+        notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
         recyclerView.adapter = notesAdapter
         arguments?.getInt("newNotePosition")?.let { newNotePosition->
             recyclerView.scrollToPosition(newNotePosition)
@@ -97,6 +95,7 @@ class NotesFragment : Fragment(),AnimationTrigger {
 
         //             Setting up a view that returns if there are no notes
         val notesQueryList = db.getAllNotes()
+        noNotes.visibility = View.GONE
         if (notesQueryList.isEmpty()){
             noNotes.visibility = View.VISIBLE
         }else{
@@ -141,8 +140,9 @@ class NotesFragment : Fragment(),AnimationTrigger {
                 month == 4 && day == 7 -> getString(R.string.mine)
                 month == 5 && day == 1 -> getString(R.string.clarissa)
                 month == 5 && day == 6 -> getString(R.string.aiyana)
+                month == 5 && day == 12 -> "It's Lorna's birthday!❤️"
                 month == 5 && day == 17 -> getString(R.string.kimberly)
-                month == 5 && day == 19 -> getString(R.string.megan)
+                month == 5 && day == 13 -> getString(R.string.megan)
                 month == 8 && day == 2 -> getString(R.string.seanice)
                 month == 8 && day == 22 -> getString(R.string.amandine)
                 month == 9 && day == 29 -> getString(R.string.lashley)
@@ -185,8 +185,39 @@ class NotesFragment : Fragment(),AnimationTrigger {
             }
         })
     }
+    private lateinit var noNotes: LinearLayout
     override fun onResume() {
         super.onResume()
         notesAdapter.refreshData(db.getAllNotes())
+        noNotes = view?.findViewById<LinearLayout>(R.id.noNotes)!!
+        val notesQueryList = db.getAllNotes()
+        if (notesQueryList.isEmpty()){
+            noNotes.visibility = View.VISIBLE
+        }else{
+            noNotes.visibility = View.GONE
+        }
+    }
+
+    fun scheduleBirthdayEmail(day: Int, month: Int, name:String){
+        when{
+            month == 1 && day == 12 -> name == getString(R.string.odriya)
+            month == 1 && day == 31 -> name == getString(R.string.beryl)
+            month == 2 && day == 7 -> name == getString(R.string.christine)
+            month == 2 && day == 19 -> name == getString(R.string.stephanie)
+            month == 3 && day == 1 -> name == getString(R.string.ann)
+            month == 4 && day == 7 -> name == getString(R.string.mine)
+            month == 5 && day == 1 -> name == getString(R.string.clarissa)
+            month == 5 && day == 6 -> name == getString(R.string.aiyana)
+            month == 5 && day == 12 -> name == "It's Lorna's birthday!❤️"
+            month == 5 && day == 17 -> name == getString(R.string.kimberly)
+            month == 5 && day == 13 -> name == getString(R.string.megan)
+            month == 8 && day == 2 -> name == getString(R.string.seanice)
+            month == 8 && day == 22 -> name == getString(R.string.amandine)
+            month == 9 && day == 29 -> name == getString(R.string.lashley)
+            month == 10 && day == 29 -> name == getString(R.string.simone)
+            month == 11 && day == 23 -> name == getString(R.string.mum)
+            month == 12 && day == 5 -> name == getString(R.string.kailetu)
+            else->""
+        }
     }
 }

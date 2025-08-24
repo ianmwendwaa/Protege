@@ -40,6 +40,7 @@ class UpdateNoteActivity : AppCompatActivity() {
         val note = db.getNoteById(noteId)
         binding.updateTitleEditText.setText(note.title)
         binding.updateContentEditText.setText(note.content)
+        binding.updateDate.setText(note.time)
         binding.charCountUpdate.setText(note.charCounter)
         val currentDateTime = LocalDateTime.now()
         val newDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm"))

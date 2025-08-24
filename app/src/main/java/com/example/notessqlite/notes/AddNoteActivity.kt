@@ -1,8 +1,11 @@
 package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -16,10 +19,11 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.notessqlite.LoadingActivity
 import com.example.notessqlite.R
 import com.example.notessqlite.R.drawable.ic_info
-import com.example.notessqlite.toasts.Utils
 import com.example.notessqlite.database.NoteDatabase
+import com.example.notessqlite.toasts.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -81,7 +85,7 @@ class AddNoteActivity : AppCompatActivity() {
                     }
                 }
 
-                val editTxt: EditText = findViewById(R.id.relationshipInfo)
+                val editTxt: EditText = findViewById(R.id.contentEditText)
                 val wordCount = countWords(editTxt)
                 wordCounter.text = "Words: $wordCount"
 
@@ -157,10 +161,12 @@ class AddNoteActivity : AppCompatActivity() {
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
             val note = Note(0, title, content, savedTime, charCount)
             db.insertNote(note)
-            animationTrigger?.triggerAnimation()
-            Utils.showToast(this, "Protege will remember that!",ic_info)
-            Utils.showToast(this, "$title saved successfully at $datePresentation", R.drawable.toast_note_taken)
             finish()
+            startActivity(Intent(this, LoadingActivity::class.java))
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                Utils.showToast(this, "$title saved successfully at $datePresentation", R.drawable.toast_note_taken)
+            },5000)
         }
     }
 }
