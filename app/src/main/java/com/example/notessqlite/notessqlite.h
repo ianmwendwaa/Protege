@@ -1,0 +1,11 @@
+//
+// Created by Owner on 8/24/2025.
+//
+
+#ifndef NOTESSQLITE_NOTESSQLITE_H
+#define NOTESSQLITE_NOTESSQLITE_H
+public class NOTESSQLITE() {
+
+}
+
+#endif //NOTESSQLITE_NOTESSQLITE_H
