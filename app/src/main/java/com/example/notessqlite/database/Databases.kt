@@ -519,7 +519,7 @@ class PasswordDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query, null)
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
             val pass = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD_DEFINED))
 
@@ -531,7 +531,6 @@ class PasswordDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAM
         db.close()
         return passwordDef
     }
-
 }
 
 class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION) {

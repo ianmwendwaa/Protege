@@ -23,6 +23,7 @@ import com.example.notessqlite.LoadingActivity
 import com.example.notessqlite.R
 import com.example.notessqlite.R.drawable.ic_info
 import com.example.notessqlite.database.NoteDatabase
+import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.toasts.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -160,13 +161,17 @@ class AddNoteActivity : AppCompatActivity() {
             tvDate.text = savedTime
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
             val note = Note(0, title, content, savedTime, charCount)
-            db.insertNote(note)
-            finish()
-            startActivity(Intent(this, LoadingActivity::class.java))
+            if(title.isEmpty() && content.isEmpty()){
+                return@setOnClickListener
+            }else{
+                db.insertNote(note)
+                finish()
+                startActivity(Intent(this, LoadingActivity::class.java))
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                Utils.showToast(this, "$title saved successfully at $datePresentation", R.drawable.toast_note_taken)
-            },5000)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Utils.showToast(this, "$title saved successfully at $datePresentation", R.drawable.toast_note_taken)
+                },5000)
+            }
         }
     }
 }
