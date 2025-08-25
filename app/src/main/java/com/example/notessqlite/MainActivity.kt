@@ -28,7 +28,7 @@ class MainActivity(): AppCompatActivity(){
         replaceFragment(NotesFragment())
 
         //calling the email engine to detect any events
-        EmailHandler().sendEmail("Goodnight Ian!","Go sleep rn!")
+//        EmailHandler().sendEmail("Goodnight Ian!","Go sleep rn!")
 
         dailyEventWatcher()
 
