@@ -1,4 +1,4 @@
-package com.example.notessqlite
+package com.example.notessqlite.birthdays
 
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
@@ -8,14 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.notessqlite.R
 import com.example.notessqlite.database.BirthDayDatabase
-import com.example.notessqlite.databinding.ActivityAddBirthdayBinding
 import com.example.notessqlite.toasts.Utils
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
@@ -47,8 +42,8 @@ class AddBirthdayActivity : BottomSheetDialogFragment() {
             val dob = birthDay.text.toString()
             val birthday = Birthday(0,name, dob)
             db.createBirthday(birthday)
-            Utils.showToast(requireContext(),"Protege will remember that!",R.drawable.ic_info)
-            Utils.showToast(requireContext(),"Wishing $name on $dob!",R.drawable.birthday_toast)
+            Utils.showToast(requireContext(),"Protege will remember that!", R.drawable.ic_info)
+            Utils.showToast(requireContext(),"Wishing $name on $dob!", R.drawable.birthday_toast)
             dismiss()
         }
     }

@@ -19,11 +19,9 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.notessqlite.LoadingActivity
+import com.example.notessqlite.notes.LoadingActivity
 import com.example.notessqlite.R
-import com.example.notessqlite.R.drawable.ic_info
 import com.example.notessqlite.database.NoteDatabase
-import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.toasts.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -37,7 +35,6 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var saveButton: Button
     private lateinit var charCount: TextView
     private lateinit var wordCounter: TextView
-    private var animationTrigger:AnimationTrigger?=null
     private var isBullets = false
     private var isItalicsEnabled = false
 
@@ -157,10 +154,8 @@ class AddNoteActivity : AppCompatActivity() {
             val content = contentEditText.text.toString()
             val charCount = charCount.text.toString()
             val savedDateTime = LocalDateTime.now()
-            val savedTime = savedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
-            tvDate.text = savedTime
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-            val note = Note(0, title, content, savedTime, charCount)
+            val note = Note(0, title, content, time, charCount)
             if(title.isEmpty() && content.isEmpty()){
                 return@setOnClickListener
             }else{

@@ -16,8 +16,8 @@ import javax.mail.internet.MimeMessage
 class EmailHandler {
 
     private fun emailEngine(email: Email){
-        val username = "williamsian845@gmail.com"
-        val password = "mznu fxge mwsr udpp"
+        val username = ""
+        val password = ""
         val smtpHost = "smtp.gmail.com"
         val smtpPort = "465"
 
@@ -45,8 +45,8 @@ class EmailHandler {
 
     fun sendEmail(subject: String, body: String){
         val email = Email(
-            to = "ianmwendwa91e@gmail.com",
-            from = "williamsian845@gmail.com",
+            to = "",
+            from = "",
             subject = subject,
             body = body
         )

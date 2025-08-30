@@ -18,18 +18,14 @@
         android:theme="@style/Theme.NotesSQLite"
         tools:targetApi="33">
         <activity
-            android:name=".LoadingActivity"
+            android:name=".notes.LoadingActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".birthdays.UpdateBirthdayActivity"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
-            android:exported="true"
-            android:label="@string/title_activity_home_page"
-            android:theme="@style/Theme.NotesSQLite"></activity>
-        <activity
-            android:name=".UpdateBirthdayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AddBirthdayActivity"
+            android:name=".birthdays.AddBirthdayActivity"
             android:exported="false" />
         <activity
             android:name=".relationships.RelationshipStatusHintActivity"

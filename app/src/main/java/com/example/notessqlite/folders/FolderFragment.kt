@@ -13,7 +13,7 @@ import com.example.notessqlite.database.CategoriesDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 @Suppress("DEPRECATION")
-class CategoriesFragment : Fragment() {
+class FolderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,7 +22,7 @@ class CategoriesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 
-    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var folderAdapter: FolderAdapter
     private lateinit var db:CategoriesDatabase
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,8 +31,8 @@ class CategoriesFragment : Fragment() {
         val noCategories:LinearLayout = view.findViewById(R.id.noCategory)
         recyclerView.layoutManager = LinearLayoutManager(context)
         db = context?.let { CategoriesDatabase(it) }!!
-        categoryAdapter = CategoryAdapter(db.retrieveFolders(), requireContext())
-        recyclerView.adapter = categoryAdapter
+        folderAdapter = FolderAdapter(db.retrieveFolders(), requireContext())
+        recyclerView.adapter = folderAdapter
         val nullCategoryQueryListResult = db.retrieveFolders()
         if (nullCategoryQueryListResult.isEmpty()){
             noCategories.visibility = View.VISIBLE
@@ -41,7 +41,7 @@ class CategoriesFragment : Fragment() {
         }
         addCategory.setOnClickListener {
             fragmentManager?.let { it1 ->
-                CreateCategory().show(it1,"newCategory")
+                CreateFolder().show(it1,"newCategory")
             }
         }
     }
@@ -54,6 +54,6 @@ class CategoriesFragment : Fragment() {
         }else{
             noCategories.visibility = View.GONE
         }
-        categoryAdapter.refreshData(db.retrieveFolders())
+        folderAdapter.refreshData(db.retrieveFolders())
     }
 }

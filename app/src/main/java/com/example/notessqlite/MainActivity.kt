@@ -12,8 +12,9 @@ import com.example.notessqlite.archives.ArchivesFragment
 import com.example.notessqlite.archives.ui.birthday.BirthdayFragment
 import com.example.notessqlite.databinding.ActivityMainBinding
 import com.example.notessqlite.email.EmailHandler
-import com.example.notessqlite.folders.CategoriesFragment
+import com.example.notessqlite.folders.FolderFragment
 import com.example.notessqlite.notes.NotesFragment
+import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.todo.ToDoFragment
 
 @Suppress("DEPRECATION")
@@ -41,7 +42,7 @@ class MainActivity(): AppCompatActivity(){
                     replaceFragment(NotesFragment())
                     true
                 }
-                R.id.navigation_todo -> {
+                R.id.navigation_todo ->{
                     replaceFragment(ToDoFragment())
                     true
                 }
@@ -50,7 +51,7 @@ class MainActivity(): AppCompatActivity(){
                     true
                 }
                 R.id.navigation_folders->{
-                    replaceFragment(CategoriesFragment())
+                    replaceFragment(FolderFragment())
                     true
                 }
                 R.id.navigation_birthday->{
@@ -77,7 +78,11 @@ class MainActivity(): AppCompatActivity(){
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+        try {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+        }catch (e: Exception){
+            CodeBase.showToast(this, "${e.localizedMessage}", R.drawable.ic_info)
+        }
     }
 }
 

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.toasts.Utils
-import com.example.notessqlite.folders.Category
+import com.example.notessqlite.folders.Folder
 import com.example.notessqlite.database.ArchivesDatabase
 import com.example.notessqlite.database.CategoriesDatabase
 import java.time.LocalDateTime
@@ -64,7 +64,7 @@ class NotesInFolder:AppCompatActivity() {
             val savedDateTime = LocalDateTime.now()
             val savedTime = savedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             date.text = savedTime
-            val folderData = Category(folderId,title,savedTime,description)
+            val folderData = Folder(folderId,title,savedTime,description)
             db.updateNote(folderData)
             Utils.showToast(this,"Folder updated!",R.drawable.ic_info)
             finish()

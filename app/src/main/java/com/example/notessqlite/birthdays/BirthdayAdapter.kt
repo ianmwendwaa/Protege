@@ -1,4 +1,4 @@
-package com.example.notessqlite
+package com.example.notessqlite.birthdays
 
 import android.content.Context
 import android.content.Intent
@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notessqlite.R
 import com.example.notessqlite.database.BirthDayDatabase
 import com.example.notessqlite.toasts.CodeBase
-import com.example.notessqlite.todo.ToDo
 
 class BirthdayAdapter(private var birthday: MutableList<Birthday>,context: Context):RecyclerView.Adapter<BirthdayAdapter.BirthdayViewHolder>() {
     private var db:BirthDayDatabase = BirthDayDatabase(context)
@@ -43,7 +43,7 @@ class BirthdayAdapter(private var birthday: MutableList<Birthday>,context: Conte
             birthday.id.let {
                 it1->db.deleteBirthday(it1)
             }
-            CodeBase.showToast(holder.itemView.context,"Wrong entry?",R.drawable.butterfly_effect)
+            CodeBase.showToast(holder.itemView.context,"Wrong entry?", R.drawable.butterfly_effect)
         }
     }
 

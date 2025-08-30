@@ -12,13 +12,11 @@ import com.example.notessqlite.R
 import com.example.notessqlite.database.CategoriesDatabase
 import com.example.notessqlite.database.EntryDatabase
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
-import com.example.notessqlite.notes.Note
 
-class CategoryCreatedInFragment(private var category: MutableList<Category>, context: Context):RecyclerView.Adapter<CategoryCreatedInFragment.CategoryViewHolder>() {
+class FolderInFragmentAdapter(private var folder: MutableList<Folder>, context: Context):RecyclerView.Adapter<FolderInFragmentAdapter.CategoryViewHolder>() {
     private var db:CategoriesDatabase = CategoriesDatabase(context)
     private var insertNoteIntoFolderDatabase:InsertNoteIntoFolderDatabase = InsertNoteIntoFolderDatabase(context)
     private var entryDB:EntryDatabase = EntryDatabase(context)
-    private var notes:Note = Note(id = 0, "", "", "","")
 
 
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,10 +29,10 @@ class CategoryCreatedInFragment(private var category: MutableList<Category>, con
         return CategoryViewHolder(view)
     }
 
-    override fun getItemCount(): Int = category.size
+    override fun getItemCount(): Int = folder.size
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = category[position]
+        val category = folder[position]
         holder.folderName.text = category.folderName
         holder.dateModified.text = category.folderDescription
 
@@ -53,8 +51,8 @@ class CategoryCreatedInFragment(private var category: MutableList<Category>, con
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newCategories: MutableList<Category>){
-        category = newCategories
+    fun refreshData(newCategories: MutableList<Folder>){
+        folder = newCategories
         notifyDataSetChanged()
     }
 }

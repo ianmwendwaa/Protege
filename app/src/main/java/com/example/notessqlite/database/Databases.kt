@@ -6,11 +6,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.notessqlite.Birthday
-import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_CONTENT
-import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_DATE
-import com.example.notessqlite.database.NoteDatabase.Companion.COLUMN_TITLE
-import com.example.notessqlite.folders.Category
+import com.example.notessqlite.birthdays.Birthday
+import com.example.notessqlite.folders.Folder
 import com.example.notessqlite.notes.Note
 import com.example.notessqlite.relationships.Relationship
 import com.example.notessqlite.todo.ToDo
@@ -553,19 +550,19 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
         val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
     }
-    fun createFolder(category: Category){
+    fun createFolder(folder: Folder){
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_FOLDER_NAME,category.folderName)
-            put(COLUMN_FOLDER_DESCRIPTION,category.folderDescription)
-            put(COLUMN_DATE_OF_MODIFICATION,category.dateModified)
+            put(COLUMN_FOLDER_NAME,folder.folderName)
+            put(COLUMN_FOLDER_DESCRIPTION,folder.folderDescription)
+            put(COLUMN_DATE_OF_MODIFICATION,folder.dateModified)
         }
         db.insert(TABLE_NAME,null,values)
         db.close()
     }
     //    it's literally in the function lil Timmy
-    fun retrieveFolders(): MutableList<Category>{
-        val categoryList = mutableListOf<Category>()
+    fun retrieveFolders(): MutableList<Folder>{
+        val folderList = mutableListOf<Folder>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query,null)
@@ -574,12 +571,12 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
             val name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_NAME))
             val description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FOLDER_DESCRIPTION))
             val date = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_MODIFICATION))
-            val category = Category(id,name,date,description)
-            categoryList.add(category)
+            val folder = Folder(id,name,date,description)
+            folderList.add(folder)
         }
         cursor.close()
         db.close()
-        return categoryList
+        return folderList
     }
     fun deleteFolder(noteId: Int){
         val db = writableDatabase
@@ -589,7 +586,7 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
         db.close()
     }
 
-    fun getFolderById(folderId: Int): Category {
+    fun getFolderById(folderId: Int): Folder {
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $folderId"
         val cursor = db.rawQuery(query, null)
@@ -602,17 +599,17 @@ class CategoriesDatabase(context: Context):SQLiteOpenHelper(context, DATABASE_NA
 
         cursor.close()
         db.close()
-        return Category(id, name, date, description)
+        return Folder(id, name, date, description)
     }
-    fun updateNote(category: Category){
+    fun updateNote(folder: Folder){
         val db = writableDatabase
         val values = ContentValues().apply {
-            put(COLUMN_FOLDER_NAME, category.folderName)
-            put(COLUMN_FOLDER_DESCRIPTION, category.folderDescription)
-            put(COLUMN_DATE_OF_MODIFICATION, category.dateModified)
+            put(COLUMN_FOLDER_NAME, folder.folderName)
+            put(COLUMN_FOLDER_DESCRIPTION, folder.folderDescription)
+            put(COLUMN_DATE_OF_MODIFICATION, folder.dateModified)
         }
         val whereClause = "$COLUMN_ID = ?"
-        val whereArgs = arrayOf(category.id.toString())
+        val whereArgs = arrayOf(folder.id.toString())
         db.update(TABLE_NAME, values, whereClause, whereArgs)
         db.close()
     }
@@ -723,8 +720,8 @@ class InsertNoteIntoFolderDatabase(context: Context):SQLiteOpenHelper(context, D
         db.insert(TABLE_NAME,null,values)
         db.close()
     }
-    fun getFolders(): MutableList<Category> {
-        val notesList = mutableListOf<Category>()
+    fun getFolders(): MutableList<Folder> {
+        val notesList = mutableListOf<Folder>()
         val db = readableDatabase
         val query = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(query, null)
@@ -735,7 +732,7 @@ class InsertNoteIntoFolderDatabase(context: Context):SQLiteOpenHelper(context, D
             val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
             val time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE))
 
-            val note = Category(id, title, content, time)
+            val note = Folder(id, title, content, time)
             notesList.add(note)
         }
         cursor.close()

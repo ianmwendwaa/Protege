@@ -11,15 +11,14 @@ import com.example.notessqlite.R
 import com.example.notessqlite.toasts.Utils
 import com.example.notessqlite.database.CategoriesDatabase
 import com.example.notessqlite.database.EntryDatabase
-import com.example.notessqlite.toasts.CodeBase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class CreateCategory:BottomSheetDialogFragment() {
+class CreateFolder:BottomSheetDialogFragment() {
     private lateinit var db:CategoriesDatabase
     private lateinit var entryDB:EntryDatabase
-    private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var folderAdapter: FolderAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val categoryName:EditText = view.findViewById(R.id.categoryName)
@@ -28,7 +27,7 @@ class CreateCategory:BottomSheetDialogFragment() {
         val saveButton:ImageView = view.findViewById(R.id.saveCategory)
         db = context?.let { CategoriesDatabase(it) }!!
         entryDB = EntryDatabase(requireContext())
-        categoryAdapter = CategoryAdapter(db.retrieveFolders(),requireContext())
+        folderAdapter = FolderAdapter(db.retrieveFolders(),requireContext())
         categoryName.requestFocus()
         val time = LocalDateTime.now()
         dateModification.text = time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
@@ -40,10 +39,10 @@ class CreateCategory:BottomSheetDialogFragment() {
             val dateModified = timeAtm.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
             dateModification.text = dateModified
             if(folderTitle.isEmpty() && folderDescription.isEmpty()){
-                CodeBase.showToast(context, "Fill in the name and description!", R.drawable.ic_info)
+                return@setOnClickListener
             }else{
-                val category = Category(0,folderTitle,dateModified,folderDescription)
-                db.createFolder(category)
+                val folder = Folder(0,folderTitle,dateModified,folderDescription)
+                db.createFolder(folder)
                 Utils.showToast(requireContext(),"New folder created!",R.drawable.butterfly_effect)
                 activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
             }
@@ -60,6 +59,6 @@ class CreateCategory:BottomSheetDialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        categoryAdapter.refreshData(db.retrieveFolders())
+        folderAdapter.refreshData(db.retrieveFolders())
     }
 }

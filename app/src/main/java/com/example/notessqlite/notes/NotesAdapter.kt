@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.R
@@ -60,11 +60,13 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
                     putExtra("note_id", note.id)
                 }
                 holder.itemView.context.startActivity(intent)
-            }catch (_:Exception){
-                CodeBase.showToast(holder.itemView.context,"Wrong activity callback",R.drawable.ic_info)
-            }finally {
-                CodeBase.showToast(holder.itemView.context,"Wrong activity callback",R.drawable.ic_info)
+            }catch (e:Exception){
+                CodeBase.showToast(holder.itemView.context,"$e",R.drawable.ic_info)
             }
+        }
+
+        holder.moreButton.setOnClickListener {
+            
         }
 
         holder.archiveButton.setOnClickListener{

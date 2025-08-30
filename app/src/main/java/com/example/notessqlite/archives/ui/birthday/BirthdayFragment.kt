@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.notessqlite.AddBirthdayActivity
-import com.example.notessqlite.BirthdayAdapter
+import com.example.notessqlite.birthdays.AddBirthdayActivity
+import com.example.notessqlite.birthdays.BirthdayAdapter
 import com.example.notessqlite.database.BirthDayDatabase
 import com.example.notessqlite.databinding.FragmentBirthdayBinding
 

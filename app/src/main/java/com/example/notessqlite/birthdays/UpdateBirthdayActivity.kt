@@ -1,10 +1,8 @@
-package com.example.notessqlite
+package com.example.notessqlite.birthdays
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.notessqlite.databinding.ActivityUpdateBirthdayBinding
 
 class UpdateBirthdayActivity : AppCompatActivity(){

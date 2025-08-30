@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
-import com.example.notessqlite.folders.CategoryCreatedInFragment
+import com.example.notessqlite.folders.FolderInFragmentAdapter
 import com.example.notessqlite.database.CategoriesDatabase
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -15,13 +15,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 open class AddToFolderDialog:BottomSheetDialogFragment() {
     private lateinit var insertDB: InsertNoteIntoFolderDatabase
     private lateinit var fetchFolderDB:CategoriesDatabase
-    private lateinit var adapterClass: CategoryCreatedInFragment
+    private lateinit var adapterClass: FolderInFragmentAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView:RecyclerView = view.findViewById(R.id.foldersToChooseFrom)
         fetchFolderDB = context?.let { CategoriesDatabase(it) }!!
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapterClass = CategoryCreatedInFragment(fetchFolderDB.retrieveFolders(),requireContext())
+        adapterClass = FolderInFragmentAdapter(fetchFolderDB.retrieveFolders(),requireContext())
         recyclerView.adapter = adapterClass
     }
 

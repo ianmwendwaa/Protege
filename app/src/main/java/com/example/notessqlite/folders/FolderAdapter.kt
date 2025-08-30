@@ -16,7 +16,7 @@ import com.example.notessqlite.folders.categoryviews.NotesInFolder
 import com.example.notessqlite.folders.categoryviews.ViewNotesInFolder
 import com.example.notessqlite.toasts.Utils
 
-class CategoryAdapter(private var category: MutableList<Category>,context: Context):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class FolderAdapter(private var folder: MutableList<Folder>, context: Context):RecyclerView.Adapter<FolderAdapter.CategoryViewHolder>() {
     private var db:CategoriesDatabase = CategoriesDatabase(context)
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val folderName: TextView = itemView.findViewById(R.id.folderName)
@@ -30,10 +30,10 @@ class CategoryAdapter(private var category: MutableList<Category>,context: Conte
         return CategoryViewHolder(view)
     }
 
-    override fun getItemCount(): Int = category.size
+    override fun getItemCount(): Int = folder.size
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = category[position]
+        val category = folder[position]
         holder.folderName.text = category.folderName
         holder.dateModified.text = category.dateModified
 
@@ -65,8 +65,8 @@ class CategoryAdapter(private var category: MutableList<Category>,context: Conte
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newCategories: MutableList<Category>){
-        category = newCategories
+    fun refreshData(newCategories: MutableList<Folder>){
+        folder = newCategories
         notifyDataSetChanged()
     }
 }

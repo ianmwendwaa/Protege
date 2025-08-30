@@ -1,72 +1,34 @@
 package com.example.notessqlite.notes
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.provider.Settings.Global.getString
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.MediaController
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.VideoView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notessqlite.R
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
-import com.example.notessqlite.toasts.CodeBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import androidx.core.net.toUri
 
-class NotesFragment : Fragment(),AnimationTrigger {
+class NotesFragment : Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_notes, container, false)
     }
-    private lateinit var videoView: VideoView
-    override fun triggerAnimation() {
-        videoView = requireView().findViewById(R.id.videoAnim)
-        videoView.visibility = View.VISIBLE
-
-        val animationSrc = ("android.resource://" +
-                requireActivity().packageName + "/" + R.raw.lisref).toUri()
-        videoView.setVideoURI(animationSrc)
-
-        val animationController = MediaController(requireContext())
-        videoView.setMediaController(animationController)
-        animationController.setAnchorView(videoView)
-        Log.d("VideoUri","VideoUri:$animationSrc")
-
-        videoView.start()
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            dismissAnimation()
-        },3000)
-    }
-
-    override fun dismissAnimation() {
-        videoView = requireView().findViewById(R.id.videoAnim)
-        videoView.visibility = View.GONE
-        videoView.stopPlayback()
-    }
-
     private lateinit var db: NoteDatabase
     private lateinit var db2:InsertNoteIntoFolderDatabase
     private lateinit var notesAdapter: NotesAdapter
@@ -84,11 +46,11 @@ class NotesFragment : Fragment(),AnimationTrigger {
         db2 = context?.let { InsertNoteIntoFolderDatabase(it) }!!
         notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
         recyclerView.adapter = notesAdapter
-        arguments?.getInt("newNotePosition")?.let { newNotePosition->
-            recyclerView.scrollToPosition(newNotePosition)
-            val viewHolder = recyclerView.findViewHolderForAdapterPosition(newNotePosition)
-            viewHolder?.itemView?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
-        }
+//        arguments?.getInt("newNotePosition")?.let { newNotePosition->
+//            recyclerView.scrollToPosition(newNotePosition)
+//            val viewHolder = recyclerView.findViewHolderForAdapterPosition(newNotePosition)
+//            viewHolder?.itemView?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
+//        }
 //        sort.setOnClickListener {
 //            db.getAllNotesByTitle()
 //        }
@@ -195,29 +157,6 @@ class NotesFragment : Fragment(),AnimationTrigger {
             noNotes.visibility = View.VISIBLE
         }else{
             noNotes.visibility = View.GONE
-        }
-    }
-
-    fun scheduleBirthdayEmail(day: Int, month: Int, name:String){
-        when{
-            month == 1 && day == 12 -> name == getString(R.string.odriya)
-            month == 1 && day == 31 -> name == getString(R.string.beryl)
-            month == 2 && day == 7 -> name == getString(R.string.christine)
-            month == 2 && day == 19 -> name == getString(R.string.stephanie)
-            month == 3 && day == 1 -> name == getString(R.string.ann)
-            month == 4 && day == 7 -> name == getString(R.string.mine)
-            month == 5 && day == 1 -> name == getString(R.string.clarissa)
-            month == 5 && day == 6 -> name == getString(R.string.aiyana)
-            month == 5 && day == 12 -> name == "It's Lorna's birthday!❤️"
-            month == 5 && day == 17 -> name == getString(R.string.kimberly)
-            month == 5 && day == 13 -> name == getString(R.string.megan)
-            month == 8 && day == 2 -> name == getString(R.string.seanice)
-            month == 8 && day == 22 -> name == getString(R.string.amandine)
-            month == 9 && day == 29 -> name == getString(R.string.lashley)
-            month == 10 && day == 29 -> name == getString(R.string.simone)
-            month == 11 && day == 23 -> name == getString(R.string.mum)
-            month == 12 && day == 5 -> name == getString(R.string.kailetu)
-            else->""
         }
     }
 }

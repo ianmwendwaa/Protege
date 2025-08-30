@@ -111,7 +111,6 @@ class UpdateNoteActivity : AppCompatActivity() {
             val updatedNote = Note(noteId, newTitle, newContent, newDate)
             val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM HH:mm:ss"))
             db.updateNote(updatedNote)
-            Utils.showToast(this,"Protege will remember that",R.drawable.ic_info)
             Utils.showToast(this,"$newTitle updated successfully at $datePresentation",R.drawable.toast_note_taken)
             finish()
         }
