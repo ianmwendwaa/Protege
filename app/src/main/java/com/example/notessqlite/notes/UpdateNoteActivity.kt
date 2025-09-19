@@ -3,7 +3,10 @@
 package com.example.notessqlite.notes
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
@@ -91,6 +94,13 @@ class UpdateNoteActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val titleText = binding.updateTitleEditText.text.isNotEmpty()
                 val contentText = binding.updateContentEditText.text.isNotEmpty()
+
+                val noteContent = contentText.toString()
+                val newNoteContent = s.toString()
+
+                if(noteContent != newNoteContent){
+                    binding.updateSaveButton.setOnClickListener { return@setOnClickListener }
+                }
                 binding.updateSaveButton.isEnabled = titleText||contentText
                 if(binding.updateSaveButton.isEnabled){
                     binding.updateSaveButton.setTextColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonEnabledColor))
@@ -111,8 +121,13 @@ class UpdateNoteActivity : AppCompatActivity() {
             val updatedNote = Note(noteId, newTitle, newContent, newDate)
             val datePresentation = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM HH:mm:ss"))
             db.updateNote(updatedNote)
-            Utils.showToast(this,"$newTitle updated successfully at $datePresentation",R.drawable.toast_note_taken)
+
             finish()
+            startActivity(Intent(this, LoadingActivity::class.java))
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                Utils.showToast(this,"$newTitle updated successfully at $datePresentation",R.drawable.toast_note_taken)
+            }, 5000)
         }
     }
 }

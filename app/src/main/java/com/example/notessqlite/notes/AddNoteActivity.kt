@@ -19,7 +19,6 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.notessqlite.notes.LoadingActivity
 import com.example.notessqlite.R
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.toasts.Utils

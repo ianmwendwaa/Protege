@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.example.notessqlite.database.EntryDatabase
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.database.TrashDatabase
+import java.util.logging.Handler
 
 class NotesAdapter(private var notes: MutableList<Note>,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
@@ -75,8 +77,13 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
             archiveDB.insertArchivedNote(note)
             insertDB.insertIntoFolder(note)
             refreshData(db.getAllNotes())
-            CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            CodeBase.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
+
+            holder.itemView.context.startActivity(Intent(holder.itemView.context, SplashActivity::class.java))
+
+            android.os.Handler(Looper.getMainLooper()).postDelayed({
+                CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+                CodeBase.showToast(holder.itemView.context, "$title has been archived.", R.drawable.ic_info)
+            },5000)
         }
 
 
@@ -85,8 +92,12 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
             note.id.let { it1 -> db.deleteNote(it1) }
             trashDB.addNoteIntoTrash(note)
             refreshData(db.getAllNotes())
-            CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
-            CodeBase.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
+
+            holder.itemView.context.startActivity(Intent(holder.itemView.context, SplashActivity::class.java))
+            android.os.Handler(Looper.getMainLooper()).postDelayed({
+                CodeBase.showToast(holder.itemView.context, "This action will have consequences.", R.drawable.butterfly_effect)
+                CodeBase.showToast(holder.itemView.context, "$title deleted!", R.drawable.ic_info)
+            }, 5000)
         }
         val randomColor = getRandomColor()
         val borderDrawable = GradientDrawable()
