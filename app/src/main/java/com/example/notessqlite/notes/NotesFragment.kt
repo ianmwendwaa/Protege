@@ -1,6 +1,12 @@
 package com.example.notessqlite.notes
 
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,20 +15,28 @@ import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notessqlite.dialog.DialogBuilder
+import com.example.notessqlite.dialog.DialogButtonEventHandler
 import com.example.notessqlite.R
+import com.example.notessqlite.birthdays.Birthday
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.Calendar
 
-class NotesFragment : Fragment(){
+class NotesFragment : Fragment(), DialogButtonEventHandler {
+    private val CHANNEL_ID = "33"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +49,7 @@ class NotesFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //--------Setting up elements (not good practice on my side but, gets the job done)---------
         val greetings: TextView = view.findViewById(R.id.greetings)
         val recyclerView: RecyclerView = view.findViewById(R.id.notesRView)
         val addBtn: FloatingActionButton = view.findViewById(R.id.addBtn)
@@ -46,16 +61,8 @@ class NotesFragment : Fragment(){
         db2 = context?.let { InsertNoteIntoFolderDatabase(it) }!!
         notesAdapter = NotesAdapter(db.getAllNotes(), requireContext())
         recyclerView.adapter = notesAdapter
-//        arguments?.getInt("newNotePosition")?.let { newNotePosition->
-//            recyclerView.scrollToPosition(newNotePosition)
-//            val viewHolder = recyclerView.findViewHolderForAdapterPosition(newNotePosition)
-//            viewHolder?.itemView?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.gray))
-//        }
-//        sort.setOnClickListener {
-//            db.getAllNotesByTitle()
-//        }
 
-        //             Setting up a view that returns if there are no notes
+        //-----------------Setting up a view that returns if there are no notes--------------------
         val notesQueryList = db.getAllNotes()
         noNotes.visibility = View.GONE
         if (notesQueryList.isEmpty()){
@@ -64,14 +71,16 @@ class NotesFragment : Fragment(){
             noNotes.visibility = View.GONE
         }
 
-        //              Launching a new note activity
+        //----------------Handling the add button clicked event (launches activity to add a new note-------------
+        val x = DialogBuilder(this, "ATTENTION! ATTENTION!", "This should just open the next activity")
         addBtn.setOnClickListener {
             val intent = Intent(context, AddNoteActivity::class.java)
             startActivity(intent)
+
         }
         searchView.queryHint = getString(R.string.queryHint)
 
-        //               Greeting logic
+        //-----------------Greeting type writer effect implementation------------------
         fun TextView.typeWriteMessage(lifecycleScope:LifecycleCoroutineScope, text:String, intervalMs:Long) {
             this.text = ""
             lifecycleScope.launch {
@@ -90,32 +99,40 @@ class NotesFragment : Fragment(){
                 else -> getString(R.string.greeting_evening)
             }
         }
-        fun getCelebration():String{
-            val month = Calendar.getInstance().get(Calendar.MONTH)+1
-            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-            return when {
-                month == 1 && day == 12 -> getString(R.string.odriya)
-                month == 1 && day == 31 -> getString(R.string.beryl)
-                month == 2 && day == 7 -> getString(R.string.christine)
-                month == 2 && day == 19 -> getString(R.string.stephanie)
-                month == 3 && day == 1 -> getString(R.string.ann)
-                month == 4 && day == 7 -> getString(R.string.mine)
-                month == 5 && day == 1 -> getString(R.string.clarissa)
-                month == 5 && day == 6 -> getString(R.string.aiyana)
-                month == 5 && day == 12 -> "It's Lorna's birthday!❤️"
-                month == 5 && day == 17 -> getString(R.string.kimberly)
-                month == 5 && day == 13 -> getString(R.string.megan)
-                month == 8 && day == 2 -> getString(R.string.seanice)
-                month == 8 && day == 22 -> getString(R.string.amandine)
-                month == 9 && day == 29 -> getString(R.string.lashley)
-                month == 10 && day == 29 -> getString(R.string.simone)
-                month == 11 && day == 23 -> getString(R.string.mum)
-                month == 12 && day == 5 -> getString(R.string.kailetu)
-                else -> getGreeting()
+
+        //----------------Birthday creation and handling logic------------------
+        val odriya = Birthday(0, "Odriya", "", LocalDate.of(2005, 1, 12))
+        val beryl = Birthday(1, "Beryl",  "", LocalDate.of(2003, 1, 31))
+        val christine = Birthday(2, "Christine", "", LocalDate.of(2001, 2, 7))
+        val stephanie = Birthday(3, "Stephanie", "", LocalDate.of(1999, 2, 19))
+        val ann = Birthday(4, "Ann", "", LocalDate.of(1990, 3, 1))
+        val ian = Birthday(5, "Ian", "", LocalDate.of(2005, 4, 7))
+        val aiyana = Birthday(6, "Mama", "", LocalDate.of(2023, 5, 6))
+        val kimberly = Birthday(7, "Kimberly", "", LocalDate.of(2006, 5, 17))
+        val elizaza = Birthday(8, "Elizaza", "", LocalDate.of(2005, 6, 13))
+        val seanice = Birthday(9, "Seanice", "", LocalDate.of(2007, 8, 2))
+        val amandine = Birthday(10, "Amandine","", LocalDate.of(2023, 8, 22))
+        val ashley = Birthday(11, "Starfire", "", LocalDate.of(2005, 9, 29))
+        val mum = Birthday(12, "Mum", "", LocalDate.of(1977, 11, 23))
+        val currentDate = LocalDate.now()
+
+        // Creating a list to store the birthdays of people I care about too much
+        val birthdayList = listOf(odriya, beryl, christine, stephanie, ann, ian, aiyana, kimberly,
+            elizaza, seanice, amandine, ashley, mum)
+        var birthdayFound = false // boolean to keep track if a birthday record has been found
+
+        // Looping through my list to find if it's anyone's birthday
+        for(amiesBirthday in birthdayList){
+            if(currentDate.month == amiesBirthday.birthday?.month && currentDate.dayOfMonth == amiesBirthday.birthday?.dayOfMonth){
+                greetings.typeWriteMessage(lifecycleScope, "It's ${amiesBirthday.name}'s birthday!❤️", 100)
+                buildNotification(amiesBirthday.name, currentDate.year - amiesBirthday.birthday.year)
+                birthdayFound = true
+                break
             }
         }
-        val celebration = getCelebration()
-        greetings.typeWriteMessage(lifecycleScope,celebration,100)
+        if(!birthdayFound){
+            greetings.typeWriteMessage(lifecycleScope, getGreeting(), 100)
+        }
 
         //              Search for notes Logic
         searchView.setOnClickListener {
@@ -147,6 +164,43 @@ class NotesFragment : Fragment(){
             }
         })
     }
+
+    private fun buildNotification(birthdayAmie:String, age:Int){
+        // NotificationBuilder
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_info)
+            .setContentTitle("It's $birthdayAmie's birthday!")
+            .setContentText("Wish $birthdayAmie a happy birthday as she turns $age years old!")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        createNotificationChannel()
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return@with
+            }
+            notify(10, builder.build())
+        }
+    }
+    @SuppressLint("ObsoleteSdkInt")
+    private fun createNotificationChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Notification channel"
+            val descriptionText = "This is my notification channel"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     private lateinit var noNotes: LinearLayout
     override fun onResume() {
         super.onResume()
@@ -158,5 +212,14 @@ class NotesFragment : Fragment(){
         }else{
             noNotes.visibility = View.GONE
         }
+    }
+
+    override fun okButtonOnClickListener() {
+        val intent = Intent(context, AddNoteActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun cancelButtonOnClickListener() {
+        // It dismisses by default, so no need to define a thing here
     }
 }
