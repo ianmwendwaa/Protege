@@ -344,3 +344,31 @@ fun GreetingPreview() {
             android:exported="true"
             android:label="@string/title_activity_home_page"
             android:theme="@style/Theme.NotesSQLite" />
+
+
+            fun getCelebration():String{
+                        val month = Calendar.getInstance().get(Calendar.MONTH)+1
+                        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                        return when {
+                            month == 1 && day == 12 -> getString(R.string.odriya)
+                            month == 1 && day == 31 -> getString(R.string.beryl)
+                            month == 2 && day == 7 -> getString(R.string.christine)
+                            month == 2 && day == 19 -> getString(R.string.stephanie)
+                            month == 3 && day == 1 -> getString(R.string.ann)
+                            month == 4 && day == 7 -> getString(R.string.mine)
+                            month == 5 && day == 1 -> getString(R.string.clarissa)
+                            month == 5 && day == 6 -> getString(R.string.aiyana)
+                            month == 5 && day == 12 -> "It's Lorna's birthday!❤️"
+                            month == 5 && day == 17 -> getString(R.string.kimberly)
+                            month == 5 && day == 13 -> getString(R.string.megan)
+                            month == 8 && day == 2 -> getString(R.string.seanice)
+                            month == 8 && day == 22 -> getString(R.string.amandine)
+                            month == 9 && day == 29 -> getString(R.string.lashley)
+                            month == 10 && day == 29 -> getString(R.string.simone)
+                            month == 11 && day == 23 -> getString(R.string.mum)
+                            month == 12 && day == 5 -> getString(R.string.kailetu)
+                            else -> getGreeting()
+                        }
+                    }
+                    val celebration = getCelebration()
+                    greetings.typeWriteMessage(lifecycleScope,celebration,100)

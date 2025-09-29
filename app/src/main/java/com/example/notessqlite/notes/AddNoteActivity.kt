@@ -19,13 +19,16 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.notessqlite.R
 import com.example.notessqlite.database.NoteDatabase
+import com.example.notessqlite.dialog.DialogBuilder
+import com.example.notessqlite.dialog.DialogButtonEventHandler
 import com.example.notessqlite.toasts.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class AddNoteActivity : AppCompatActivity() {
+class AddNoteActivity : AppCompatActivity(), DialogButtonEventHandler {
 
     private lateinit var db: NoteDatabase
     private lateinit var titleEditText: EditText
@@ -50,6 +53,14 @@ class AddNoteActivity : AppCompatActivity() {
         saveButton = findViewById(R.id.saveButton)
 
         titleEditText.requestFocus()
+
+        val lifecycleScope = lifecycleScope
+//        titleEditText.hint = typeWriteMessage(lifecycleScope, "Title",100).toString()
+        val contentHintTexts = listOf(
+            "What's on your mind?", "What's up?", "MindPages", "Plans?"
+        )
+
+        contentEditText.hint = contentHintTexts.random()
 
 //        Setting time for the date view
         val currentDateTime = LocalDateTime.now()
@@ -148,18 +159,25 @@ class AddNoteActivity : AppCompatActivity() {
         titleEditText.addTextChangedListener(textWatcher)
         contentEditText.addTextChangedListener(textWatcher)
 
+        var isSaveButtonClicked = false
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val content = contentEditText.text.toString()
             val charCount = charCount.text.toString()
             val savedDateTime = LocalDateTime.now()
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-            val note = Note(0, title, content, time, charCount)
+            val note = Note(0, title, content, datePresentation, charCount)
             if(title.isEmpty() && content.isEmpty()){
                 return@setOnClickListener
             }else{
+                isSaveButtonClicked = true
                 db.insertNote(note)
-                finish()
+                if(isSaveButtonClicked){
+                    finish()
+                }else{
+                    val dialogBox = DialogBuilder(this, "Save note?", "Do you want to save the note?")
+                    dialogBox.show(supportFragmentManager, "save_watcher")
+                }
                 startActivity(Intent(this, LoadingActivity::class.java))
 
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -167,5 +185,16 @@ class AddNoteActivity : AppCompatActivity() {
                 },5000)
             }
         }
+        if(isSaveButtonClicked){
+
+        }
+    }
+
+    override fun okButtonOnClickListener() {
+
+    }
+
+    override fun cancelButtonOnClickListener() {
+
     }
 }

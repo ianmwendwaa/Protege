@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notessqlite.dialog.DialogButtonEventHandler
 import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.R
 import com.example.notessqlite.database.ArchivesDatabase
@@ -21,9 +21,9 @@ import com.example.notessqlite.database.EntryDatabase
 import com.example.notessqlite.database.InsertNoteIntoFolderDatabase
 import com.example.notessqlite.database.NoteDatabase
 import com.example.notessqlite.database.TrashDatabase
-import java.util.logging.Handler
 
-class NotesAdapter(private var notes: MutableList<Note>,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private var notes: MutableList<Note>,context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>(),
+    DialogButtonEventHandler {
 
     private val db: NoteDatabase = NoteDatabase(context)
     private val archiveDB: ArchivesDatabase = ArchivesDatabase(context)
@@ -50,6 +50,7 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
 
     override fun getItemCount(): Int = notes.size
 
+
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
         holder.titleTextView.text = note.title
@@ -70,7 +71,6 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
         holder.moreButton.setOnClickListener {
             
         }
-
         holder.archiveButton.setOnClickListener{
             val title = note.title
             note.id.let { it1 -> db.deleteNote(it1) }
@@ -88,7 +88,8 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
 
 
         holder.deleteButton.setOnClickListener {
-            val title = note.title
+//            val dialogBox = DialogBuilder(this, "Authorize deletion","Do you want to delete ?")
+            val title = notes[1].title
             note.id.let { it1 -> db.deleteNote(it1) }
             trashDB.addNoteIntoTrash(note)
             refreshData(db.getAllNotes())
@@ -122,5 +123,13 @@ class NotesAdapter(private var notes: MutableList<Note>,context: Context) : Recy
         notes.clear()
         notes.addAll(newList)
         notifyDataSetChanged()
+    }
+
+    override fun okButtonOnClickListener() {
+
+    }
+
+    override fun cancelButtonOnClickListener() {
+        TODO("Not yet implemented")
     }
 }

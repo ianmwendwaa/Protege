@@ -95,12 +95,12 @@ class UpdateNoteActivity : AppCompatActivity() {
                 val titleText = binding.updateTitleEditText.text.isNotEmpty()
                 val contentText = binding.updateContentEditText.text.isNotEmpty()
 
-                val noteContent = contentText.toString()
-                val newNoteContent = s.toString()
-
-                if(noteContent != newNoteContent){
-                    binding.updateSaveButton.setOnClickListener { return@setOnClickListener }
-                }
+//                val noteContent = contentText.toString()
+//                val newNoteContent = s.toString()
+//
+//                if(noteContent != newNoteContent){
+//                    binding.updateSaveButton.setOnClickListener { return@setOnClickListener }
+//                }
                 binding.updateSaveButton.isEnabled = titleText||contentText
                 if(binding.updateSaveButton.isEnabled){
                     binding.updateSaveButton.setTextColor(ContextCompat.getColor(this@UpdateNoteActivity, R.color.buttonEnabledColor))

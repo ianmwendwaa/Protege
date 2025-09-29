@@ -18,7 +18,7 @@ import com.example.notessqlite.toasts.CodeBase
 import com.example.notessqlite.todo.ToDoFragment
 
 @Suppress("DEPRECATION")
-class MainActivity(): AppCompatActivity(){
+class MainActivity: AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class MainActivity(): AppCompatActivity(){
                     replaceFragment(NotesFragment())
                     true
                 }
-                R.id.navigation_todo ->{
+                R.id.navigation_todo->{
                     replaceFragment(ToDoFragment())
                     true
                 }
@@ -67,7 +67,8 @@ class MainActivity(): AppCompatActivity(){
 
         //schedule the worker to run after every 24 hours
         val dailyWorkRequest = PeriodicWorkRequest.Builder(
-            EmailHandler.EmailWorker::class.java, 24,
+            EmailHandler.EmailWorker::class.java,
+            24,
             java.util.concurrent.TimeUnit.HOURS).build()
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
@@ -81,11 +82,7 @@ class MainActivity(): AppCompatActivity(){
         try {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
         }catch (e: Exception){
-            CodeBase.showToast(this, "${e.localizedMessage}", R.drawable.ic_info)
+            CodeBase.showToast(this, e.localizedMessage, R.drawable.ic_info)
         }
     }
 }
-
-
-
-

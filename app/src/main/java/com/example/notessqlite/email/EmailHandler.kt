@@ -57,6 +57,7 @@ class EmailHandler {
     fun birthdayWatcher(){
         val amiesInfo = listOf(
             Amies("Test subject", LocalDate.of(2025, 8, 25))
+
         )
 
         val sth = mutableListOf<Amies>()

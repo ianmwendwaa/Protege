@@ -41,7 +41,10 @@ class BirthdayAdapter(private var birthday: MutableList<Birthday>,context: Conte
         }
         holder.deleteButton.setOnClickListener {
             birthday.id.let {
-                it1->db.deleteBirthday(it1)
+                it1->
+                if (it1 != null) {
+                    db.deleteBirthday(it1)
+                }
             }
             CodeBase.showToast(holder.itemView.context,"Wrong entry?", R.drawable.butterfly_effect)
         }
