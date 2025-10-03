@@ -64,7 +64,7 @@ class AddNoteActivity : AppCompatActivity(), DialogButtonEventHandler {
 
 //        Setting time for the date view
         val currentDateTime = LocalDateTime.now()
-        val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        val time = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
         tvDate.text = time
 
 
@@ -166,7 +166,7 @@ class AddNoteActivity : AppCompatActivity(), DialogButtonEventHandler {
             val charCount = charCount.text.toString()
             val savedDateTime = LocalDateTime.now()
             val datePresentation = savedDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-            val note = Note(0, title, content, datePresentation, charCount)
+            val note = Note(0, title, content, time, charCount)
             if(title.isEmpty() && content.isEmpty()){
                 return@setOnClickListener
             }else{
